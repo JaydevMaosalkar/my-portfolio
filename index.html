@@ -135,7 +135,7 @@
             }
         }
 
-        /* VIDEO FIX - CORRECT YOUTUBE EMBED */
+        /* VIDEO FIX - WORKING GOOGLE DRIVE LINK */
         .video-overlay {
             position: absolute;
             top: 0;
@@ -155,6 +155,13 @@
             opacity: 0;
         }
 
+        #graduationVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3);
+        }
+
         /* PROFESSIONAL CONTENT DESIGN */
         .main-content {
             opacity: 0;
@@ -167,7 +174,7 @@
             transform: translateY(0);
         }
 
-        /* HERO SECTION - PROFESSIONAL */
+        /* HERO SECTION */
         .hero {
             min-height: 100vh;
             position: relative;
@@ -207,7 +214,7 @@
             font-weight: 600;
         }
 
-        /* PROFESSIONAL BUTTONS */
+        /* BUTTONS */
         .primary-btn {
             background: var(--primary-blue);
             color: white;
@@ -503,7 +510,7 @@
     </style>
 </head>
 <body>
-    <!-- NETFLIX-STYLE INTRO ONLY -->
+    <!-- NETFLIX-STYLE INTRO WITH WORKING VIDEO -->
     <div class="cinematic-intro" id="cinematicIntro">
         <div class="name-container">
             <div class="name-glow">JAYDEV</div>
@@ -511,10 +518,13 @@
             <div class="name-slice slice-bottom">JAYDEV</div>
         </div>
         
-        <!-- FIXED VIDEO EMBED -->
+        <!-- YOUR GRADUATION VIDEO - WORKING GOOGLE DRIVE LINK -->
         <div class="video-overlay" id="videoOverlay">
-            <!-- Fixed YouTube Embed - Replace VIDEO_ID with your actual ID -->
-            <div id="youtube-player" style="width: 100%; height: 100%;"></div>
+            <video id="graduationVideo" muted playsinline preload="auto">
+                <!-- DIRECT GOOGLE DRIVE VIDEO LINK -->
+                <source src="https://drive.google.com/uc?export=download&id=1LQzor7rqogTF50rTPAeCF1YhiATYEd7H" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
@@ -797,60 +807,66 @@
     </div>
 
     <script>
-        // FIXED YOUTUBE VIDEO EMBED
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'iP2o-8CiqY8',
-                playerVars: {
-                    'autoplay': 0, // Start manually
-                    'mute': 1,
-                    'controls': 0,
-                    'showinfo': 0,
-                    'rel': 0,
-                    'modestbranding': 1,
-                    'playsinline': 1
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+        // VIDEO PLAYBACK WITH FALLBACK
+        document.addEventListener('DOMContentLoaded', () => {
+            const cinematicIntro = document.getElementById('cinematicIntro');
+            const videoOverlay = document.getElementById('videoOverlay');
+            const video = document.getElementById('graduationVideo');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Check if video can play
+            video.addEventListener('error', () => {
+                console.log('Video failed to load, skipping to content');
+                // Skip video and show content
+                setTimeout(() => {
+                    cinematicIntro.style.opacity = '0';
+                    setTimeout(() => {
+                        cinematicIntro.style.display = 'none';
+                        mainContent.classList.add('active');
+                        animateOnScroll();
+                    }, 1000);
+                }, 3500);
             });
-        }
-
-        function onPlayerReady(event) {
+            
             // Start sequence after name animation
             setTimeout(() => {
-                const videoOverlay = document.getElementById('videoOverlay');
                 videoOverlay.classList.add('active');
-                event.target.playVideo();
                 
-                // Play for 8 seconds then fade out
-                setTimeout(() => {
-                    videoOverlay.classList.add('fade-out');
-                    
-                    // Hide intro and show content
-                    setTimeout(() => {
-                        const cinematicIntro = document.getElementById('cinematicIntro');
-                        const mainContent = document.getElementById('mainContent');
+                // Try to play video
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('Graduation video playing successfully');
                         
+                        // Play for 8 seconds then transition
+                        setTimeout(() => {
+                            videoOverlay.classList.add('fade-out');
+                            
+                            setTimeout(() => {
+                                cinematicIntro.style.opacity = '0';
+                                cinematicIntro.style.pointerEvents = 'none';
+                                
+                                setTimeout(() => {
+                                    cinematicIntro.style.display = 'none';
+                                    mainContent.classList.add('active');
+                                    animateOnScroll();
+                                }, 1000);
+                            }, 1000);
+                        }, 8000);
+                    }).catch(error => {
+                        console.log('Video autoplay blocked, continuing to content');
+                        // Continue to content
                         cinematicIntro.style.opacity = '0';
-                        cinematicIntro.style.pointerEvents = 'none';
-                        
                         setTimeout(() => {
                             cinematicIntro.style.display = 'none';
                             mainContent.classList.add('active');
                             animateOnScroll();
                         }, 1000);
-                    }, 1000);
-                }, 8000);
-            }, 3500); // Wait for name animation to complete
-        }
-
-        // Load YouTube API
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    });
+                }
+            }, 3500); // Wait for name animation
+        });
 
         // Scroll progress
         window.addEventListener('scroll', () => {
