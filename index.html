@@ -1,292 +1,728 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Name | Aerospace Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaydev Warkad | Aerospace & Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #0071e3;
+            --accent: #00ff88;
+            --text: #ffffff;
+            --text-secondary: #aaaaaa;
         }
 
         body {
-            background: #000;
-            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--primary);
+            color: var(--text);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('/images/hero-bg.jpg') center/cover;
-        }
-
-        .hero-content h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-tagline {
-            font-size: 1.8rem;
-            color: #888;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        /* Apple-Style Image Gallery */
-        .project-gallery {
-            position: relative;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .gallery-slide {
-            position: absolute;
+        /* Cinematic Loading Sequence */
+        .loading-sequence {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100vh;
+            background: var(--primary);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            z-index: 1000;
+            transition: opacity 1.5s ease, transform 1.5s ease;
         }
 
-        .gallery-slide.active {
-            opacity: 1;
-        }
-
-        .gallery-image {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 30px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            transform: scale(0.92);
-            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-slide.active .gallery-image {
-            transform: scale(1);
-        }
-
-        .gallery-caption {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            background: rgba(0,0,0,0.7);
-            padding: 20px 40px;
-            border-radius: 50px;
-            backdrop-filter: blur(20px);
-            font-size: 1.2rem;
+        .name-reveal {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             opacity: 0;
-            transition: opacity 1s ease 0.5s;
+            transform: translateY(30px);
+            animation: nameReveal 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
         }
 
-        .gallery-slide.active .gallery-caption {
-            opacity: 1;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 150px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 100px;
-            font-weight: 600;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .project-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 25px;
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.4s ease;
-        }
-
-        .project-card:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-10px);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        .project-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .project-description {
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .tech-tag {
-            background: rgba(0, 113, 227, 0.2);
-            color: #0071e3;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        @keyframes nameReveal {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease both;
+        .tagline-transition {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 600;
+            opacity: 0;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .tagline-transition.active {
+            animation: taglineAppear 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes taglineAppear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -30%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover;
+            filter: brightness(0.7);
+            transform: scale(1.1);
+            transition: transform 20s linear;
+        }
+
+        .hero:hover .hero-background {
+            transform: scale(1.15);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero h1.animate-in {
+            animation: slideUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p.animate-in {
+            animation: slideUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Navigation */
+        .floating-nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 3s forwards;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--secondary);
+            transform: scale(1.3);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 4rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title.animate-in {
+            animation: slideUp 1s ease forwards;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card.animate-in {
+            animation: cardAppear 0.8s ease forwards;
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: var(--secondary);
+            box-shadow: 0 40px 80px rgba(0, 113, 227, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .project-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 113, 227, 0.2);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0, 40, 85, 0.4) 100%);
+            border-radius: 40px;
+            margin: 4rem auto;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .stats-section.animate-in {
+            animation: slideUp 1s ease forwards;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 8rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-item {
+            margin: 4rem 0;
+            width: calc(50% - 4rem);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 0;
+        }
+
+        .timeline-item.animate-in {
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--secondary);
+            transform: translateX(10px);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0, 40, 85, 0.3) 100%);
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-10px);
         }
 
         /* Footer */
-        .footer {
+        footer {
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 60px 20px;
-            color: #666;
             border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
         }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            z-index: 99;
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 2rem;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 4rem);
+                margin-left: 4rem !important;
+            }
+            
+            .floating-nav {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Utility Animations */
+        .delay-1 { animation-delay: 0.2s !important; }
+        .delay-2 { animation-delay: 0.4s !important; }
+        .delay-3 { animation-delay: 0.6s !important; }
+        .delay-4 { animation-delay: 0.8s !important; }
+        .delay-5 { animation-delay: 1s !important; }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Aerospace Innovation</h1>
-            <p class="hero-tagline">Engineering the future of unmanned flight</p>
-        </div>
-    </section>
+    <!-- Loading Sequence -->
+    <div class="loading-sequence" id="loadingSequence">
+        <div class="name-reveal">JAYDEV WARKAD</div>
+    </div>
 
-    <!-- Apple-Style Image Gallery -->
-    <section class="project-gallery">
-        <div class="gallery-slide active">
-            <img src="/images/uav-design.jpg" class="gallery-image" alt="UAV Design">
-            <div class="gallery-caption">Aerodynamic Framework Design</div>
-        </div>
-        <div class="gallery-slide">
-            <img src="/images/3d-print.jpg" class="gallery-image" alt="3D Printing">
-            <div class="gallery-caption">Precision 3D Printing Process</div>
-        </div>
-        <div class="gallery-slide">
-            <img src="/images/components-integration.jpg" class="gallery-image" alt="Components Integration">
-            <div class="gallery-caption">Electronics & Systems Integration</div>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="projects"></div>
+        <div class="nav-dot" data-section="stats"></div>
+        <div class="nav-dot" data-section="timeline"></div>
+        <div class="nav-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="animate-in">Innovating Aerospace <br>Through Precision Engineering</h1>
+            <p class="animate-in">UAV Specialist | Aerospace Engineer | 3D Printing Expert | Systems Integrator</p>
+            <div style="opacity: 0; animation: slideUp 1.2s ease 0.6s forwards;">
+                <div style="display: inline-flex; gap: 1rem; margin-top: 2rem;">
+                    <div style="padding: 1rem 2rem; background: var(--secondary); border-radius: 30px; font-weight: 600; cursor: pointer; transition: transform 0.3s ease;" 
+                         onmouseover="this.style.transform='scale(1.05)'" 
+                         onmouseout="this.style.transform='scale(1)'">
+                        View Projects
+                    </div>
+                    <div style="padding: 1rem 2rem; border: 2px solid var(--secondary); border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" 
+                         onmouseover="this.style.background='var(--secondary)'" 
+                         onmouseout="this.style.background='transparent'">
+                        Contact Me
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="projects-section">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="project-grid" id="projects-container">
-            <!-- Projects will be loaded here -->
+    <section class="projects-grid" id="projects">
+        <h2 class="section-title animate-in">Featured Projects</h2>
+        <div class="grid-container">
+            <!-- Project 1 -->
+            <div class="project-card animate-in">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                     alt="Scaled A350-900 UAV" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Scaled A350-900 UAV</h3>
+                    <p class="card-description">Designed and engineered a 1:20 scale unmanned aerial vehicle with complete systems integration, aerodynamic optimization, and advanced flight capabilities.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">CAD Design</span>
+                        <span class="tech-tag">3D Printing</span>
+                        <span class="tech-tag">Aerodynamics</span>
+                        <span class="tech-tag">Systems Integration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card animate-in delay-1">
+                <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                     alt="Autonomous Flight System" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Autonomous Flight Control System</h3>
+                    <p class="card-description">Developed an AI-powered autonomous navigation system with obstacle avoidance, path optimization, and real-time telemetry for UAV operations.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">ROS</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card animate-in delay-2">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                     alt="Aerodynamic Simulation" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">CFD Aerodynamic Simulation Suite</h3>
+                    <p class="card-description">Created computational fluid dynamics simulations for wing design optimization, reducing drag by 27% and improving lift-to-drag ratio.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">ANSYS Fluent</span>
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Simulation</span>
+                        <span class="tech-tag">Data Analysis</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <p>© 2024 Your Name. All rights reserved.</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">AI-Enhanced Portfolio</p>
+    <!-- Statistics Section -->
+    <section class="stats-section animate-in" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Projects Completed</p>
+            </div>
+            <div class="stat-item">
+                <h3>3,200+</h3>
+                <p>Design Hours</p>
+            </div>
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>Success Rate</p>
+            </div>
+            <div class="stat-item">
+                <h3>27%</h3>
+                <p>Performance Improvement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <h2 class="section-title animate-in">Career Journey</h2>
+        <div class="timeline">
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item animate-in">
+                <div class="timeline-content">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">2024</h3>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Lead UAV Engineer</h4>
+                    <p style="color: var(--text-secondary);">Spearheaded the development of scaled aircraft prototypes with integrated autonomous systems. Managed cross-functional teams to deliver innovative aerospace solutions.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item animate-in delay-1">
+                <div class="timeline-content">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">2023</h3>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Aerospace Research Fellow</h4>
+                    <p style="color: var(--text-secondary);">Conducted advanced research in aerodynamic optimization and composite materials. Published findings in international aerospace journals.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item animate-in delay-2">
+                <div class="timeline-content">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">2022</h3>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Bachelor's in Aerospace Engineering</h4>
+                    <p style="color: var(--text-secondary);">Graduated with honors, specializing in UAV design and autonomous systems. Capstone project featured in university innovation showcase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title animate-in">Let's Build The Future Together</h2>
+        <p style="font-size: 1.5rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; opacity: 0; animation: slideUp 1s ease 0.3s forwards;">
+            Passionate about pushing the boundaries of aerospace technology and autonomous systems.
+        </p>
+        
+        <div class="social-links">
+            <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Jaydev Warkad. All rights reserved.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">Crafted with precision • Engineered for innovation</p>
     </footer>
 
     <script>
-        // Apple-style image transitions
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.gallery-slide');
-        
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-        
-        // Change slide every 5 seconds
-        setInterval(nextSlide, 5000);
-
-        // Load projects from data.json
-        async function loadProjects() {
-            try {
-                const response = await fetch('/data.json');
-                const data = await response.json();
-                displayProjects(data.projects);
-            } catch (error) {
-                // Fallback if data.json doesn't exist
-                const fallbackProjects = [
-                    {
-                        title: "Scaled A350-900 UAV Project",
-                        description: "Designed and engineered a scaled unmanned aerial vehicle based on the Airbus A350-900, focusing on aerodynamic efficiency and structural integrity.",
-                        achievements: ["CAD Framework Design", "3D Printing", "Systems Integration"],
-                        technologies: ["CAD Design", "3D Printing", "Aerodynamics", "Systems Integration"],
-                        date: "2024"
-                    }
-                ];
-                displayProjects(fallbackProjects);
-            }
-        }
-
-        function displayProjects(projects) {
-            const container = document.getElementById('projects-container');
-            container.innerHTML = '';
+        // Loading Sequence
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingSequence = document.getElementById('loadingSequence');
             
-            projects.forEach((project, index) => {
-                const projectHTML = `
-                    <div class="project-card animate-fade-in" style="animation-delay: ${index * 0.2}s">
-                        <h3 class="project-title">${project.title}</h3>
-                        <p class="project-description">${project.description}</p>
-                        <div class="tech-tags">
-                            ${project.technologies.map(tech => 
-                                `<span class="tech-tag">${tech}</span>`
-                            ).join('')}
-                        </div>
-                        <div style="margin-top: 20px; color: #888; font-size: 0.9rem;">
-                            ${project.date}
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += projectHTML;
+            // Show name for 3 seconds
+            setTimeout(() => {
+                const tagline = document.createElement('div');
+                tagline.className = 'tagline-transition';
+                tagline.textContent = "Aerospace Innovation";
+                loadingSequence.appendChild(tagline);
+                
+                // Trigger animation
+                setTimeout(() => tagline.classList.add('active'), 50);
+                
+                // Hide loading sequence after 2 more seconds
+                setTimeout(() => {
+                    loadingSequence.style.opacity = '0';
+                    loadingSequence.style.transform = 'scale(1.1)';
+                    
+                    setTimeout(() => {
+                        loadingSequence.style.display = 'none';
+                        // Animate hero content
+                        document.querySelectorAll('.hero h1, .hero p').forEach(el => {
+                            el.classList.add('animate-in');
+                        });
+                    }, 1500);
+                }, 2000);
+            }, 3000);
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+            
+            // Animate sections on scroll
+            animateOnScroll();
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.section-title, .project-card, .stats-section, .timeline-item');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animate-in');
+                }
             });
         }
 
-        // Initial load
-        loadProjects();
+        // Floating navigation
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('section');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for nav dots
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.dataset.section;
+                const section = document.getElementById(sectionId);
+                
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Initial animation trigger
+        setTimeout(animateOnScroll, 500);
     </script>
 </body>
 </html>
