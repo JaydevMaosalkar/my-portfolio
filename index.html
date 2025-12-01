@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaydev | Industrial Automation</title>
+    <title>Jaydev Maosalkar | Mechatronics Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* RESET & BASE */
@@ -14,26 +14,22 @@
         }
 
         :root {
-            --netflix-red: #e50914;
-            --netflix-dark: #141414;
-            --netflix-light: #f5f5f1;
-            --netflix-gray: #808080;
-            --netflix-glow: #ff6b6b;
+            --primary-blue: #0066cc;
+            --dark-bg: #0a192f;
+            --light-text: #e6f1ff;
+            --gray-text: #8892b0;
+            --accent: #00d4aa;
         }
 
         body {
-            font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: #000;
-            color: var(--netflix-light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
             overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="%23e50914" stroke-width="2"/></svg>'), auto;
+            -webkit-font-smoothing: antialiased;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* CINEMATIC INTRO - NETFLIX STYLE */
+        /* NETFLIX-STYLE INTRO ONLY */
         .cinematic-intro {
             position: fixed;
             top: 0;
@@ -48,7 +44,7 @@
             overflow: hidden;
         }
 
-        .netflix-logo-container {
+        .name-container {
             position: relative;
             width: 100%;
             height: 100%;
@@ -60,28 +56,25 @@
 
         .name-slice {
             position: absolute;
-            font-size: 14vw;
+            font-size: 16vw;
             font-weight: 900;
             letter-spacing: -0.03em;
             text-transform: uppercase;
             opacity: 0;
             filter: blur(20px);
-            text-shadow: 
-                0 0 30px var(--netflix-red),
-                0 0 60px var(--netflix-red),
-                0 0 90px var(--netflix-red);
+            color: #fff;
         }
 
         .slice-top {
             clip-path: inset(0 0 50% 0);
             transform: translateY(-100px) rotateX(90deg);
-            animation: sliceTopReveal 2.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            animation: sliceTopReveal 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
         }
 
         .slice-bottom {
             clip-path: inset(50% 0 0 0);
             transform: translateY(100px) rotateX(-90deg);
-            animation: sliceBottomReveal 2.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            animation: sliceBottomReveal 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
         }
 
         @keyframes sliceTopReveal {
@@ -120,13 +113,13 @@
 
         .name-glow {
             position: absolute;
-            font-size: 14vw;
+            font-size: 16vw;
             font-weight: 900;
             letter-spacing: -0.03em;
-            color: var(--netflix-red);
+            color: var(--primary-blue);
             opacity: 0;
             z-index: -1;
-            animation: nameGlow 3s cubic-bezier(0.77, 0, 0.175, 1) 1.5s forwards;
+            animation: nameGlow 2.5s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards;
         }
 
         @keyframes nameGlow {
@@ -142,7 +135,7 @@
             }
         }
 
-        /* VIDEO BACKGROUND - PLAYS ONCE */
+        /* VIDEO FIX - CORRECT YOUTUBE EMBED */
         .video-overlay {
             position: absolute;
             top: 0;
@@ -155,17 +148,17 @@
         }
 
         .video-overlay.active {
-            opacity: 1;
+            opacity: 0.15;
         }
 
         .video-overlay.fade-out {
             opacity: 0;
         }
 
-        /* CONTENT FADE IN */
+        /* PROFESSIONAL CONTENT DESIGN */
         .main-content {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
             transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -174,404 +167,378 @@
             transform: translateY(0);
         }
 
-        /* HERO SECTION - NETFLIX STYLE */
+        /* HERO SECTION - PROFESSIONAL */
         .hero {
             min-height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            padding: 0 5%;
             background: linear-gradient(to bottom, 
-                rgba(0,0,0,0) 0%,
-                rgba(0,0,0,0.3) 30%,
-                rgba(0,0,0,0.7) 70%,
-                rgba(0,0,0,1) 100%);
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, 
-                rgba(229, 9, 20, 0.1) 0%,
-                rgba(0, 0, 0, 1) 70%);
-            z-index: -1;
+                rgba(10, 25, 47, 0.9) 0%,
+                rgba(10, 25, 47, 1) 100%);
         }
 
         .hero-content {
-            text-align: center;
             max-width: 1200px;
-            position: relative;
-            z-index: 2;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(30px);
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--netflix-gray);
+            color: var(--gray-text);
             margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
+            max-width: 700px;
         }
 
-        /* NETFLIX-STYLE BUTTONS */
-        .netflix-button {
-            background: var(--netflix-red);
+        .highlight-text {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* PROFESSIONAL BUTTONS */
+        .primary-btn {
+            background: var(--primary-blue);
             color: white;
             border: none;
             padding: 1rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
         }
 
-        .netflix-button:hover {
-            background: #ff0a16;
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        .primary-btn:hover {
+            background: #0052a3;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
         }
 
-        .netflix-button.secondary {
+        .secondary-btn {
             background: transparent;
-            border: 2px solid var(--netflix-gray);
-            color: var(--netflix-light);
+            color: var(--light-text);
+            border: 2px solid var(--gray-text);
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .netflix-button.secondary:hover {
-            border-color: var(--netflix-light);
-            background: rgba(255,255,255,0.1);
+        .secondary-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
         }
 
-        /* NETFLIX-STYLE CAROUSEL */
+        /* SECTIONS */
         .section {
-            padding: 4rem 2rem;
-            position: relative;
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .section-header {
-            margin-bottom: 2rem;
-            padding-left: 2rem;
+            margin-bottom: 4rem;
+            text-align: center;
         }
 
         .section-title {
-            font-size: 1.8rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::before {
-            content: '';
+            margin-bottom: 1rem;
+            color: var(--light-text);
+            position: relative;
             display: inline-block;
-            width: 4px;
-            height: 24px;
-            background: var(--netflix-red);
-            margin-right: 10px;
         }
 
-        /* SKILLS CAROUSEL - INTERACTIVE */
-        .skills-carousel {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
-        .skills-carousel::-webkit-scrollbar {
-            display: none;
+        /* SKILLS GRID */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .skill-card {
-            min-width: 300px;
-            background: rgba(20, 20, 20, 0.8);
-            border-radius: 8px;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2.5rem;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
 
         .skill-card:hover {
-            transform: scale(1.05);
-            border-color: var(--netflix-red);
-            background: rgba(30, 30, 30, 0.9);
-            z-index: 10;
-        }
-
-        .skill-card.active {
-            border-color: var(--netflix-red);
-            background: rgba(30, 30, 30, 0.9);
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .skill-icon {
             font-size: 2.5rem;
-            color: var(--netflix-red);
-            margin-bottom: 1rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
 
         .skill-details {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
         }
 
         .skill-card.active .skill-details {
             max-height: 500px;
-            margin-top: 1rem;
         }
 
-        /* PROJECTS GRID */
+        /* EXPERIENCE TIMELINE */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                transparent,
+                var(--primary-blue),
+                transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 24px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            border: 3px solid var(--dark-bg);
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary-blue);
+            transform: translateX(10px);
+        }
+
+        .company {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* PROJECTS */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            padding: 1rem;
+            margin-top: 3rem;
         }
 
         .project-card {
-            background: rgba(20, 20, 20, 0.8);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-color: var(--primary-blue);
         }
 
-        .project-preview {
+        .project-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .project-card:hover .project-preview {
-            transform: scale(1.1);
+        .project-card:hover .project-image {
+            transform: scale(1.05);
         }
 
-        .project-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, 
-                rgba(0,0,0,0.9) 0%,
-                rgba(0,0,0,0.7) 50%,
-                transparent 100%);
-            padding: 2rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-overlay {
-            transform: translateY(0);
-        }
-
-        /* TIMELINE */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
+        .project-info {
             padding: 2rem;
         }
 
-        .timeline-item {
-            position: relative;
-            padding: 2rem;
-            margin: 2rem 0;
-            background: rgba(20, 20, 20, 0.8);
-            border-radius: 8px;
-            border-left: 4px solid var(--netflix-red);
-            cursor: pointer;
+        /* CONTACT */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
-        .timeline-item:hover {
-            transform: translateX(10px);
-            background: rgba(30, 30, 30, 0.9);
+        .contact-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
         }
 
-        .timeline-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
         }
 
-        .timeline-item.active .timeline-details {
-            max-height: 500px;
-            margin-top: 1rem;
-        }
-
-        /* MODAL FOR DETAILS */
-        .modal {
+        /* SCROLL PROGRESS */
+        .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--netflix-dark);
-            border-radius: 8px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 3rem;
-            position: relative;
-            border: 2px solid var(--netflix-red);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--netflix-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--netflix-red);
-        }
-
-        /* NAVIGATION */
-        .nav-dots {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 100;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-dot.active {
-            background: var(--netflix-red);
-            transform: scale(1.3);
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent));
+            z-index: 999;
+            transition: width 0.1s ease;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .skills-carousel {
-                flex-direction: column;
+            .timeline::before {
+                left: 20px;
             }
             
-            .skill-card {
-                min-width: 100%;
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline-dot {
+                left: 14px;
+            }
+            
+            .primary-btn, .secondary-btn {
+                width: 100%;
+                margin-right: 0;
+                justify-content: center;
             }
             
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .nav-dots {
-                display: none;
-            }
-            
-            .modal-content {
-                padding: 2rem 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- CINEMATIC INTRO -->
+    <!-- NETFLIX-STYLE INTRO ONLY -->
     <div class="cinematic-intro" id="cinematicIntro">
-        <div class="netflix-logo-container">
+        <div class="name-container">
             <div class="name-glow">JAYDEV</div>
             <div class="name-slice slice-top">JAYDEV</div>
             <div class="name-slice slice-bottom">JAYDEV</div>
         </div>
         
-        <!-- YouTube Video - Plays Once -->
+        <!-- FIXED VIDEO EMBED -->
         <div class="video-overlay" id="videoOverlay">
-            <iframe 
-                src="https://www.youtube.com/embed/iP2o-8CiqY8?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1&start=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                style="width: 100%; height: 100%;"
-            ></iframe>
+            <!-- Fixed YouTube Embed - Replace VIDEO_ID with your actual ID -->
+            <div id="youtube-player" style="width: 100%; height: 100%;"></div>
         </div>
     </div>
 
-    <!-- NAVIGATION DOTS -->
-    <div class="nav-dots">
-        <div class="nav-dot active" data-section="hero"></div>
-        <div class="nav-dot" data-section="skills"></div>
-        <div class="nav-dot" data-section="projects"></div>
-        <div class="nav-dot" data-section="experience"></div>
-        <div class="nav-dot" data-section="contact"></div>
-    </div>
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- MAIN CONTENT -->
+    <!-- PROFESSIONAL CONTENT -->
     <div class="main-content" id="mainContent">
         <!-- HERO SECTION -->
         <section class="hero" id="hero">
-            <div class="hero-background"></div>
             <div class="hero-content">
-                <h1 class="hero-title">Industrial Automation Engineer</h1>
-                <p class="hero-subtitle">Specializing in Digital Twin Modeling & HIL Validation</p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem;">
-                    <button class="netflix-button" onclick="scrollToSection('skills')">
+                <h1 class="hero-title">Mechatronics Engineer</h1>
+                <p class="hero-subtitle">
+                    Specializing in <span class="highlight-text">Industrial Automation</span>, 
+                    <span class="highlight-text">Digital Twin Modeling</span>, and 
+                    <span class="highlight-text">HIL Validation</span>. Transforming complex systems 
+                    into predictable, efficient performance through innovative engineering solutions.
+                </p>
+                <div>
+                    <button class="primary-btn" onclick="scrollToSection('skills')">
                         <i class="fas fa-cogs"></i> View Skills
                     </button>
-                    <button class="netflix-button secondary" onclick="scrollToSection('projects')">
-                        <i class="fas fa-project-diagram"></i> See Projects
-                    </button>
-                    <button class="netflix-button secondary" onclick="showContactModal()">
-                        <i class="fas fa-envelope"></i> Contact Me
+                    <button class="secondary-btn" onclick="scrollToSection('experience')">
+                        <i class="fas fa-briefcase"></i> Experience
                     </button>
                 </div>
             </div>
@@ -581,28 +548,27 @@
         <section class="section" id="skills">
             <div class="section-header">
                 <h2 class="section-title">Technical Expertise</h2>
-                <p style="color: var(--netflix-gray);">Click on any skill to see how I acquired it</p>
+                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
+                    Click on any skill to see detailed experience and acquisition journey
+                </p>
             </div>
             
-            <div class="skills-carousel">
+            <div class="skills-grid">
                 <!-- Skill 1 -->
                 <div class="skill-card" onclick="toggleSkill(this)">
                     <div class="skill-icon">
                         <i class="fas fa-industry"></i>
                     </div>
-                    <h3>Industrial Automation</h3>
-                    <p>PLC Systems & Control Engineering</p>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Industrial Automation</h3>
+                    <p style="color: var(--gray-text);">PLC Systems, HIL, Control Engineering</p>
                     <div class="skill-details">
-                        <p style="color: var(--netflix-gray); margin-top: 1rem;">
-                            <strong>Acquired through:</strong><br>
-                            • 2 years at Forbes & Company (Trainee → Junior Engineer)<br>
-                            • Siemens PLC certification<br>
-                            • Hands-on HVAC R&D at Airedale by Modine<br>
-                            • Real-time control system implementation
+                        <p style="color: var(--gray-text);">
+                            <strong>How I gained this skill:</strong><br><br>
+                            • <strong>2 years</strong> at Forbes & Company as Trainee → Junior Engineer<br>
+                            • <strong>Siemens PLC certification</strong> and hands-on programming<br>
+                            • <strong>HVAC R&D</strong> at Airedale by Modine with real-time control systems<br>
+                            • Implemented <strong>automation solutions</strong> reducing manual intervention by 60%
                         </p>
-                        <button class="netflix-button" style="margin-top: 1rem;" onclick="event.stopPropagation(); showDetailModal('PLC Systems', 'Full PLC programming experience with Siemens systems, including ladder logic and structured text. Implemented in HVAC control systems at Airedale.')">
-                            View Details
-                        </button>
                     </div>
                 </div>
 
@@ -611,19 +577,16 @@
                     <div class="skill-icon">
                         <i class="fas fa-microchip"></i>
                     </div>
-                    <h3>HIL Validation</h3>
-                    <p>Hardware-in-the-Loop Testing</p>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">HIL Validation</h3>
+                    <p style="color: var(--gray-text);">Hardware-in-the-Loop Testing</p>
                     <div class="skill-details">
-                        <p style="color: var(--netflix-gray); margin-top: 1rem;">
-                            <strong>Acquired through:</strong><br>
-                            • R&D role at Airedale by Modine<br>
-                            • Digital twin integration projects<br>
-                            • Siemens Simcenter Amesim modeling<br>
-                            • Cross-functional validation protocols
+                        <p style="color: var(--gray-text);">
+                            <strong>How I gained this skill:</strong><br><br>
+                            • <strong>R&D role</strong> at Airedale by Modine (1 year)<br>
+                            • Developed <strong>digital twin integration</strong> with physical systems<br>
+                            • Created <strong>validation protocols</strong> reducing testing time by 40%<br>
+                            • Cross-functional <strong>root-cause analysis</strong> implementation
                         </p>
-                        <button class="netflix-button" style="margin-top: 1rem;" onclick="event.stopPropagation(); showDetailModal('HIL Validation', 'Developed comprehensive HIL testing frameworks for HVAC systems, reducing validation time by 40%. Integrated real-time simulations with physical hardware.')">
-                            View Details
-                        </button>
                     </div>
                 </div>
 
@@ -632,40 +595,96 @@
                     <div class="skill-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>Digital Twin</h3>
-                    <p>Siemens Simcenter Modeling</p>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Digital Twin Modeling</h3>
+                    <p style="color: var(--gray-text);">Siemens Simcenter Amesim</p>
                     <div class="skill-details">
-                        <p style="color: var(--netflix-gray); margin-top: 1rem;">
-                            <strong>Acquired through:</strong><br>
-                            • Advanced simulation projects<br>
-                            • Predictive maintenance systems<br>
-                            • Real-time data integration<br>
-                            • 3D modeling & virtual prototyping
+                        <p style="color: var(--gray-text);">
+                            <strong>How I gained this skill:</strong><br><br>
+                            • Built <strong>Siemens Simcenter models</strong> integrated with PLC systems<br>
+                            • Implemented <strong>predictive maintenance</strong> through simulation<br>
+                            • Reduced <strong>equipment downtime</strong> by 25%<br>
+                            • Real-time <strong>performance optimization</strong> of HVAC systems
                         </p>
-                        <button class="netflix-button" style="margin-top: 1rem;" onclick="event.stopPropagation(); showDetailModal('Digital Twin', 'Created digital replicas of HVAC systems using Siemens Simcenter Amesim. Enabled predictive analytics and reduced equipment downtime by 25%.')">
-                            View Details
-                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <h2 class="section-title">Professional Experience</h2>
+                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
+                    Detailed career journey with measurable achievements
+                </p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Current Role -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <div class="company">One Stop Stores Ltd</div>
+                        <span class="duration">July 2025 - Present | Huddersfield, UK</span>
+                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Shift Supervisor</h4>
+                        <p style="color: var(--gray-text);">
+                            Leading operational excellence in retail management, coordinating teams, 
+                            and implementing efficiency improvements in high-paced environments.
+                        </p>
+                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                <strong>Key Achievements:</strong><br>
+                                • Team coordination and cross-functional management<br>
+                                • Process optimization and efficiency improvements<br>
+                                • Customer service excellence implementation
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Skill 4 -->
-                <div class="skill-card" onclick="toggleSkill(this)">
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Data Analysis</h3>
-                    <p>MATLAB & Technical Reporting</p>
-                    <div class="skill-details">
-                        <p style="color: var(--netfox-gray); margin-top: 1rem;">
-                            <strong>Acquired through:</strong><br>
-                            • MATLAB certification (Majlinda Qarri)<br>
-                            • Performance optimization projects<br>
-                            • Root-cause analysis procedures<br>
-                            • Technical documentation for stakeholders
+                <!-- R&D Role -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <div class="company">Airedale by Modine</div>
+                        <span class="duration">August 2023 - August 2024 | Leeds, UK</span>
+                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Research & Development Engineer</h4>
+                        <p style="color: var(--gray-text);">
+                            Pioneered digital-twin integration and HIL validation for HVAC systems, 
+                            achieving significant performance improvements.
                         </p>
-                        <button class="netflix-button" style="margin-top: 1rem;" onclick="event.stopPropagation(); showDetailModal('Data Analysis', 'Utilized MATLAB for system performance analysis and optimization. Created comprehensive technical reports with requirement-to-test traceability.')">
-                            View Details
-                        </button>
+                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                <strong>Key Achievements:</strong><br>
+                                • <strong>40% reduction</strong> in validation time through HIL testing<br>
+                                • <strong>Digital twin integration</strong> between Siemens Simcenter and PLCs<br>
+                                • <strong>Cross-functional collaboration</strong> with engineering teams<br>
+                                • <strong>Technical reporting</strong> with requirement-to-test traceability
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Role -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <div class="company">Forbes & Company Limited</div>
+                        <span class="duration">December 2020 - August 2022 | Aurangabad, India</span>
+                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Junior Engineer → Trainee</h4>
+                        <p style="color: var(--gray-text);">
+                            Developed foundational expertise in industrial automation systems 
+                            and special-purpose machinery through hands-on projects.
+                        </p>
+                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
+                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                                <strong>Key Achievements:</strong><br>
+                                • Gained <strong>1 year 9 months</strong> industrial experience<br>
+                                • Worked on <strong>special-purpose machinery</strong> projects<br>
+                                • Learned <strong>PLC programming</strong> fundamentals<br>
+                                • Participated in <strong>cross-functional engineering</strong> teams
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -675,93 +694,49 @@
         <section class="section" id="projects">
             <div class="section-header">
                 <h2 class="section-title">Featured Projects</h2>
-                <p style="color: var(--netflix-gray);">Hover for details, click for full case study</p>
+                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
+                    Real-world engineering solutions with measurable impact
+                </p>
             </div>
             
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card" onclick="showDetailModal('HVAC Digital Twin System', 'Developed a complete digital twin of HVAC systems using Siemens Simcenter Amesim. Integrated with PLC controls for real-time monitoring and predictive maintenance. Achieved 40% reduction in validation time and 25% improvement in energy efficiency. Technologies: Siemens Simcenter, PLC Programming, MATLAB, HIL Testing.')">
+                <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
-                         alt="HVAC Digital Twin" class="project-preview">
-                    <div class="project-overlay">
-                        <h3>HVAC Digital Twin</h3>
-                        <p style="color: var(--netflix-gray);">Real-time simulation & predictive maintenance</p>
+                         alt="HVAC Digital Twin" class="project-image">
+                    <div class="project-info">
+                        <h3 style="color: var(--light-text); margin-bottom: 1rem;">HVAC Digital Twin System</h3>
+                        <p style="color: var(--gray-text);">
+                            Real-time simulation and predictive maintenance system reducing validation time by 40%.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                Siemens Simcenter
+                            </span>
+                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                HIL Testing
+                            </span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card" onclick="showDetailModal('Industrial Automation Framework', 'Designed and implemented a comprehensive automation framework for special-purpose machinery. Features include PLC control systems, safety interlocks, and remote monitoring capabilities. Reduced manual intervention by 60% and improved production consistency.')">
+                <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
-                         alt="Automation Framework" class="project-preview">
-                    <div class="project-overlay">
-                        <h3>Automation Framework</h3>
-                        <p style="color: var(--netflix-gray);">End-to-end industrial automation</p>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card" onclick="showDetailModal('Cross-Functional RCA System', 'Implemented a structured Root Cause Analysis system across engineering teams. Developed standardized procedures, documentation templates, and collaborative workflows. Improved problem resolution time by 60% and enhanced knowledge sharing.')">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
-                         alt="RCA System" class="project-preview">
-                    <div class="project-overlay">
-                        <h3>RCA System</h3>
-                        <p style="color: var(--netflix-gray);">Structured root-cause analysis</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERIENCE TIMELINE -->
-        <section class="section" id="experience">
-            <div class="section-header">
-                <h2 class="section-title">Professional Journey</h2>
-                <p style="color: var(--netflix-gray);">Click on any role for detailed achievements</p>
-            </div>
-            
-            <div class="timeline">
-                <!-- Current Role -->
-                <div class="timeline-item" onclick="toggleTimeline(this)">
-                    <h3>One Stop Stores Ltd</h3>
-                    <p style="color: var(--netflix-red);">Shift Supervisor</p>
-                    <p style="color: var(--netflix-gray);">July 2025 - Present</p>
-                    <div class="timeline-details">
-                        <p style="margin-top: 1rem;">
-                            • Leading operational excellence in retail management<br>
-                            • Coordinating cross-functional teams<br>
-                            • Implementing efficiency improvements<br>
-                            • Customer service optimization
+                         alt="Automation Framework" class="project-image">
+                    <div class="project-info">
+                        <h3 style="color: var(--light-text); margin-bottom: 1rem;">Industrial Automation Framework</h3>
+                        <p style="color: var(--gray-text);">
+                            End-to-end automation solution reducing manual intervention by 60% in manufacturing processes.
                         </p>
-                    </div>
-                </div>
-
-                <!-- R&D Role -->
-                <div class="timeline-item" onclick="toggleTimeline(this)">
-                    <h3>Airedale by Modine</h3>
-                    <p style="color: var(--netflix-red);">Research & Development Engineer</p>
-                    <p style="color: var(--netflix-gray);">August 2023 - August 2024</p>
-                    <div class="timeline-details">
-                        <p style="margin-top: 1rem;">
-                            • Built Siemens Simcenter Amesim models integrated with PLCs<br>
-                            • Reduced validation time by 40% through HIL testing<br>
-                            • Conducted structured root-cause analysis<br>
-                            • Created technical reports with requirement traceability<br>
-                            • Collaborated with cross-functional engineering teams
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Previous Role -->
-                <div class="timeline-item" onclick="toggleTimeline(this)">
-                    <h3>Forbes & Company Limited</h3>
-                    <p style="color: var(--netflix-red);">Junior Engineer → Trainee</p>
-                    <p style="color: var(--netflix-gray);">December 2020 - August 2022</p>
-                    <div class="timeline-details">
-                        <p style="margin-top: 1rem;">
-                            • Gained foundational industrial automation experience<br>
-                            • Worked on special-purpose machinery projects<br>
-                            • Learned PLC programming basics<br>
-                            • Participated in cross-functional engineering teams
-                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                PLC Programming
+                            </span>
+                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                Control Systems
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -770,161 +745,133 @@
         <!-- CONTACT SECTION -->
         <section class="section" id="contact">
             <div class="section-header">
-                <h2 class="section-title">Let's Connect</h2>
-                <p style="color: var(--netflix-gray);">Ready to collaborate on innovative projects</p>
-            </div>
-            
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem;">
-                    <a href="mailto:j.maosalkar@gmail.com" class="netflix-button">
-                        <i class="fas fa-envelope"></i> Email Me
-                    </a>
-                    <a href="https://linkedin.com/in/jaydevmaosalkar" target="_blank" class="netflix-button secondary">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <button class="netflix-button secondary" onclick="showDetailModal('Resume', 'Download my complete resume with detailed experience, education, and certifications.')">
-                        <i class="fas fa-file-download"></i> Resume
-                    </button>
-                </div>
-                
-                <p style="color: var(--netflix-gray); margin-top: 3rem; font-size: 0.9rem;">
-                    Currently based in Huddersfield, United Kingdom<br>
+                <h2 class="section-title">Get In Touch</h2>
+                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
                     Open to opportunities in Industrial Automation & R&D
                 </p>
             </div>
-        </section>
-    </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Email</h3>
+                    <p style="color: var(--gray-text);">j.maosalkar@gmail.com</p>
+                    <button class="secondary-btn" style="margin-top: 1rem;" onclick="window.location.href='mailto:j.maosalkar@gmail.com'">
+                        Send Email
+                    </button>
+                </div>
 
-    <!-- DETAIL MODAL -->
-    <div class="modal" id="detailModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h2 id="modalTitle"></h2>
-            <div id="modalContent" style="margin-top: 2rem; line-height: 1.6;"></div>
-        </div>
-    </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">LinkedIn</h3>
+                    <p style="color: var(--gray-text);">linkedin.com/in/jaydevmaosalkar</p>
+                    <button class="secondary-btn" style="margin-top: 1rem;" onclick="window.open('https://linkedin.com/in/jaydevmaosalkar', '_blank')">
+                        Visit Profile
+                    </button>
+                </div>
 
-    <!-- CONTACT MODAL -->
-    <div class="modal" id="contactModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h2>Contact Jaydev</h2>
-            <div style="margin-top: 2rem;">
-                <p style="color: var(--netflix-gray); margin-bottom: 1rem;">
-                    <i class="fas fa-envelope"></i> j.maosalkar@gmail.com
-                </p>
-                <p style="color: var(--netflix-gray); margin-bottom: 1rem;">
-                    <i class="fab fa-linkedin"></i> linkedin.com/in/jaydevmaosalkar
-                </p>
-                <p style="color: var(--netflix-gray); margin-bottom: 2rem;">
-                    <i class="fas fa-map-marker-alt"></i> Huddersfield, United Kingdom
-                </p>
-                <button class="netflix-button" onclick="window.location.href='mailto:j.maosalkar@gmail.com'">
-                    Send Email
-                </button>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Location</h3>
+                    <p style="color: var(--gray-text);">Huddersfield, United Kingdom</p>
+                    <p style="color: var(--gray-text); font-size: 0.9rem; margin-top: 0.5rem;">
+                        Open to remote & on-site opportunities
+                    </p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="text-align: center; padding: 3rem 5%; border-top: 1px solid rgba(255,255,255,0.1); color: var(--gray-text);">
+            <p>© 2024 Jaydev Maosalkar. All rights reserved.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                Mechatronics Engineer | Industrial Automation Specialist
+            </p>
+        </footer>
     </div>
 
     <script>
-        // Netflix-style intro sequence
-        document.addEventListener('DOMContentLoaded', () => {
-            const cinematicIntro = document.getElementById('cinematicIntro');
-            const videoOverlay = document.getElementById('videoOverlay');
-            const mainContent = document.getElementById('mainContent');
-            const heroTitle = document.querySelector('.hero-title');
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            
-            // Sequence timing
+        // FIXED YOUTUBE VIDEO EMBED
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                videoId: 'iP2o-8CiqY8',
+                playerVars: {
+                    'autoplay': 0, // Start manually
+                    'mute': 1,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Start sequence after name animation
             setTimeout(() => {
-                // Activate video after name reveal (2.5s name animation + 1.5s glow)
+                const videoOverlay = document.getElementById('videoOverlay');
+                videoOverlay.classList.add('active');
+                event.target.playVideo();
+                
+                // Play for 8 seconds then fade out
                 setTimeout(() => {
-                    videoOverlay.classList.add('active');
+                    videoOverlay.classList.add('fade-out');
                     
-                    // Video plays for 10 seconds then fade out
+                    // Hide intro and show content
                     setTimeout(() => {
-                        videoOverlay.classList.add('fade-out');
+                        const cinematicIntro = document.getElementById('cinematicIntro');
+                        const mainContent = document.getElementById('mainContent');
                         
-                        // Show main content
+                        cinematicIntro.style.opacity = '0';
+                        cinematicIntro.style.pointerEvents = 'none';
+                        
                         setTimeout(() => {
                             cinematicIntro.style.display = 'none';
                             mainContent.classList.add('active');
-                            
-                            // Animate hero text
-                            setTimeout(() => {
-                                heroTitle.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
-                                heroTitle.style.opacity = '1';
-                                heroTitle.style.transform = 'translateY(0)';
-                                
-                                setTimeout(() => {
-                                    heroSubtitle.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
-                                    heroSubtitle.style.opacity = '1';
-                                    heroSubtitle.style.transform = 'translateY(0)';
-                                }, 300);
-                            }, 500);
-                            
-                            // Start scroll animations
                             animateOnScroll();
                         }, 1000);
-                    }, 10000); // Video plays for 10 seconds
-                }, 4000); // Wait for name animation + glow
-            }, 100);
+                    }, 1000);
+                }, 8000);
+            }, 3500); // Wait for name animation to complete
+        }
+
+        // Load YouTube API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+            
+            animateOnScroll();
         });
 
-        // Scroll animations
+        // Animate elements on scroll
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.skill-card, .project-card, .timeline-item');
+            const timelineItems = document.querySelectorAll('.timeline-item');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        entry.target.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            });
-            
-            elements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                observer.observe(el);
-            });
-        }
-
-        // Navigation dots
-        function updateNavDots() {
-            const sections = document.querySelectorAll('section');
-            const navDots = document.querySelectorAll('.nav-dot');
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                    currentSection = section.id;
+            timelineItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    item.classList.add('visible');
                 }
             });
-            
-            navDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.dataset.section === currentSection) {
-                    dot.classList.add('active');
-                }
-            });
-        }
-
-        // Scroll to section
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                window.scrollTo({
-                    top: section.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
         }
 
         // Toggle skill details
@@ -940,58 +887,32 @@
 
         // Toggle timeline details
         function toggleTimeline(element) {
-            const allTimelines = document.querySelectorAll('.timeline-item');
-            allTimelines.forEach(item => {
-                if (item !== element) {
-                    item.classList.remove('active');
-                }
+            const details = element.querySelector('.timeline-details');
+            const isActive = details.style.maxHeight === '500px';
+            
+            // Close all other timeline details
+            document.querySelectorAll('.timeline-details').forEach(detail => {
+                detail.style.maxHeight = '0';
             });
-            element.classList.toggle('active');
+            
+            if (!isActive) {
+                details.style.maxHeight = '500px';
+            }
         }
 
-        // Show detail modal
-        function showDetailModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalContent').innerHTML = content;
-            document.getElementById('detailModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         }
-
-        // Show contact modal
-        function showContactModal() {
-            document.getElementById('contactModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
-        function closeModal() {
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.classList.remove('active');
-            });
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event listeners
-        window.addEventListener('scroll', updateNavDots);
-        
-        // Navigation dots click
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.addEventListener('click', () => {
-                scrollToSection(dot.dataset.section);
-            });
-        });
-
-        // Close modal on outside click
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-        });
 
         // Initialize
-        setTimeout(updateNavDots, 1000);
+        setTimeout(animateOnScroll, 100);
     </script>
 </body>
 </html>
