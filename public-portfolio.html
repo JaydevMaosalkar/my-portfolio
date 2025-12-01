@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Name | Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .posts-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: #fff;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .post-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .post-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .ai-rewritten {
+            background: rgba(0, 113, 227, 0.1);
+            border-left: 4px solid #0071e3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Name</h1>
+            <p>Aerospace Engineer & UAV Specialist</p>
+        </div>
+    </section>
+
+    <section class="posts-section">
+        <h2 class="section-title">Projects & Achievements</h2>
+        <div class="post-grid" id="posts-container">
+            <!-- Portfolio content will load here -->
+        </div>
+    </section>
+
+    <script>
+        async function loadPortfolio() {
+            try {
+                const response = await fetch('https://your-api-url.vercel.app/posts');
+                const posts = await response.json();
+                displayPosts(posts);
+            } catch (error) {
+                // Fallback static content
+                document.getElementById('posts-container').innerHTML = `
+                    <div class="post-card">
+                        <h3>Scaled A350-900 UAV Project</h3>
+                        <div class="ai-rewritten">
+                            Successfully completed the design, development, and integration of a scaled A350-900 Unmanned Aerial Vehicle. Demonstrated expertise in aerodynamics, 3D printing, and systems integration.
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function displayPosts(posts) {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            
+            posts.forEach(post => {
+                const postHTML = `
+                    <div class="post-card">
+                        <h3>${post.title}</h3>
+                        <div class="ai-rewritten">
+                            ${post.rewritten}
+                        </div>
+                        <small style="color: #888;">${post.date}</small>
+                    </div>
+                `;
+                container.innerHTML += postHTML;
+            });
+        }
+        
+        loadPortfolio();
+    </script>
+</body>
+</html>
