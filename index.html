@@ -3,651 +3,831 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaydev Maosalkar | Mechatronics Engineer | Industrial Automation</title>
+    <title>Jaydev</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset & Base */
+        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #0a192f; /* Navy Blue - Professional */
-            --secondary: #00d4aa; /* Teal - Engineering */
-            --accent: #ff6b6b; /* Coral - Energy */
-            --text: #e6f1ff;
-            --text-secondary: #8892b0;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--primary);
-            color: var(--text);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #000;
+            color: #f5f5f7;
             overflow-x: hidden;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Cinematic Name Reveal */
-        .name-reveal-container {
+        /* CINEMATIC INTRO */
+        .cinematic-intro {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: var(--primary);
+            background: #000;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            transition: opacity 1.5s ease, transform 1.5s ease;
+            overflow: hidden;
         }
 
-        .name-part {
-            font-size: clamp(3rem, 10vw, 8rem);
+        .name-matrix {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18vw;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,1) 0%, 
+                rgba(100,100,100,0.8) 30%,
+                rgba(50,50,50,0.6) 70%,
+                rgba(0,0,0,0) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: matrixReveal 2.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            filter: blur(0.5px);
+        }
+
+        @keyframes matrixReveal {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8) rotate(-5deg);
+                filter: blur(20px);
+            }
+            40% {
+                opacity: 1;
+                filter: blur(0.5px);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        .intro-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 3s ease;
+        }
+
+        .intro-video.active {
+            opacity: 0.3;
+        }
+
+        /* HERO SECTION - TESLA STYLE */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(20, 20, 20, 0.8) 0%,
+                rgba(0, 0, 0, 1) 70%);
+            z-index: 1;
+        }
+
+        .hero-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 800;
-            line-height: 1;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(50px);
         }
 
-        .first-name {
-            background: linear-gradient(135deg, var(--text) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: nameReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
-        }
-
-        .last-name {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: nameReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
-            margin-left: 1rem;
-        }
-
-        @keyframes nameReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Video Background */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
+        .hero-title .line {
+            display: block;
             overflow: hidden;
-            z-index: -1;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 3rem;
             opacity: 0;
-            transition: opacity 2s ease;
+            transform: translateY(30px);
         }
 
-        .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-            filter: brightness(0.3);
-        }
-
-        .video-background.active {
-            opacity: 1;
-        }
-
-        /* Main Content */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1.5s ease 2s;
-        }
-
-        .main-content.active {
-            opacity: 1;
-        }
-
-        /* Hero Section */
-        .hero {
+        /* APPLE-STYLE SECTION */
+        .section {
+            position: relative;
             min-height: 100vh;
+            padding: 10vh 5vw;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content {
-            text-align: center;
-            max-width: 1200px;
+        .section:nth-child(even) {
+            background: rgba(10, 10, 10, 0.5);
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
             z-index: 2;
         }
 
-        .professional-tagline {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 1s ease 3s forwards;
+        .section-header {
+            margin-bottom: 6rem;
         }
 
-        .specialization {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--secondary);
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 1s ease 3.3s forwards;
-        }
-
-        .highlight-box {
-            background: rgba(0, 212, 170, 0.1);
-            border-left: 4px solid var(--secondary);
-            padding: 1.5rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            text-align: left;
-            border-radius: 0 10px 10px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 1s ease 3.6s forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections */
-        .section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--secondary);
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid rgba(0, 212, 170, 0.3);
-        }
-
-        .timeline-item {
-            margin-bottom: 3rem;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -2.3rem;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--secondary);
-            border: 4px solid var(--primary);
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            border-color: var(--secondary);
-            transform: translateX(10px);
-        }
-
-        .company {
-            color: var(--secondary);
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .duration {
-            color: var(--text-secondary);
+        .section-label {
             font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #86868b;
             margin-bottom: 1rem;
             display: block;
         }
 
-        /* Skills Grid */
-        .skills-grid {
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        /* EXPERIENCE TIMELINE - INNOVATIVE */
+        .experience-timeline {
+            position: relative;
+        }
+
+        .timeline-track {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                transparent,
+                rgba(100, 100, 100, 0.3),
+                transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 10rem;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+            transform: translateX(-50px);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            position: absolute;
+            top: 0;
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-year {
+            right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            left: 3rem;
+        }
+
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .company-role {
+            font-size: 1.2rem;
+            color: #86868b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* SKILLS MATRIX - INNOVATIVE */
+        .skills-matrix {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 4rem;
         }
 
-        .skill-category {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .skill-category h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-list {
+        .skill-orb {
+            position: relative;
+            height: 300px;
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0.02) 0%,
+                rgba(255, 255, 255, 0.01) 70%,
+                transparent 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        .skill-tag {
-            background: rgba(0, 212, 170, 0.2);
-            color: var(--secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .skill-orb:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Education Cards */
-        .education-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .skill-orb::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(255, 255, 255, 0.1) 60deg,
+                transparent 120deg,
+                rgba(255, 255, 255, 0.1) 180deg,
+                transparent 240deg,
+                rgba(255, 255, 255, 0.1) 300deg,
+                transparent 360deg
+            );
+            animation: rotate 20s linear infinite;
         }
 
-        .education-card {
-            background: rgba(255, 255, 255, 0.05);
+        .skill-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
             padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
         }
 
-        .education-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-10px);
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Projects */
-        .projects-grid {
+        /* PROJECTS SHOWCASE */
+        .projects-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 4rem;
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            position: relative;
+            height: 500px;
+            border-radius: 24px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-10px);
+            transform: translateY(-20px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
-        .project-header {
-            background: rgba(0, 212, 170, 0.1);
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .project-preview {
+            position: absolute;
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: filter 0.4s ease;
         }
 
-        .project-content {
-            padding: 1.5rem;
+        .project-card:hover .project-preview {
+            filter: brightness(1);
         }
 
-        /* Contact */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-item {
-            text-align: center;
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: linear-gradient(to top,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.7) 50%,
+                transparent 100%);
+        }
+
+        /* SCROLL PROGRESS */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0.1));
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+
+        /* MINIMAL NAV */
+        .minimal-nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 99;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .contact-item:hover {
-            background: rgba(0, 212, 170, 0.1);
-            transform: translateY(-5px);
+        .nav-dot.active {
+            background: #fff;
+            transform: scale(1.5);
         }
 
-        .contact-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
+        /* FOOTER - APPLE STYLE */
+        .footer {
+            padding: 6rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5);
         }
 
-        /* Responsive */
+        .signature {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #fff, #86868b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .name-part {
-                font-size: clamp(2.5rem, 8vw, 5rem);
+            .timeline-item {
+                flex-direction: column !important;
+                margin-bottom: 5rem;
             }
             
-            .section {
-                padding: 4rem 1rem;
+            .timeline-year {
+                position: relative;
+                left: 0 !important;
+                right: auto !important;
+                font-size: 4rem;
+                margin-bottom: 1rem;
             }
             
-            .timeline {
-                padding-left: 1rem;
-            }
-            
-            .timeline-dot {
-                left: -1.3rem;
+            .projects-showcase {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Cinematic Name Reveal -->
-    <div class="name-reveal-container" id="nameReveal">
-        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <div class="name-part first-name">JAYDEV</div>
-            <div class="name-part last-name">MAOSALKAR</div>
-        </div>
-    </div>
-
-    <!-- Video Background -->
-    <div class="video-background" id="videoBackground">
-        <!-- Replace with your graduation video -->
-        <video autoplay muted loop playsinline>
-            <source src="your-graduation-video.mp4" type="video/mp4">
-            <!-- Fallback image if video doesn't load -->
-            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080" 
-                 alt="Graduation Background" style="width: 100%; height: 100%; object-fit: cover;">
+    <!-- Cinematic Intro -->
+    <div class="cinematic-intro" id="cinematicIntro">
+        <div class="name-matrix">JAYDEV</div>
+        <video class="intro-video" autoplay muted playsinline loop>
+            <!-- Replace with your graduation video -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-computer-circuit-board-46666-large.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content" id="mainContent">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="professional-tagline">Mechatronics Engineer</h1>
-                <p class="specialization">Industrial Automation | Digital Twin Modeling | HIL Validation</p>
-                
-                <div class="highlight-box">
-                    <p>Specializing in digital-twin modeling, PLC/controls, and hardware-in-the-loop validation to transform complex systems into predictable, efficient performance. Experienced in HVAC R&D, special-purpose machinery, and cross-functional team collaboration.</p>
-                </div>
-            </div>
-        </section>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-        <!-- Experience Section -->
-        <section class="section" id="experience">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
+    <!-- Minimal Navigation -->
+    <div class="minimal-nav">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="experience"></div>
+        <div class="nav-dot" data-section="skills"></div>
+        <div class="nav-dot" data-section="projects"></div>
+        <div class="nav-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="line"><span>Redefining</span></span>
+                <span class="line"><span>Industrial</span></span>
+                <span class="line"><span>Automation</span></span>
+            </h1>
+            <p class="hero-subtitle">
+                Mechatronics Engineer specializing in digital-twin modeling<br>
+                and hardware-in-loop validation for complex systems
+            </p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-label">Experience</span>
+                <h2 class="section-title">Professional Journey</h2>
+            </div>
+            
+            <div class="experience-timeline">
+                <div class="timeline-track"></div>
+                
                 <!-- Current Role -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="company">One Stop Stores Ltd</div>
-                        <span class="duration">July 2025 - Present | Huddersfield, UK</span>
-                        <h3 style="color: var(--text); margin: 1rem 0 0.5rem;">Shift Supervisor</h3>
-                        <p style="color: var(--text-secondary);">Managing store operations, leading teams, and ensuring optimal customer service and operational efficiency.</p>
-                    </div>
-                </div>
-
-                <!-- R&D Engineer -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="company">Airedale by Modine</div>
-                        <span class="duration">August 2023 - August 2024 | Leeds, UK</span>
-                        <h3 style="color: var(--text); margin: 1rem 0 0.5rem;">Research & Development Engineer</h3>
-                        <p style="color: var(--text-secondary);">Built Siemens Simcenter Amesim models linked with Siemens PLCs to calibrate real-time responses and tighten control loops. Conducted structured root-cause analysis with cross-functional teams and created technical reports with requirement-to-test traceability.</p>
-                        <div class="skill-list" style="margin-top: 1rem;">
-                            <span class="skill-tag">Siemens Simcenter</span>
-                            <span class="skill-tag">PLC Controls</span>
-                            <span class="skill-tag">HIL Validation</span>
-                            <span class="skill-tag">Digital Twin</span>
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-card">
+                            <div class="company-name">One Stop Stores Ltd</div>
+                            <div class="company-role">Shift Supervisor</div>
+                            <p style="color: #86868b; line-height: 1.6;">
+                                Leading operational excellence through systematic management
+                                and team coordination in high-paced retail environments.
+                            </p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Previous Roles -->
+                
+                <!-- R&D Role -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="company">Forbes & Company Limited</div>
-                        <span class="duration">December 2020 - August 2022 | Aurangabad, India</span>
-                        <h3 style="color: var(--text); margin: 1rem 0 0.5rem;">Junior Engineer → Trainee</h3>
-                        <p style="color: var(--text-secondary);">Gained 1 year 9 months of industrial experience in mechatronics systems, contributing to special-purpose machinery projects and automation solutions.</p>
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-card">
+                            <div class="company-name">Airedale by Modine</div>
+                            <div class="company-role">Research & Development Engineer</div>
+                            <p style="color: #86868b; line-height: 1.6;">
+                                Pioneered digital-twin integration between Siemens Simcenter Amesim
+                                and PLC systems, achieving 40% reduction in validation time through
+                                predictive modeling and HIL testing frameworks.
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;">
+                                <span style="padding: 0.4rem 1rem; background: rgba(255,255,255,0.05); border-radius: 20px; font-size: 0.9rem;">
+                                    Siemens Simcenter
+                                </span>
+                                <span style="padding: 0.4rem 1rem; background: rgba(255,255,255,0.05); border-radius: 20px; font-size: 0.9rem;">
+                                    HIL Validation
+                                </span>
+                                <span style="padding: 0.4rem 1rem; background: rgba(255,255,255,0.05); border-radius: 20px; font-size: 0.9rem;">
+                                    Digital Twin
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Previous Role -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-card">
+                            <div class="company-name">Forbes & Company</div>
+                            <div class="company-role">Junior Engineer → Trainee</div>
+                            <p style="color: #86868b; line-height: 1.6;">
+                                Developed foundational expertise in industrial automation systems
+                                and special-purpose machinery through hands-on engineering projects
+                                and cross-functional collaboration.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Skills Section -->
-        <section class="section" id="skills">
-            <h2 class="section-title">Technical Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Industrial Automation</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">PLC Programming</span>
-                        <span class="skill-tag">HIL (Hardware-in-Loop)</span>
-                        <span class="skill-tag">Siemens Simcenter Amesim</span>
-                        <span class="skill-tag">Digital Twin Modeling</span>
-                        <span class="skill-tag">Control Systems</span>
-                        <span class="skill-tag">MATLAB</span>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-label">Expertise</span>
+                <h2 class="section-title">Technical Mastery</h2>
+            </div>
+            
+            <div class="skills-matrix">
+                <div class="skill-orb">
+                    <div class="skill-content">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Industrial<br>Automation</h3>
+                        <p style="color: #86868b; font-size: 0.9rem;">
+                            PLC Systems • HIL Validation • Control Engineering
+                        </p>
                     </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Software & Tools</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">Microsoft Suites</span>
-                        <span class="skill-tag">Siemens PLC</span>
-                        <span class="skill-tag">Simulation Software</span>
-                        <span class="skill-tag">Data Analysis</span>
-                        <span class="skill-tag">Technical Reporting</span>
+                
+                <div class="skill-orb">
+                    <div class="skill-content">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Digital<br>Simulation</h3>
+                        <p style="color: #86868b; font-size: 0.9rem;">
+                            Siemens Simcenter • MATLAB • System Modeling
+                        </p>
                     </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">Marathi (Native)</span>
-                        <span class="skill-tag">Hindi (Native)</span>
-                        <span class="skill-tag">English (Professional)</span>
-                        <span class="skill-tag">Punjabi (Professional)</span>
-                        <span class="skill-tag">Italian (Basic)</span>
+                
+                <div class="skill-orb">
+                    <div class="skill-content">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Cross-functional<br>Leadership</h3>
+                        <p style="color: #86868b; font-size: 0.9rem;">
+                            Team Coordination • RCA Processes • Technical Reporting
+                        </p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Education Section -->
-        <section class="section" id="education">
-            <h2 class="section-title">Education & Certifications</h2>
-            <div class="education-cards">
-                <div class="education-card">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">The University of Huddersfield</h3>
-                    <p style="color: var(--text); font-weight: 600;">BEng (Hons) Mechatronics</p>
-                    <p style="color: var(--text-secondary); margin: 0.5rem 0;">September 2022 - July 2025</p>
-                    <p style="color: var(--text-secondary); margin-top: 1rem;">Modules: Control Systems, DSP Applications, Production Management, Robotics</p>
-                </div>
-
-                <div class="education-card">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">Indo-German Tool Room</h3>
-                    <p style="color: var(--text); font-weight: 600;">Diploma in Mechatronics, Robotics & Automation</p>
-                    <p style="color: var(--text-secondary); margin: 0.5rem 0;">2017 - 2020</p>
-                </div>
-
-                <div class="education-card">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">Certifications</h3>
-                    <ul style="color: var(--text-secondary); list-style: none; padding-left: 0;">
-                        <li style="margin-bottom: 0.5rem;">• Learning Industrial Automation - Zahraa Khalil</li>
-                        <li>• Learning MATLAB - Majlinda Qarri</li>
-                    </ul>
-                </div>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-label">Projects</span>
+                <h2 class="section-title">Innovation<br>Showcase</h2>
             </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="section" id="projects">
-            <h2 class="section-title">Key Projects & Achievements</h2>
-            <div class="projects-grid">
+            
+            <div class="projects-showcase">
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 style="color: var(--text); margin: 0;">Digital Twin HVAC System</h3>
-                    </div>
-                    <div class="project-content">
-                        <p style="color: var(--text-secondary);">Developed Siemens Simcenter Amesim models integrated with PLCs for real-time HVAC system calibration, reducing testing time by 40% and improving energy efficiency.</p>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 style="color: var(--text); margin: 0;">HIL Validation Framework</h3>
-                    </div>
-                    <div class="project-content">
-                        <p style="color: var(--text-secondary);">Created hardware-in-loop validation systems for industrial automation equipment, enabling predictive maintenance and reducing downtime by 25%.</p>
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                         alt="HVAC Digital Twin" class="project-preview">
+                    <div class="project-info">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">HVAC Digital Twin</h3>
+                        <p style="color: #86868b; font-size: 0.9rem;">
+                            Real-time simulation system reducing validation time by 40%
+                        </p>
                     </div>
                 </div>
-
+                
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 style="color: var(--text); margin: 0;">Cross-functional RCA System</h3>
-                    </div>
-                    <div class="project-content">
-                        <p style="color: var(--text-secondary);">Implemented structured root-cause analysis processes across engineering teams, improving problem resolution time by 60% and enhancing documentation traceability.</p>
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                         alt="Automation Framework" class="project-preview">
+                    <div class="project-info">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Automation Framework</h3>
+                        <p style="color: #86868b; font-size: 0.9rem;">
+                            End-to-end industrial automation with predictive maintenance
+                        </p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section class="section" id="contact">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-content">
+            <div class="section-header">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Let's Build<br>The Future</h2>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <div style="display: inline-flex; flex-direction: column; gap: 2rem; align-items: center;">
+                    <div style="font-size: 1.2rem; color: #86868b;">
+                        j.maosalkar@gmail.com
                     </div>
-                    <h3 style="color: var(--text); margin-bottom: 0.5rem;">Email</h3>
-                    <p style="color: var(--text-secondary);">j.maosalkar@gmail.com</p>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <a href="#" style="color: #86868b; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">
+                            LinkedIn
+                        </a>
+                        <a href="#" style="color: #86868b; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">
+                            GitHub
+                        </a>
+                        <a href="#" style="color: #86868b; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">
+                            Resume
+                        </a>
                     </div>
-                    <h3 style="color: var(--text); margin-bottom: 0.5rem;">LinkedIn</h3>
-                    <p style="color: var(--text-secondary);">linkedin.com/in/jaydevmaosalkar</p>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3 style="color: var(--text); margin-bottom: 0.5rem;">Location</h3>
-                    <p style="color: var(--text-secondary);">Huddersfield, United Kingdom</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer style="text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary);">
-            <p>© 2024 Jaydev Maosalkar. All rights reserved.</p>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">Mechatronics Engineer | Industrial Automation Specialist</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="signature">JAYDEV</div>
+        <p style="color: #86868b; font-size: 0.9rem; letter-spacing: 0.1em;">
+            MECHATRONICS ENGINEER • INDUSTRIAL AUTOMATION SPECIALIST
+        </p>
+    </footer>
 
     <script>
-        // Name Reveal Sequence
+        // Cinematic Intro Sequence
         document.addEventListener('DOMContentLoaded', () => {
-            const nameReveal = document.getElementById('nameReveal');
-            const videoBackground = document.getElementById('videoBackground');
-            const mainContent = document.getElementById('mainContent');
+            const cinematicIntro = document.getElementById('cinematicIntro');
+            const introVideo = document.querySelector('.intro-video');
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
             const timelineItems = document.querySelectorAll('.timeline-item');
 
-            // Sequence timing
+            // Start sequence
             setTimeout(() => {
-                // Fade out name, fade in video
-                nameReveal.style.opacity = '0';
-                nameReveal.style.transform = 'scale(1.1)';
+                // Activate video background
+                introVideo.classList.add('active');
                 
+                // Fade out intro
                 setTimeout(() => {
-                    nameReveal.style.display = 'none';
-                    videoBackground.classList.add('active');
-                    mainContent.classList.add('active');
+                    cinematicIntro.style.opacity = '0';
+                    cinematicIntro.style.pointerEvents = 'none';
                     
-                    // Animate timeline items on scroll
-                    animateOnScroll();
-                }, 1500);
-            }, 3000); // Show name for 3 seconds
+                    // Animate hero text
+                    setTimeout(() => {
+                        const lines = document.querySelectorAll('.hero-title .line span');
+                        const subtitle = document.querySelector('.hero-subtitle');
+                        
+                        lines.forEach((line, index) => {
+                            setTimeout(() => {
+                                line.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                                line.style.transform = 'translateY(0)';
+                            }, index * 200);
+                        });
+                        
+                        setTimeout(() => {
+                            subtitle.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+                            subtitle.style.opacity = '1';
+                            subtitle.style.transform = 'translateY(0)';
+                        }, 600);
+                        
+                        // Animate timeline items on scroll
+                        animateOnScroll();
+                    }, 1000);
+                }, 2000);
+            }, 2500);
+        });
 
-            // Scroll animations
-            function animateOnScroll() {
-                timelineItems.forEach(item => {
-                    const rect = item.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 100) {
-                        item.classList.add('visible');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', animateOnScroll);
-
-            // Initialize first visible items
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+            
+            // Update navigation dots
+            updateNavDots();
+            
+            // Animate elements on scroll
             animateOnScroll();
         });
 
-        // Smooth scrolling for navigation (if added later)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.timeline-item, .skill-orb, .project-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateX(0)';
+                    element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 }
+            });
+        }
+
+        // Navigation dots
+        function updateNavDots() {
+            const sections = document.querySelectorAll('section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === currentSection) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scroll for navigation dots
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.dataset.section;
+                const section = document.getElementById(sectionId);
+                
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Video hover effect
+        document.querySelectorAll('.project-preview').forEach(video => {
+            video.addEventListener('mouseenter', () => {
+                video.style.transition = 'filter 0.4s ease';
             });
         });
     </script>
