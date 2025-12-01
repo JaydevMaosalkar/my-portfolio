@@ -1,0 +1,29 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "title": "Aerospace Engineer & UAV Specialist",
+    "tagline": "Engineering the future of unmanned flight"
+  },
+  "projects": [
+    {
+      "title": "Scaled A350-900 UAV Project",
+      "description": "Designed and engineered a scaled unmanned aerial vehicle based on the Airbus A350-900, focusing on aerodynamic efficiency and structural integrity. Successfully integrated all electronic and structural components for optimal performance.",
+      "achievements": [
+        "Created full airframe framework using CAD modeling",
+        "3D printed detailed aircraft model with precision engineering",
+        "Integrated all electronic and structural components",
+        "Applied aerospace principles to scaled UAV design"
+      ],
+      "technologies": ["CAD Design", "3D Printing", "Aerodynamics", "Systems Integration", "Prototyping"],
+      "date": "2024",
+      "category": "Aerospace Engineering"
+    },
+    {
+      "title": "Autonomous Flight Control System",
+      "description": "Developed an autonomous navigation system for UAVs implementing PID controllers and sensor fusion algorithms for stable flight in various conditions.",
+      "technologies": ["Python", "PID Control", "Sensor Fusion", "ROS", "Embedded Systems"],
+      "date": "2024",
+      "category": "Autonomous Systems"
+    }
+  ]
+}

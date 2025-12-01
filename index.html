@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Name | Professional Portfolio</title>
+    <title>Your Name | Aerospace Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -13,135 +13,280 @@
         body {
             background: #000;
             color: #fff;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('/images/hero-bg.jpg') center/cover;
         }
 
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            background: linear-gradient(135deg, #fff, #aaa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
         }
 
-        .hero-content p {
-            font-size: 1.5rem;
+        .hero-tagline {
+            font-size: 1.8rem;
             color: #888;
             margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
         }
 
-        .posts-section {
-            padding: 100px 20px;
+        /* Apple-Style Image Gallery */
+        .project-gallery {
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-image {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 30px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            transform: scale(0.92);
+            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-slide.active .gallery-image {
+            transform: scale(1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: rgba(0,0,0,0.7);
+            padding: 20px 40px;
+            border-radius: 50px;
+            backdrop-filter: blur(20px);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 1s ease 0.5s;
+        }
+
+        .gallery-slide.active .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 150px 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
+            font-size: 3.5rem;
             text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            color: #fff;
+            margin-bottom: 100px;
+            font-weight: 600;
         }
 
-        .post-grid {
+        .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
 
-        .post-card {
+        .project-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
-        .post-card:hover {
-            transform: translateY(-10px);
+        .project-card:hover {
             background: rgba(255,255,255,0.08);
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.2);
         }
 
-        .post-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             color: #fff;
         }
 
-        .ai-rewritten {
-            background: rgba(0, 113, 227, 0.1);
-            border-left: 4px solid #0071e3;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+        .project-description {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 113, 227, 0.2);
+            color: #0071e3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
     </style>
 </head>
 <body>
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Your Name</h1>
-            <p>Aerospace Engineer & UAV Specialist</p>
+            <h1>Aerospace Innovation</h1>
+            <p class="hero-tagline">Engineering the future of unmanned flight</p>
         </div>
     </section>
 
-    <section class="posts-section">
-        <h2 class="section-title">Projects & Achievements</h2>
-        <div class="post-grid" id="posts-container">
-            <!-- Portfolio content will load here -->
+    <!-- Apple-Style Image Gallery -->
+    <section class="project-gallery">
+        <div class="gallery-slide active">
+            <img src="/images/uav-design.jpg" class="gallery-image" alt="UAV Design">
+            <div class="gallery-caption">Aerodynamic Framework Design</div>
+        </div>
+        <div class="gallery-slide">
+            <img src="/images/3d-print.jpg" class="gallery-image" alt="3D Printing">
+            <div class="gallery-caption">Precision 3D Printing Process</div>
+        </div>
+        <div class="gallery-slide">
+            <img src="/images/components-integration.jpg" class="gallery-image" alt="Components Integration">
+            <div class="gallery-caption">Electronics & Systems Integration</div>
         </div>
     </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-grid" id="projects-container">
+            <!-- Projects will be loaded here -->
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Your Name. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">AI-Enhanced Portfolio</p>
+    </footer>
 
     <script>
-        async function loadPortfolio() {
+        // Apple-style image transitions
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Load projects from data.json
+        async function loadProjects() {
             try {
-                const response = await fetch('https://your-api-url.vercel.app/posts');
-                const posts = await response.json();
-                displayPosts(posts);
+                const response = await fetch('/data.json');
+                const data = await response.json();
+                displayProjects(data.projects);
             } catch (error) {
-                // Fallback static content
-                document.getElementById('posts-container').innerHTML = `
-                    <div class="post-card">
-                        <h3>Scaled A350-900 UAV Project</h3>
-                        <div class="ai-rewritten">
-                            Successfully completed the design, development, and integration of a scaled A350-900 Unmanned Aerial Vehicle. Demonstrated expertise in aerodynamics, 3D printing, and systems integration.
-                        </div>
-                    </div>
-                `;
+                // Fallback if data.json doesn't exist
+                const fallbackProjects = [
+                    {
+                        title: "Scaled A350-900 UAV Project",
+                        description: "Designed and engineered a scaled unmanned aerial vehicle based on the Airbus A350-900, focusing on aerodynamic efficiency and structural integrity.",
+                        achievements: ["CAD Framework Design", "3D Printing", "Systems Integration"],
+                        technologies: ["CAD Design", "3D Printing", "Aerodynamics", "Systems Integration"],
+                        date: "2024"
+                    }
+                ];
+                displayProjects(fallbackProjects);
             }
         }
 
-        function displayPosts(posts) {
-            const container = document.getElementById('posts-container');
+        function displayProjects(projects) {
+            const container = document.getElementById('projects-container');
             container.innerHTML = '';
             
-            posts.forEach(post => {
-                const postHTML = `
-                    <div class="post-card">
-                        <h3>${post.title}</h3>
-                        <div class="ai-rewritten">
-                            ${post.rewritten}
+            projects.forEach((project, index) => {
+                const projectHTML = `
+                    <div class="project-card animate-fade-in" style="animation-delay: ${index * 0.2}s">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="tech-tags">
+                            ${project.technologies.map(tech => 
+                                `<span class="tech-tag">${tech}</span>`
+                            ).join('')}
                         </div>
-                        <small style="color: #888;">${post.date}</small>
+                        <div style="margin-top: 20px; color: #888; font-size: 0.9rem;">
+                            ${project.date}
+                        </div>
                     </div>
                 `;
-                container.innerHTML += postHTML;
+                container.innerHTML += projectHTML;
             });
         }
-        
-        loadPortfolio();
+
+        // Initial load
+        loadProjects();
     </script>
 </body>
 </html>
