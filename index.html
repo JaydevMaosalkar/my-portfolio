@@ -40,7 +40,7 @@
             line-height: 1.6;
         }
 
-        /* VIDEO BACKGROUND - FIXED VIMEO */
+        /* PERFECTLY FITTED VIDEO BACKGROUND */
         .video-container {
             position: fixed;
             top: 0;
@@ -55,11 +55,12 @@
 
         .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* This ensures no black borders and perfect cropping */
             filter: brightness(0.4) contrast(1.2);
             pointer-events: none;
             z-index: -1;
@@ -190,7 +191,7 @@
             transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             background: rgba(0, 0, 0, 0.7);
             padding: 120px 5%;
-            margin-top: 100vh; /* Start earlier */
+            margin-top: 100vh;
             position: relative;
             z-index: 10;
         }
@@ -249,17 +250,19 @@
             line-height: 1.6;
         }
 
-        /* MODERN CARDS */
+        /* IMPROVED GLASSMORPHISM CARDS [citation:3][citation:6][citation:9] */
         .modern-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
             border-radius: 20px;
             padding: 40px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             min-height: 250px;
+            isolation: isolate; /* Prevents backdrop-filter from affecting siblings */
         }
 
         .modern-card::before {
@@ -271,7 +274,7 @@
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(255, 255, 255, 0.05), 
+                rgba(255, 255, 255, 0.1), 
                 transparent);
             transition: left 0.7s ease;
             z-index: 1;
@@ -283,8 +286,57 @@
 
         .modern-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(41, 151, 255, 0.4);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(41, 151, 255, 0.1);
+            backdrop-filter: blur(15px) saturate(200%);
+            -webkit-backdrop-filter: blur(15px) saturate(200%);
+        }
+
+        /* CARD BACKGROUNDS WITH LOGOS AND LINKEDIN CONTENT */
+        .card-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.07;
+            z-index: -1;
+            border-radius: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .modern-card:hover .card-bg-overlay {
+            opacity: 0.1;
+        }
+
+        /* University of Huddersfield Background */
+        .huddersfield-bg {
+            background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/University_of_Huddersfield_coat_of_arms.svg/1200px-University_of_Huddersfield_coat_of_arms.svg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* IGTR Background */
+        .igtr-bg {
+            background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
+        }
+
+        /* Airedale by Modine Background */
+        .airedale-bg {
+            background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
+        }
+
+        /* Forbes & Company Background */
+        .forbes-bg {
+            background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
         }
 
         .card-content {
@@ -382,7 +434,7 @@
             visibility: visible;
         }
 
-        /* SKILLS GRID */
+        /* SKILLS GRID WITH IMPROVED GLASS EFFECT */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -395,23 +447,71 @@
             padding: 35px;
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             min-height: 200px;
+            isolation: isolate;
         }
 
         .skill-card:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(41, 151, 255, 0.3);
             transform: translateY(-8px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(41, 151, 255, 0.1);
         }
 
         .skill-card.active {
             border-color: var(--accent-blue);
             background: rgba(0, 102, 204, 0.08);
+        }
+
+        /* Skill-specific backgrounds */
+        .automation-bg {
+            background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
+            opacity: 0.05;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border-radius: 18px;
+        }
+
+        .digital-twin-bg {
+            background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
+            opacity: 0.05;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border-radius: 18px;
+        }
+
+        .software-bg {
+            background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200');
+            background-size: cover;
+            opacity: 0.05;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border-radius: 18px;
         }
 
         .skill-details {
@@ -439,17 +539,23 @@
 
         .project-card {
             border-radius: 20px;
-            overflow: visible;
+            overflow: hidden;
             background: var(--surface-dark);
             transition: all 0.5s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .project-card:hover {
             transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(41, 151, 255, 0.2);
             border-color: var(--accent-blue);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         .project-image {
@@ -511,16 +617,23 @@
             padding: 45px 30px;
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .contact-card:hover {
             border-color: var(--accent-blue);
             transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(41, 151, 255, 0.1);
         }
 
         .email-hidden {
@@ -550,9 +663,11 @@
             padding: 80px 5%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        /* MUSIC PLAYER */
+        /* ENHANCED MUSIC PLAYER */
         .music-player {
             position: fixed;
             bottom: 25px;
@@ -560,6 +675,7 @@
             z-index: 1000;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: 12px 20px;
             display: flex;
@@ -574,6 +690,9 @@
             background: rgba(0, 0, 0, 0.8);
             border-color: var(--accent-blue-light);
             transform: translateY(-2px);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(41, 151, 255, 0.2);
         }
 
         .music-btn {
@@ -633,6 +752,14 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 500;
+        }
+
+        /* SONG TITLE DISPLAY */
+        .song-title {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-top: 5px;
+            font-style: italic;
         }
 
         /* SCROLL FADE FOR VIDEO */
@@ -708,6 +835,13 @@
                 bottom: 15px;
                 right: 15px;
                 padding: 10px 15px;
+                flex-direction: column;
+                gap: 10px;
+                border-radius: 25px;
+            }
+            
+            .volume-slider {
+                width: 80px;
             }
         }
 
@@ -740,6 +874,8 @@
         .tag {
             display: inline-block;
             background: rgba(41, 151, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             color: var(--accent-blue-light);
             padding: 8px 16px;
             border-radius: 20px;
@@ -800,6 +936,8 @@
             display: inline-flex;
             align-items: center;
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(41, 151, 255, 0.3);
             padding: 12px 20px;
             border-radius: 12px;
@@ -811,35 +949,67 @@
             margin-right: 10px;
             font-size: 1.2rem;
         }
+
+        /* GLASS SHINE EFFECT ON HOVER [citation:1][citation:3] */
+        .glass-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: left 0.7s ease;
+            z-index: 1;
+        }
+
+        .modern-card:hover .glass-shine,
+        .skill-card:hover .glass-shine,
+        .contact-card:hover .glass-shine {
+            left: 150%;
+        }
     </style>
 </head>
 <body>
     <!-- TRANSITION OVERLAY -->
     <div class="transition-overlay" id="transitionOverlay"></div>
 
-    <!-- VIDEO BACKGROUND WITH FALLBACK -->
+    <!-- VIDEO BACKGROUND - PERFECTLY CROPPED -->
     <div class="video-container" id="videoContainer">
-        <div class="video-fade-overlay" id="videoFadeOverlay"></div>
-        <div class="fallback-background"></div>
-        <!-- Using direct MP4 video for reliability -->
-        <video class="video-background" id="backgroundVideo" autoplay muted loop playsinline>
-            <source src="https://cdn.pixabay.com/video/2022/03/24/111656-702412278_large.mp4" type="video/mp4">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-robot-working-in-a-production-line-43331-large.mp4" type="video/mp4">
-        </video>
-    </div>
+    <div class="video-fade-overlay" id="videoFadeOverlay"></div>
+    <div class="fallback-background"></div>
+    <!-- Replace the <video> tag with this iframe -->
+    <iframe src="https://player.vimeo.com/video/1142250809?background=1&autoplay=1&loop=1&muted=1" 
+            frameborder="0" 
+            class="video-background"
+            allow="autoplay; fullscreen">
+    </iframe>
+</div>
 
-    <!-- MUSIC PLAYER -->
+    <!-- ENHANCED MUSIC PLAYER -->
     <div class="music-player" id="musicPlayer">
-        <div class="music-info">Background Music</div>
+        <div>
+            <div class="music-info">Background Music</div>
+            <div class="song-title" id="songTitle">Smooth Criminal (Instrumental Cover)</div>
+        </div>
         <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">
             <i class="fas fa-play"></i>
         </button>
         <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
     </div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="backgroundMusic" loop preload="auto">
+    <!-- MULTIPLE AUDIO ELEMENTS FOR BACKGROUND MUSIC -->
+    <audio id="backgroundMusic1" preload="auto">
+        <!-- Michael Jackson instrumental covers - royalty free alternatives -->
         <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="backgroundMusic2" preload="auto">
         <source src="https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3" type="audio/mpeg">
     </audio>
 
@@ -865,7 +1035,7 @@
             </div>
         </section>
 
-        <!-- EDUCATION SECTION -->
+        <!-- EDUCATION SECTION WITH INSTITUTION BACKGROUNDS -->
         <section class="section" id="education">
             <div class="section-header">
                 <span class="section-label">Academic Foundation</span>
@@ -876,11 +1046,13 @@
             </div>
 
             <div class="timeline">
-                <!-- MSc -->
+                <!-- MSc - University of Huddersfield -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
                         <div class="modern-card">
+                            <div class="card-bg-overlay huddersfield-bg"></div>
+                            <div class="glass-shine"></div>
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>University of Huddersfield</span>
@@ -896,11 +1068,12 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <!-- LinkedIn Image Placeholder -->
+                                    <!-- University Achievement Image -->
                                     <div style="text-align: center; margin: 20px 0;">
-                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                            <i class="fas fa-university" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: University Achievement</span>
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                                 alt="University Campus" 
+                                                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                         </div>
                                     </div>
                                     
@@ -929,6 +1102,8 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
                         <div class="modern-card">
+                            <div class="card-bg-overlay igtr-bg"></div>
+                            <div class="glass-shine"></div>
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>Indo German Tool Room (IGTR), Aurangabad</span>
@@ -944,11 +1119,12 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <!-- LinkedIn Image Placeholder -->
+                                    <!-- IGTR Training Image -->
                                     <div style="text-align: center; margin: 20px 0;">
-                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                            <i class="fas fa-tools" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: IGTR Training</span>
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                                 alt="Precision Engineering" 
+                                                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                         </div>
                                     </div>
                                     
@@ -982,7 +1158,7 @@
             </div>
         </section>
 
-        <!-- EXPERIENCE SECTION -->
+        <!-- EXPERIENCE SECTION WITH COMPANY BACKGROUNDS -->
         <section class="section" id="experience">
             <div class="section-header">
                 <span class="section-label">Professional Experience</span>
@@ -993,11 +1169,13 @@
             </div>
 
             <div class="timeline">
-                <!-- R&D Role -->
+                <!-- R&D Role - Airedale -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
                         <div class="modern-card">
+                            <div class="card-bg-overlay airedale-bg"></div>
+                            <div class="glass-shine"></div>
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>Airedale by Modine</span>
@@ -1013,11 +1191,12 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <!-- LinkedIn Image Placeholder -->
+                                    <!-- R&D Achievement Image -->
                                     <div style="text-align: center; margin: 20px 0;">
-                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                            <i class="fas fa-flask" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: R&D Achievement</span>
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                                 alt="HVAC Systems" 
+                                                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                         </div>
                                     </div>
                                     
@@ -1051,11 +1230,13 @@
                     </div>
                 </div>
 
-                <!-- Previous Role -->
+                <!-- Previous Role - Forbes & Company -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
                         <div class="modern-card">
+                            <div class="card-bg-overlay forbes-bg"></div>
+                            <div class="glass-shine"></div>
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>Forbes & Company Limited</span>
@@ -1071,11 +1252,12 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <!-- LinkedIn Image Placeholder -->
+                                    <!-- Industry Experience Image -->
                                     <div style="text-align: center; margin: 20px 0;">
-                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                            <i class="fas fa-industry" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Industry Experience</span>
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                                 alt="Industrial Automation" 
+                                                 style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                         </div>
                                     </div>
                                     
@@ -1102,7 +1284,7 @@
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
+        <!-- SKILLS SECTION WITH ENHANCED GLASS EFFECT -->
         <section class="section" id="skills">
             <div class="section-header">
                 <span class="section-label">Technical Expertise</span>
@@ -1114,6 +1296,8 @@
 
             <div class="skills-grid">
                 <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="automation-bg"></div>
+                    <div class="glass-shine"></div>
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1131,11 +1315,12 @@
                     
                     <div class="skill-details">
                         <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                            <!-- Skill Image Placeholder -->
+                            <!-- Skill Image -->
                             <div style="text-align: center; margin: 20px 0;">
-                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                    <i class="fas fa-cogs" style="font-size: 2.5rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Automation Projects</span>
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                         alt="Automation Systems" 
+                                         style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                 </div>
                             </div>
                             
@@ -1159,6 +1344,8 @@
                 </div>
 
                 <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="digital-twin-bg"></div>
+                    <div class="glass-shine"></div>
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(48, 176, 199, 0.1), rgba(48, 176, 199, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1176,11 +1363,12 @@
                     
                     <div class="skill-details">
                         <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                            <!-- Skill Image Placeholder -->
+                            <!-- Skill Image -->
                             <div style="text-align: center; margin: 20px 0;">
-                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                    <i class="fas fa-robot" style="font-size: 2.5rem; color: var(--accent-teal); opacity: 0.5;"></i>
-                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Digital Twin Projects</span>
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                         alt="Digital Twin Simulation" 
+                                         style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                 </div>
                             </div>
                             
@@ -1204,6 +1392,8 @@
                 </div>
 
                 <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="software-bg"></div>
+                    <div class="glass-shine"></div>
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1221,11 +1411,12 @@
                     
                     <div class="skill-details">
                         <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                            <!-- Skill Image Placeholder -->
+                            <!-- Skill Image -->
                             <div style="text-align: center; margin: 20px 0;">
-                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                    <i class="fas fa-code" style="font-size: 2.5rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Software Projects</span>
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                         alt="Software Development" 
+                                         style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                 </div>
                             </div>
                             
@@ -1277,11 +1468,12 @@
                         
                         <div class="project-details">
                             <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                <!-- Project Image Placeholder -->
+                                <!-- Project Image -->
                                 <div style="text-align: center; margin: 20px 0;">
-                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                        <i class="fas fa-project-diagram" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: HVAC Project</span>
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                             alt="HVAC Digital Twin Project" 
+                                             style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                     </div>
                                 </div>
                                 
@@ -1323,11 +1515,12 @@
                         
                         <div class="project-details">
                             <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                <!-- Project Image Placeholder -->
+                                <!-- Project Image -->
                                 <div style="text-align: center; margin: 20px 0;">
-                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                        <i class="fas fa-cogs" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Automation Project</span>
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                             alt="Industrial Automation" 
+                                             style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                     </div>
                                 </div>
                                 
@@ -1369,11 +1562,12 @@
                         
                         <div class="project-details">
                             <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                <!-- Project Image Placeholder -->
+                                <!-- Project Image -->
                                 <div style="text-align: center; margin: 20px 0;">
-                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
-                                        <i class="fas fa-drafting-compass" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
-                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: CAD Project</span>
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0; overflow: hidden;">
+                                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                             alt="CAD Design Project" 
+                                             style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
                                     </div>
                                 </div>
                                 
@@ -1415,6 +1609,7 @@
 
             <div class="contact-grid">
                 <div class="contact-card">
+                    <div class="glass-shine"></div>
                     <div style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
                         <i class="fas fa-envelope" style="font-size: 2rem; color: var(--accent-blue-light);"></i>
                     </div>
@@ -1428,6 +1623,7 @@
                 </div>
 
                 <div class="contact-card">
+                    <div class="glass-shine"></div>
                     <div style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(48, 176, 199, 0.1), rgba(48, 176, 199, 0.2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
                         <i class="fab fa-linkedin" style="font-size: 2rem; color: var(--accent-teal);"></i>
                     </div>
@@ -1437,6 +1633,7 @@
                 </div>
 
                 <div class="contact-card">
+                    <div class="glass-shine"></div>
                     <div style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
                         <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: var(--accent-blue-light);"></i>
                     </div>
@@ -1534,17 +1731,30 @@
             }, 3000);
         });
 
-        // MUSIC FUNCTIONS
+        // ENHANCED MUSIC FUNCTIONS WITH MULTIPLE TRACKS
+        let currentTrack = 1;
+        const songs = [
+            "Smooth Criminal (Instrumental Cover)",
+            "Beat It (Synthwave Remix)",
+            "Billie Jean (Chillwave Version)"
+        ];
+
         function initializeMusic() {
-            const music = document.getElementById('backgroundMusic');
+            const music1 = document.getElementById('backgroundMusic1');
+            const music2 = document.getElementById('backgroundMusic2');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
+            const songTitle = document.getElementById('songTitle');
             
             // Set initial volume
-            music.volume = volumeSlider.value;
+            music1.volume = volumeSlider.value;
+            music2.volume = volumeSlider.value;
             
-            // Try to autoplay music (user interaction required for some browsers)
-            music.play().then(() => {
+            // Set initial song title
+            songTitle.textContent = songs[0];
+            
+            // Try to autoplay first track
+            music1.play().then(() => {
                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 playPauseBtn.classList.add('playing');
             }).catch(e => {
@@ -1552,26 +1762,59 @@
                 playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 playPauseBtn.classList.remove('playing');
             });
+            
+            // Setup track ending handlers
+            music1.onended = () => {
+                currentTrack = 2;
+                songTitle.textContent = songs[1];
+                music2.play();
+                music1.currentTime = 0;
+            };
+            
+            music2.onended = () => {
+                currentTrack = 1;
+                songTitle.textContent = songs[0];
+                music1.play();
+                music2.currentTime = 0;
+            };
         }
 
         function toggleMusic() {
-            const music = document.getElementById('backgroundMusic');
+            const music1 = document.getElementById('backgroundMusic1');
+            const music2 = document.getElementById('backgroundMusic2');
             const playPauseBtn = document.getElementById('playPauseBtn');
+            const songTitle = document.getElementById('songTitle');
             
-            if (music.paused) {
-                music.play();
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                playPauseBtn.classList.add('playing');
+            if (currentTrack === 1) {
+                if (music1.paused) {
+                    music1.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playPauseBtn.classList.add('playing');
+                    songTitle.textContent = songs[0];
+                } else {
+                    music1.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playPauseBtn.classList.remove('playing');
+                }
             } else {
-                music.pause();
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                playPauseBtn.classList.remove('playing');
+                if (music2.paused) {
+                    music2.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playPauseBtn.classList.add('playing');
+                    songTitle.textContent = songs[1];
+                } else {
+                    music2.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playPauseBtn.classList.remove('playing');
+                }
             }
         }
 
         function changeVolume(value) {
-            const music = document.getElementById('backgroundMusic');
-            music.volume = value;
+            const music1 = document.getElementById('backgroundMusic1');
+            const music2 = document.getElementById('backgroundMusic2');
+            music1.volume = value;
+            music2.volume = value;
         }
 
         // SMOOTH VIDEO TRANSITION
@@ -1582,12 +1825,12 @@
             const transitionOverlay = document.getElementById('transitionOverlay');
             
             let hasTransitioned = false;
-            const transitionPoint = document.body.scrollHeight - window.innerHeight * 2; // Earlier transition
+            const transitionPoint = document.body.scrollHeight - window.innerHeight * 2;
             
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // Gradual fade as user scrolls down - starts earlier
+                // Gradual fade as user scrolls down
                 if (scrollTop > window.innerHeight * 0.3) {
                     const fadeProgress = Math.min(1, (scrollTop - window.innerHeight * 0.3) / (window.innerHeight * 1));
                     videoFadeOverlay.style.opacity = fadeProgress.toString();
@@ -1598,7 +1841,7 @@
                     finalContent.classList.add('active');
                 }
                 
-                // Apple-style transition at bottom (earlier)
+                // Apple-style transition at bottom
                 if (scrollTop >= transitionPoint && !hasTransitioned) {
                     hasTransitioned = true;
                     
