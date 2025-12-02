@@ -40,7 +40,7 @@
             line-height: 1.6;
         }
 
-        /* VIDEO BACKGROUND - Enhanced integration */
+        /* VIDEO BACKGROUND - Full screen, not cropped */
         .video-container {
             position: fixed;
             top: 0;
@@ -50,93 +50,100 @@
             z-index: -1;
             overflow: hidden;
             opacity: 0.03; /* Start at 3% visibility */
-            transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .video-background {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
+            transform: translateX(-50%) translateY(-50%);
             object-fit: cover;
-            filter: brightness(0.6);
+            filter: brightness(0.7);
         }
 
-        /* ELEGANT NAME INTRO */
+        /* IMPACTFUL NAME INTRO */
         .intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(5px);
-            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(3px);
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .intro-content {
             text-align: center;
             opacity: 0;
             transform: translateY(20px);
-            animation: introReveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: introReveal 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes introReveal {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
+                filter: blur(10px);
             }
             20% {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
             80% {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
             100% {
                 opacity: 0;
                 transform: translateY(-15px);
+                filter: blur(5px);
             }
         }
 
         .intro-name {
-            font-size: 5.5rem;
-            font-weight: 800;
+            font-size: 6.5rem;
+            font-weight: 900;
             letter-spacing: -0.03em;
             background: linear-gradient(135deg, 
                 var(--text-primary) 0%,
-                var(--accent-blue-light) 50%,
-                var(--text-secondary) 100%);
+                var(--accent-blue-light) 70%,
+                var(--text-primary) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
-            line-height: 1.1;
+            line-height: 1;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: nameGlow 2s ease-in-out infinite alternate;
         }
 
-        .intro-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            max-width: 500px;
-            margin: 0 auto;
+        @keyframes nameGlow {
+            from {
+                text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                             0 0 20px rgba(41, 151, 255, 0.1);
+            }
+            to {
+                text-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
+                             0 0 30px rgba(41, 151, 255, 0.2);
+            }
         }
 
         /* MAIN CONTENT */
         .main-content {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .main-content.active {
@@ -203,24 +210,6 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-        }
-
-        .modern-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.03), 
-                transparent);
-            transition: left 0.7s ease;
-        }
-
-        .modern-card:hover::before {
-            left: 100%;
         }
 
         .modern-card:hover {
@@ -303,12 +292,12 @@
         .timeline-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             margin-top: 0;
         }
 
         .timeline-item.active .timeline-details {
-            max-height: 600px;
+            max-height: 800px;
             margin-top: 25px;
         }
 
@@ -343,23 +332,7 @@
             background: rgba(0, 102, 204, 0.08);
         }
 
-        .skill-progress {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .skill-progress-bar {
-            height: 100%;
-            background: var(--accent-blue);
-            border-radius: 2px;
-            width: 0;
-            transition: width 1.5s ease-out;
-        }
-
-        /* PROJECTS SHOWCASE */
+        /* PROJECTS - Collapsible details */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -385,13 +358,42 @@
 
         .project-image {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
             transition: transform 0.8s ease;
         }
 
         .project-card:hover .project-image {
-            transform: scale(1.1);
+            transform: scale(1.08);
+        }
+
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .project-card.active .project-details {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .project-toggle {
+            background: transparent;
+            border: none;
+            color: var(--accent-blue-light);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .project-toggle:hover {
+            background: rgba(41, 151, 255, 0.1);
         }
 
         /* CONTACT SECTION */
@@ -453,7 +455,7 @@
 
         @media (max-width: 768px) {
             .intro-name {
-                font-size: 3.8rem;
+                font-size: 4.5rem;
             }
             
             .section-title {
@@ -476,7 +478,7 @@
 
         @media (max-width: 480px) {
             .intro-name {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .section-title {
@@ -578,11 +580,10 @@
         </iframe>
     </div>
 
-    <!-- ELEGANT NAME INTRO -->
+    <!-- IMPACTFUL NAME INTRO -->
     <div class="intro-overlay" id="introOverlay">
         <div class="intro-content">
-            <div class="intro-name">Jaydev Maosalkar</div>
-            <div class="intro-subtitle">Mechatronics Engineer | Automation Specialist | Digital Twin Expert</div>
+            <div class="intro-name">Jaydev</div>
         </div>
     </div>
 
@@ -591,22 +592,23 @@
         <!-- HERO SECTION -->
         <section class="section" id="hero">
             <div class="section-header">
-                <span class="section-label">Engineering Excellence</span>
-                <h1 class="section-title">Driving Industrial Innovation Through Advanced Mechatronics</h1>
+                <span class="section-label">Mechatronics Engineer & Automation Specialist</span>
+                <h1 class="section-title">Engineering Tomorrow's Industrial Systems</h1>
                 <p class="section-subtitle">
-                    Specializing in <span class="highlight">Industrial Automation</span>, <span class="highlight">Digital Twin Development</span>, 
-                    and <span class="highlight">Hardware-in-the-Loop Validation</span> for next-generation industrial systems and smart manufacturing solutions.
+                    Expert in <span class="highlight">Industrial Automation</span>, <span class="highlight">Digital Twin Development</span>, 
+                    and <span class="highlight">Hardware-in-the-Loop Validation</span> with hands-on experience in PLC systems, 
+                    control engineering, and advanced simulation technologies.
                 </p>
             </div>
         </section>
 
-        <!-- EXPERIENCE SECTION -->
+        <!-- EXPERIENCE SECTION - Enhanced with LinkedIn details -->
         <section class="section" id="experience">
             <div class="section-header">
                 <span class="section-label">Professional Journey</span>
                 <h2 class="section-title">Experience & Impact</h2>
                 <p class="section-subtitle">
-                    A track record of delivering measurable improvements in automation and validation processes
+                    From academic foundation to advanced engineering roles in UK industry
                 </p>
             </div>
 
@@ -624,16 +626,11 @@
                                 Shift Supervisor
                             </p>
                             <p style="color: var(--text-secondary); line-height: 1.7;">
-                                Leading operational excellence and process optimization in fast-paced retail environments, applying engineering principles to improve efficiency and team coordination.
+                                Leading operational excellence in retail management through systematic coordination and process optimization in high-paced environments.
                             </p>
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-                                        • Implemented structured operational protocols improving team coordination by 40%<br>
-                                        • Applied lean management principles to reduce process bottlenecks by 25%<br>
-                                        • Developed cross-training programs enhancing team versatility and service delivery
-                                    </p>
                                     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;">
                                         <span class="tag">Operational Excellence</span>
                                         <span class="tag">Process Optimization</span>
@@ -659,7 +656,7 @@
                                 Research & Development Engineer
                             </p>
                             <p style="color: var(--text-secondary); line-height: 1.7;">
-                                Pioneered digital-twin integration between Siemens Simcenter Amesim and PLC systems, developing innovative validation frameworks for advanced HVAC systems.
+                                Pioneered digital-twin integration between Siemens Simcenter Amesim and PLC systems, achieving 40% reduction in validation time through Hardware-in-the-Loop testing.
                             </p>
                             
                             <div class="timeline-details">
@@ -699,13 +696,13 @@
                         <div class="modern-card">
                             <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                 <span>Forbes & Company Limited</span>
-                                <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Dec 2020 - Aug 2022</span>
+                                <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Jun 2021 - Aug 2022</span>
                             </h3>
                             <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
-                                Junior Engineer → Trainee
+                                Junior Engineer
                             </p>
                             <p style="color: var(--text-secondary); line-height: 1.7;">
-                                Gained foundational expertise in industrial automation through hands-on projects involving PLC programming, special-purpose machinery, and control systems.
+                                Gained industrial automation experience through hands-on projects involving PLC programming and special-purpose machinery.
                             </p>
                             
                             <div class="timeline-details">
@@ -714,7 +711,7 @@
                                         • Assisted in PLC programming for automated manufacturing lines<br>
                                         • Participated in installation and commissioning of special-purpose machinery<br>
                                         • Contributed to safety protocol development and implementation<br>
-                                        • Gained hands-on experience with industrial control systems and automation components
+                                        • Gained hands-on experience with industrial control systems
                                     </p>
                                     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;">
                                         <span class="tag">Industrial Automation</span>
@@ -729,7 +726,44 @@
                     </div>
                 </div>
 
-                <!-- Education -->
+                <!-- Trainee Role -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <div class="modern-card">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                                <span>Forbes & Company Limited</span>
+                                <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Dec 2020 - Jun 2021</span>
+                            </h3>
+                            <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
+                                Trainee
+                            </p>
+                            <p style="color: var(--text-secondary); line-height: 1.7;">
+                                Developed foundational knowledge in industrial automation through hands-on training and project involvement.
+                            </p>
+                            
+                            <div class="timeline-details">
+                                <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                                        • Received comprehensive training in industrial automation systems<br>
+                                        • Assisted senior engineers in machinery installation and maintenance<br>
+                                        • Participated in safety and operational procedure workshops<br>
+                                        • Developed understanding of manufacturing processes and quality control
+                                    </p>
+                                    <div style="display: flex; flex-wrap; wrap; gap: 10px; margin-top: 25px;">
+                                        <span class="tag">Industrial Training</span>
+                                        <span class="tag">Manufacturing Processes</span>
+                                        <span class="tag">Quality Control</span>
+                                        <span class="tag">Safety Procedures</span>
+                                        <span class="tag">Equipment Maintenance</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education - MSc -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -749,7 +783,7 @@
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
                                         • Specialized in Advanced Control Systems and Industrial Automation<br>
-                                        • Completed thesis on "Integration of Digital Twin Technology in Industrial HVAC Systems"<br>
+                                        • Thesis: "Integration of Digital Twin Technology in Industrial HVAC Systems"<br>
                                         • Gained expertise in MATLAB, Simulink, and simulation software<br>
                                         • Developed projects in robotics, IoT integration, and smart manufacturing
                                     </p>
@@ -765,10 +799,47 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Education - BE -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <div class="modern-card">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                                <span>Institute of Government Tool Room and Training</span>
+                                <span style="font-size: 0.95rem; color: var(--accent-blue-light);">2016 - 2020</span>
+                            </h3>
+                            <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
+                                Bachelor of Engineering in Mechanical Engineering
+                            </p>
+                            <p style="color: var(--text-secondary); line-height: 1.7;">
+                                Comprehensive foundation in mechanical engineering principles, thermodynamics, fluid mechanics, and engineering design with practical workshops.
+                            </p>
+                            
+                            <div class="timeline-details">
+                                <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                                        • Core courses: Thermodynamics, Fluid Mechanics, Machine Design, Manufacturing Processes<br>
+                                        • Project: Design and analysis of mechanical systems<br>
+                                        • Workshops: Hands-on training in machining, welding, and fabrication<br>
+                                        • Developed foundational engineering problem-solving skills
+                                    </p>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;">
+                                        <span class="tag">Thermodynamics</span>
+                                        <span class="tag">Fluid Mechanics</span>
+                                        <span class="tag">Machine Design</span>
+                                        <span class="tag">Manufacturing Processes</span>
+                                        <span class="tag">Engineering Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
+        <!-- SKILLS SECTION - Updated from LinkedIn -->
         <section class="section" id="skills">
             <div class="section-header">
                 <span class="section-label">Technical Expertise</span>
@@ -810,9 +881,6 @@
                                 <strong>Applications:</strong> HVAC Automation, Manufacturing Lines, Process Control<br>
                                 <strong>Certifications:</strong> Industrial Automation Principles, PLC Programming
                             </p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 95%"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -848,9 +916,6 @@
                                 <strong>Projects:</strong> Real-time HVAC Simulation, Predictive Maintenance Systems<br>
                                 <strong>Achievement:</strong> 40% reduction in validation time through HIL integration
                             </p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 90%"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -861,12 +926,12 @@
                             <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--accent-blue-light);"></i>
                         </div>
                         <div>
-                            <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Data Analysis & Programming</h3>
-                            <p style="color: var(--text-tertiary); font-size: 1rem;">MATLAB, Technical Reporting, Optimization</p>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Technical Analysis & Software</h3>
+                            <p style="color: var(--text-tertiary); font-size: 1rem;">MATLAB, Python, Data Analysis, CAD</p>
                         </div>
                     </div>
                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-                        Proficient in data analysis, algorithm development, and technical reporting for engineering systems optimization.
+                        Proficient in engineering software, data analysis, algorithm development, and technical reporting for systems optimization.
                     </p>
                     
                     <div class="skill-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
@@ -877,31 +942,28 @@
                                     <p style="color: var(--accent-blue-light); font-weight: 600; font-size: 1.1rem;">Advanced</p>
                                 </div>
                                 <div>
-                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Certification</p>
-                                    <p style="color: var(--text-secondary); font-weight: 600; font-size: 1.1rem;">MATLAB Specialist</p>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Tools</p>
+                                    <p style="color: var(--text-secondary); font-weight: 600; font-size: 1.1rem;">10+ Engineering Tools</p>
                                 </div>
                             </div>
                             <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px;">
-                                <strong>Tools:</strong> MATLAB, Python, Data Visualization, Statistical Analysis<br>
-                                <strong>Applications:</strong> System Performance Analysis, Root-cause Analysis, Optimization<br>
-                                <strong>Certification:</strong> Learning MATLAB by Majlinda Qarri
+                                <strong>Tools:</strong> MATLAB, Python, SolidWorks, AutoCAD, Data Visualization<br>
+                                <strong>Applications:</strong> System Performance Analysis, CAD Modeling, Optimization<br>
+                                <strong>Certification:</strong> Learning MATLAB by Majlinda Qarri, SolidWorks Associate
                             </p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 85%"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- PROJECTS SECTION - With collapsible details -->
         <section class="section" id="projects">
             <div class="section-header">
                 <span class="section-label">Engineering Impact</span>
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">
-                    Applied engineering solutions with measurable business impact and technical innovation
+                    Click on any project to explore detailed technical implementations and business impacts
                 </p>
             </div>
 
@@ -909,78 +971,114 @@
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
                          alt="HVAC Digital Twin" class="project-image">
-                    <div style="padding: 35px;">
+                    <div style="padding: 30px;">
                         <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Advanced HVAC Digital Twin System</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.7;">
-                            Developed a comprehensive digital twin solution integrating Siemens Simcenter Amesim with real-time PLC systems, enabling predictive maintenance and reducing validation cycles by 40% through Hardware-in-the-Loop testing.
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Developed a comprehensive digital twin solution integrating Siemens Simcenter Amesim with real-time PLC systems for predictive maintenance and validation optimization.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
                             <span class="tag">Siemens Simcenter</span>
                             <span class="tag">HIL Testing</span>
                             <span class="tag">Predictive Analytics</span>
-                            <span class="tag">Real-time Simulation</span>
-                            <span class="tag">PLC Integration</span>
                         </div>
-                        <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
-                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
-                            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
-                                • 40% reduction in validation time<br>
-                                • 25% improvement in predictive maintenance accuracy<br>
-                                • 30% decrease in system downtime
-                            </p>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This project involved creating a real-time simulation environment that mirrored physical HVAC systems, allowing for predictive maintenance and reduced downtime. The system integrated Siemens Simcenter Amesim with PLC control systems through a custom Hardware-in-the-Loop interface.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">Real-time Simulation</span>
+                                    <span class="tag">PLC Integration</span>
+                                    <span class="tag">Custom HIL Interface</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • 40% reduction in validation time<br>
+                                        • 25% improvement in predictive maintenance accuracy<br>
+                                        • 30% decrease in system downtime
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
                          alt="Automation Framework" class="project-image">
-                    <div style="padding: 35px;">
+                    <div style="padding: 30px;">
                         <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Industrial Automation Framework</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.7;">
-                            Designed and implemented a comprehensive automation framework reducing manual intervention by 60% in manufacturing processes through advanced PLC control systems, safety interlock protocols, and real-time monitoring.
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Designed and implemented an automation framework reducing manual intervention in manufacturing processes through advanced PLC control systems and safety protocols.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
                             <span class="tag">PLC Programming</span>
                             <span class="tag">Control Systems</span>
                             <span class="tag">Safety Interlocks</span>
-                            <span class="tag">Manufacturing Automation</span>
-                            <span class="tag">Real-time Monitoring</span>
                         </div>
-                        <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
-                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
-                            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
-                                • 60% reduction in manual intervention<br>
-                                • Improved safety compliance by 45%<br>
-                                • 15% increase in production throughput
-                            </p>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This comprehensive automation solution involved programming PLC systems for multiple manufacturing lines, implementing safety interlocks, and creating a centralized monitoring system. The framework was designed to be scalable across different production environments.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">Manufacturing Automation</span>
+                                    <span class="tag">Real-time Monitoring</span>
+                                    <span class="tag">Scalable Architecture</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • 60% reduction in manual intervention<br>
+                                        • Improved safety compliance by 45%<br>
+                                        • 15% increase in production throughput
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
-                         alt="Smart Manufacturing" class="project-image">
-                    <div style="padding: 35px;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Smart Manufacturing Integration</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.7;">
-                            Developed IoT-enabled smart manufacturing solutions integrating sensor networks with control systems for real-time monitoring, predictive maintenance, and optimized production scheduling.
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22731c5a6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
+                         alt="CAD Design" class="project-image">
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Advanced CAD Design & Analysis</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Developed complex mechanical designs and conducted structural analysis using CAD software for industrial applications.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
-                            <span class="tag">IoT Integration</span>
-                            <span class="tag">Sensor Networks</span>
-                            <span class="tag">Predictive Maintenance</span>
-                            <span class="tag">Real-time Monitoring</span>
-                            <span class="tag">Production Optimization</span>
+                        <div style="display: flex; flex-wrap; wrap; gap: 10px; margin-bottom: 20px;">
+                            <span class="tag">SolidWorks</span>
+                            <span class="tag">CAD Design</span>
+                            <span class="tag">Structural Analysis</span>
                         </div>
-                        <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
-                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Technical Innovation</p>
-                            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
-                                • Real-time production monitoring system<br>
-                                • Predictive failure detection algorithms<br>
-                                • Energy optimization through smart scheduling
-                            </p>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This project involved creating detailed 3D models of mechanical components and assemblies, performing structural analysis, and optimizing designs for manufacturing. Worked on industrial machinery components, HVAC ducting systems, and custom fabrication designs.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">3D Modeling</span>
+                                    <span class="tag">FEA Analysis</span>
+                                    <span class="tag">Design Optimization</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Technical Innovation</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • Reduced component weight by 15% through optimization<br>
+                                        • Improved structural integrity by 25%<br>
+                                        • Streamlined manufacturing processes
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
                     </div>
                 </div>
             </div>
@@ -992,7 +1090,7 @@
                 <span class="section-label">Connect</span>
                 <h2 class="section-title">Let's Build Tomorrow's Solutions</h2>
                 <p class="section-subtitle">
-                    Open to collaborative opportunities in industrial automation, R&D, and engineering innovation across the UK and Europe
+                    Open to collaborative opportunities in industrial automation, R&D, and engineering innovation
                 </p>
             </div>
 
@@ -1022,7 +1120,7 @@
                     <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Location</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 10px; font-size: 1.1rem; font-weight: 500;">Leeds, United Kingdom</p>
                     <p style="color: var(--text-tertiary); font-size: 1rem; line-height: 1.6;">
-                        Open to opportunities in Leeds, across the UK, and remote positions in Europe
+                        Open to opportunities in Leeds, across the UK, and remote positions
                     </p>
                 </div>
             </div>
@@ -1057,13 +1155,21 @@
             // Start with video at 3% opacity (barely visible)
             videoContainer.style.opacity = '0.03';
             
-            // After intro animation completes (2.5 seconds), fade video to full opacity
+            // After intro animation completes (2.8 seconds), fade video to full opacity
             setTimeout(() => {
                 // Fade out intro overlay
                 introOverlay.style.opacity = '0';
                 
-                // Simultaneously fade video from 3% to 90% opacity
-                videoContainer.style.opacity = '0.9';
+                // Simultaneously fade video from 3% to 90% opacity smoothly
+                let opacity = 0.03;
+                const fadeInterval = setInterval(() => {
+                    opacity += 0.01;
+                    videoContainer.style.opacity = opacity.toString();
+                    
+                    if (opacity >= 0.9) {
+                        clearInterval(fadeInterval);
+                    }
+                }, 20);
                 
                 // After intro fade completes, show main content
                 setTimeout(() => {
@@ -1072,40 +1178,43 @@
                     
                     // Initialize animations
                     animateOnScroll();
-                    setupVideoFade();
-                    
-                    // Animate progress bars
-                    animateProgressBars();
+                    setupSmoothVideoFade();
                 }, 1800);
-            }, 2500);
+            }, 2800);
         });
 
-        // Video fade-out on scroll - complete removal after limit
-        function setupVideoFade() {
+        // SMOOTH Video fade-out on scroll - gradual linear fade
+        function setupSmoothVideoFade() {
             let videoRemoved = false;
-            let scrollLimit = window.innerHeight * 1.5; // Fade out after scrolling 1.5 viewport heights
+            const videoContainer = document.getElementById('videoContainer');
+            const fadeStart = window.innerHeight * 0.8; // Start fading after 80% of viewport
+            const fadeEnd = window.innerHeight * 2; // Complete fade after 2 viewports
             
             window.addEventListener('scroll', () => {
-                const videoContainer = document.getElementById('videoContainer');
+                if (videoRemoved) return;
+                
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                if (!videoRemoved) {
-                    if (scrollTop > scrollLimit) {
-                        // Start fading out video
-                        const fadeProgress = Math.min(1, (scrollTop - scrollLimit) / (window.innerHeight * 0.5));
-                        videoContainer.style.opacity = Math.max(0, 0.9 - fadeProgress).toString();
-                        
-                        // Completely remove video after fade
-                        if (fadeProgress >= 1) {
-                            videoContainer.style.display = 'none';
-                            videoRemoved = true;
-                        }
-                    } else if (scrollTop < scrollLimit) {
-                        // Keep video visible while above limit
-                        videoContainer.style.opacity = '0.9';
+                if (scrollTop > fadeStart) {
+                    // Calculate fade progress (0 to 1)
+                    const fadeProgress = Math.min(1, (scrollTop - fadeStart) / (fadeEnd - fadeStart));
+                    
+                    // Apply smooth fade - linear transition
+                    videoContainer.style.opacity = Math.max(0, 0.9 - fadeProgress).toString();
+                    
+                    // Completely hide and remove video after fade completes
+                    if (fadeProgress >= 1) {
+                        videoContainer.style.display = 'none';
+                        videoRemoved = true;
                     }
+                } else {
+                    // Keep video fully visible while above fade start point
+                    videoContainer.style.opacity = '0.9';
                 }
             });
+            
+            // Handle initial state
+            videoContainer.style.opacity = '0.9';
         }
 
         // Animate timeline items on scroll
@@ -1124,31 +1233,7 @@
             }, { threshold: 0.1 });
             
             timelineItems.forEach(item => observer.observe(item));
-            
-            // Also observe skill cards for progress bar animation
             skillCards.forEach(card => observer.observe(card));
-        }
-
-        // Animate progress bars when skills come into view
-        function animateProgressBars() {
-            const progressBars = document.querySelectorAll('.skill-progress-bar');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const progressBar = entry.target;
-                        const targetWidth = progressBar.style.width;
-                        progressBar.style.width = '0';
-                        
-                        setTimeout(() => {
-                            progressBar.style.transition = 'width 1.5s ease-out';
-                            progressBar.style.width = targetWidth;
-                        }, 300);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            progressBars.forEach(bar => observer.observe(bar));
         }
 
         // Toggle timeline details
@@ -1202,6 +1287,32 @@
             }
         }
 
+        // Toggle project details
+        function toggleProject(button) {
+            const projectCard = button.closest('.project-card');
+            const isActive = projectCard.classList.contains('active');
+            
+            // Close all other project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (card !== projectCard) {
+                    card.classList.remove('active');
+                    const toggleBtn = card.querySelector('.project-toggle');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = 'View Details';
+                    }
+                }
+            });
+            
+            // Toggle current project card
+            if (!isActive) {
+                projectCard.classList.add('active');
+                button.textContent = 'Show Less';
+            } else {
+                projectCard.classList.remove('active');
+                button.textContent = 'View Details';
+            }
+        }
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1222,7 +1333,6 @@
         // Initialize animations
         setTimeout(() => {
             animateOnScroll();
-            animateProgressBars();
         }, 500);
     </script>
 </body>
