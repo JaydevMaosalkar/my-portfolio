@@ -6,156 +6,112 @@
     <title>Jaydev Maosalkar | Mechatronics Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RESET & BASE */
+        /* APPLE COLOR SCHEME */
+        :root {
+            --apple-black: #000000;
+            --apple-dark: #1d1d1f;
+            --apple-gray: #86868b;
+            --apple-light: #f5f5f7;
+            --apple-blue: #0071e3;
+            --apple-blue-light: #2997ff;
+            --apple-gradient: linear-gradient(135deg, #000000 0%, #1d1d1f 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-blue: #0066cc;
-            --dark-bg: #0a192f;
-            --light-text: #e6f1ff;
-            --gray-text: #8892b0;
-            --accent: #00d4aa;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--dark-bg);
-            color: var(--light-text);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--apple-black);
+            color: var(--apple-light);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* NETFLIX-STYLE INTRO ONLY */
-        .cinematic-intro {
+        /* APPLE-STYLE NAME INTRO */
+        .apple-intro {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000;
+            background: var(--apple-black);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            overflow: hidden;
         }
 
-        .name-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            perspective: 1000px;
-        }
-
-        .name-slice {
-            position: absolute;
-            font-size: 16vw;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
+        .apple-name {
+            font-size: 6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,1) 0%,
+                rgba(255,255,255,0.8) 50%,
+                rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             opacity: 0;
-            filter: blur(20px);
-            color: #fff;
+            transform: scale(0.8);
+            animation: appleNameReveal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .slice-top {
-            clip-path: inset(0 0 50% 0);
-            transform: translateY(-100px) rotateX(90deg);
-            animation: sliceTopReveal 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-        }
-
-        .slice-bottom {
-            clip-path: inset(50% 0 0 0);
-            transform: translateY(100px) rotateX(-90deg);
-            animation: sliceBottomReveal 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-        }
-
-        @keyframes sliceTopReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(-100px) rotateX(90deg);
-                filter: blur(20px);
-            }
-            50% {
-                opacity: 1;
-                filter: blur(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-                filter: blur(0);
-            }
-        }
-
-        @keyframes sliceBottomReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(100px) rotateX(-90deg);
-                filter: blur(20px);
-            }
-            50% {
-                opacity: 1;
-                filter: blur(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-                filter: blur(0);
-            }
-        }
-
-        .name-glow {
-            position: absolute;
-            font-size: 16vw;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            color: var(--primary-blue);
-            opacity: 0;
-            z-index: -1;
-            animation: nameGlow 2.5s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards;
-        }
-
-        @keyframes nameGlow {
+        @keyframes appleNameReveal {
             0% {
                 opacity: 0;
                 transform: scale(0.8);
-                filter: blur(40px);
+                filter: blur(20px);
             }
             100% {
-                opacity: 0.3;
-                transform: scale(1.2);
-                filter: blur(20px);
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
             }
         }
 
-        /* VIMEO VIDEO BACKGROUND - WORKING */
-        .video-background {
+        /* VIMEO VIDEO - CORNER TO CORNER */
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
             opacity: 0;
-            transition: opacity 2s ease;
+            transition: opacity 1.5s ease;
         }
 
         .video-background.active {
-            opacity: 0.15; /* Subtle background effect */
+            opacity: 0.9;
         }
 
-        /* PROFESSIONAL CONTENT */
+        .video-background.fade-out {
+            opacity: 0;
+        }
+
+        /* MAIN CONTENT */
         .main-content {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .main-content.active {
@@ -163,265 +119,177 @@
             transform: translateY(0);
         }
 
-        /* HERO SECTION */
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            background: linear-gradient(to bottom, 
-                rgba(10, 25, 47, 0.9) 0%,
-                rgba(10, 25, 47, 1) 100%);
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--gray-text);
-            margin-bottom: 2rem;
-            max-width: 700px;
-        }
-
-        .highlight-text {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* BUTTONS */
-        .primary-btn {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-right: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .primary-btn:hover {
-            background: #0052a3;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
-        }
-
-        .secondary-btn {
-            background: transparent;
-            color: var(--light-text);
-            border: 2px solid var(--gray-text);
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .secondary-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* SECTIONS */
+        /* APPLE-STYLE SECTIONS */
         .section {
-            padding: 100px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 120px 5%;
+            position: relative;
+            background: var(--apple-gradient);
+        }
+
+        .section:nth-child(even) {
+            background: var(--apple-dark);
         }
 
         .section-header {
-            margin-bottom: 4rem;
             text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--apple-blue);
+            margin-bottom: 12px;
+            display: block;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--light-text);
-            position: relative;
-            display: inline-block;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--apple-gray);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* SKILLS GRID */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .skill-card {
+        /* APPLE-STYLE CARDS */
+        .apple-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .apple-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* TIMELINE - APPLE STYLE */
+        .apple-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
             cursor: pointer;
         }
 
-        .skill-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-blue);
-            background: rgba(255, 255, 255, 0.08);
+        .timeline-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--apple-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
         }
 
-        .skill-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-content.expanded {
+            max-height: 500px;
+        }
+
+        /* SKILLS GRID - APPLE STYLE */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--apple-blue);
+            transform: scale(1.02);
         }
 
         .skill-details {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            margin-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
+            margin-top: 20px;
         }
 
-        .skill-card.active .skill-details {
-            max-height: 500px;
+        .skill-item.active .skill-details {
+            max-height: 300px;
         }
 
-        /* EXPERIENCE TIMELINE */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 3rem auto 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, 
-                transparent,
-                var(--primary-blue),
-                transparent);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 80px;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-            transition: all 0.8s ease;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 24px;
-            top: 5px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            border: 3px solid var(--dark-bg);
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .timeline-content:hover {
-            border-color: var(--primary-blue);
-            transform: translateX(10px);
-        }
-
-        .company {
-            color: var(--accent);
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .duration {
-            color: var(--gray-text);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* PROJECTS */
+        /* PROJECTS SHOWCASE */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            border-color: var(--primary-blue);
+            border-color: var(--apple-blue);
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
         .project-card:hover .project-image {
@@ -429,118 +297,214 @@
         }
 
         .project-info {
-            padding: 2rem;
+            padding: 25px;
         }
 
-        /* CONTACT */
-        .contact-info {
+        /* CONTACT - APPLE STYLE */
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .contact-item {
             text-align: center;
-            padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
 
         .contact-item:hover {
-            border-color: var(--accent);
+            border-color: var(--apple-blue);
             transform: translateY(-5px);
         }
 
         .contact-icon {
             font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
+            color: var(--apple-blue);
+            margin-bottom: 20px;
         }
 
-        /* SCROLL PROGRESS */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent));
-            z-index: 999;
-            transition: width 0.1s ease;
+        /* APPLE FOOTER */
+        .apple-footer {
+            text-align: center;
+            padding: 60px 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--apple-black);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--apple-light), var(--apple-gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 20px;
+            .apple-name {
+                font-size: 3.5rem;
             }
             
-            .timeline-item {
-                padding-left: 60px;
+            .section-title {
+                font-size: 2.5rem;
             }
             
-            .timeline-dot {
-                left: 14px;
-            }
-            
-            .primary-btn, .secondary-btn {
-                width: 100%;
-                margin-right: 0;
-                justify-content: center;
-            }
-            
+            .skills-grid,
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 80px 5%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- NETFLIX-STYLE INTRO -->
-    <div class="cinematic-intro" id="cinematicIntro">
-        <div class="name-container">
-            <div class="name-glow">JAYDEV</div>
-            <div class="name-slice slice-top">JAYDEV</div>
-            <div class="name-slice slice-bottom">JAYDEV</div>
-        </div>
+    <!-- APPLE-STYLE NAME INTRO -->
+    <div class="apple-intro" id="appleIntro">
+        <div class="apple-name">Jaydev</div>
     </div>
 
-    <!-- VIMEO VIDEO BACKGROUND - YOUR GRADUATION VIDEO -->
-    <div class="video-background" id="videoBackground">
-        <!-- YOUR VIMEO GRADUATION VIDEO -->
-        <iframe src="https://player.vimeo.com/video/1142250809?background=1&autoplay=1&muted=1&loop=1&autopause=0&controls=0"
-                frameborder="0" 
-                allow="autoplay; fullscreen; picture-in-picture" 
-                allowfullscreen
-                style="width:100%; height:100%;">
+    <!-- VIMEO VIDEO - FULL SCREEN -->
+    <div class="video-container" id="videoContainer">
+        <iframe class="video-background" id="vimeoVideo"
+                src="https://player.vimeo.com/video/1142250809?background=1&autoplay=1&muted=1&loop=1&autopause=0&controls=0&quality=720p"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
         </iframe>
     </div>
 
-    <!-- SCROLL PROGRESS -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- PROFESSIONAL CONTENT -->
+    <!-- MAIN CONTENT -->
     <div class="main-content" id="mainContent">
         <!-- HERO SECTION -->
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Mechatronics Engineer</h1>
-                <p class="hero-subtitle">
-                    Specializing in <span class="highlight-text">Industrial Automation</span>, 
-                    <span class="highlight-text">Digital Twin Modeling</span>, and 
-                    <span class="highlight-text">HIL Validation</span>. Transforming complex systems 
-                    into predictable, efficient performance through innovative engineering solutions.
+        <section class="section" id="hero">
+            <div class="section-header">
+                <span class="section-label">Mechatronics Engineer</span>
+                <h1 class="section-title">Engineering Tomorrow's<br>Automation Systems</h1>
+                <p class="section-subtitle">
+                    Specializing in Industrial Automation, Digital Twin Modeling, 
+                    and HIL Validation for next-generation industrial systems.
                 </p>
-                <div>
-                    <button class="primary-btn" onclick="scrollToSection('skills')">
-                        <i class="fas fa-cogs"></i> View Skills
-                    </button>
-                    <button class="secondary-btn" onclick="scrollToSection('experience')">
-                        <i class="fas fa-briefcase"></i> Experience
-                    </button>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <span class="section-label">Career Journey</span>
+                <h2 class="section-title">Professional Experience</h2>
+                <p class="section-subtitle">
+                    Click on any role to view detailed achievements and contributions
+                </p>
+            </div>
+
+            <div class="apple-timeline">
+                <!-- Current Role -->
+                <div class="timeline-item">
+                    <div class="timeline-header" onclick="toggleTimeline(this)">
+                        <div class="timeline-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 5px;">One Stop Stores Ltd</h3>
+                            <p style="color: var(--apple-gray); font-size: 0.9rem;">Shift Supervisor • July 2025 - Present</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <p style="color: var(--apple-gray); line-height: 1.6; margin-bottom: 15px;">
+                            Leading operational excellence in retail management through systematic coordination 
+                            and process optimization in high-paced environments.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Team Leadership
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Process Optimization
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Cross-functional Coordination
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- R&D Role -->
+                <div class="timeline-item">
+                    <div class="timeline-header" onclick="toggleTimeline(this)">
+                        <div class="timeline-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 5px;">Airedale by Modine</h3>
+                            <p style="color: var(--apple-gray); font-size: 0.9rem;">Research & Development Engineer • Aug 2023 - Aug 2024</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <p style="color: var(--apple-gray); line-height: 1.6; margin-bottom: 15px;">
+                            Pioneered digital-twin integration between Siemens Simcenter Amesim and PLC systems, 
+                            achieving 40% reduction in validation time through Hardware-in-the-Loop testing.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Siemens Simcenter
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                HIL Validation
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Digital Twin
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                HVAC Systems
+                            </span>
+                        </div>
+                        <p style="color: var(--apple-gray); font-size: 0.9rem;">
+                            <strong>Key Achievement:</strong> Implemented structured root-cause analysis protocols 
+                            that improved problem resolution time by 60% across engineering teams.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Previous Role -->
+                <div class="timeline-item">
+                    <div class="timeline-header" onclick="toggleTimeline(this)">
+                        <div class="timeline-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 5px;">Forbes & Company Limited</h3>
+                            <p style="color: var(--apple-gray); font-size: 0.9rem;">Junior Engineer → Trainee • Dec 2020 - Aug 2022</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content">
+                        <p style="color: var(--apple-gray); line-height: 1.6; margin-bottom: 15px;">
+                            Gained foundational industrial automation experience through hands-on projects 
+                            involving special-purpose machinery and PLC programming fundamentals.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Industrial Automation
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                PLC Basics
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                Machinery Projects
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -548,144 +512,65 @@
         <!-- SKILLS SECTION -->
         <section class="section" id="skills">
             <div class="section-header">
-                <h2 class="section-title">Technical Expertise</h2>
-                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
-                    Click on any skill to see detailed experience and acquisition journey
+                <span class="section-label">Technical Mastery</span>
+                <h2 class="section-title">Core Competencies</h2>
+                <p class="section-subtitle">
+                    Click on any skill to view detailed proficiency and project applications
                 </p>
             </div>
-            
+
             <div class="skills-grid">
-                <!-- Skill 1 -->
-                <div class="skill-card" onclick="toggleSkill(this)">
-                    <div class="skill-icon">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Industrial Automation</h3>
-                    <p style="color: var(--gray-text);">PLC Systems, HIL, Control Engineering</p>
+                <div class="skill-item" onclick="toggleSkill(this)">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-industry" style="color: var(--apple-blue);"></i>
+                        Industrial Automation
+                    </h3>
+                    <p style="color: var(--apple-gray); font-size: 0.95rem;">
+                        PLC Systems, Control Engineering, HIL Testing
+                    </p>
                     <div class="skill-details">
-                        <p style="color: var(--gray-text);">
-                            <strong>How I gained this skill:</strong><br><br>
-                            • <strong>2 years</strong> at Forbes & Company as Trainee → Junior Engineer<br>
-                            • <strong>Siemens PLC certification</strong> and hands-on programming<br>
-                            • <strong>HVAC R&D</strong> at Airedale by Modine with real-time control systems<br>
-                            • Implemented <strong>automation solutions</strong> reducing manual intervention by 60%
+                        <p style="color: var(--apple-gray); margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <strong>Proficiency Level:</strong> Advanced<br>
+                            <strong>Key Projects:</strong> HVAC Digital Twin, Automation Framework<br>
+                            <strong>Tools:</strong> Siemens PLC, MATLAB, Control Systems<br>
+                            <strong>Experience:</strong> 3+ years across R&D and industrial applications
                         </p>
                     </div>
                 </div>
 
-                <!-- Skill 2 -->
-                <div class="skill-card" onclick="toggleSkill(this)">
-                    <div class="skill-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">HIL Validation</h3>
-                    <p style="color: var(--gray-text);">Hardware-in-the-Loop Testing</p>
+                <div class="skill-item" onclick="toggleSkill(this)">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-robot" style="color: var(--apple-blue);"></i>
+                        Digital Twin Modeling
+                    </h3>
+                    <p style="color: var(--apple-gray); font-size: 0.95rem;">
+                        Siemens Simcenter Amesim, Simulation, Predictive Maintenance
+                    </p>
                     <div class="skill-details">
-                        <p style="color: var(--gray-text);">
-                            <strong>How I gained this skill:</strong><br><br>
-                            • <strong>R&D role</strong> at Airedale by Modine (1 year)<br>
-                            • Developed <strong>digital twin integration</strong> with physical systems<br>
-                            • Created <strong>validation protocols</strong> reducing testing time by 40%<br>
-                            • Cross-functional <strong>root-cause analysis</strong> implementation
+                        <p style="color: var(--apple-gray); margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <strong>Proficiency Level:</strong> Expert<br>
+                            <strong>Key Projects:</strong> Real-time HVAC Simulation System<br>
+                            <strong>Tools:</strong> Siemens Simcenter, 3D Modeling Software<br>
+                            <strong>Achievement:</strong> 40% reduction in validation time
                         </p>
                     </div>
                 </div>
 
-                <!-- Skill 3 -->
-                <div class="skill-card" onclick="toggleSkill(this)">
-                    <div class="skill-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Digital Twin Modeling</h3>
-                    <p style="color: var(--gray-text);">Siemens Simcenter Amesim</p>
+                <div class="skill-item" onclick="toggleSkill(this)">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-chart-line" style="color: var(--apple-blue);"></i>
+                        Data Analysis
+                    </h3>
+                    <p style="color: var(--apple-gray); font-size: 0.95rem;">
+                        MATLAB, Technical Reporting, Performance Optimization
+                    </p>
                     <div class="skill-details">
-                        <p style="color: var(--gray-text);">
-                            <strong>How I gained this skill:</strong><br><br>
-                            • Built <strong>Siemens Simcenter models</strong> integrated with PLC systems<br>
-                            • Implemented <strong>predictive maintenance</strong> through simulation<br>
-                            • Reduced <strong>equipment downtime</strong> by 25%<br>
-                            • Real-time <strong>performance optimization</strong> of HVAC systems
+                        <p style="color: var(--apple-gray); margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <strong>Proficiency Level:</strong> Advanced<br>
+                            <strong>Certification:</strong> Learning MATLAB by Majlinda Qarri<br>
+                            <strong>Applications:</strong> System performance analysis, Root-cause analysis<br>
+                            <strong>Tools:</strong> MATLAB, Data Visualization, Statistical Analysis
                         </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERIENCE SECTION -->
-        <section class="section" id="experience">
-            <div class="section-header">
-                <h2 class="section-title">Professional Experience</h2>
-                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
-                    Detailed career journey with measurable achievements
-                </p>
-            </div>
-            
-            <div class="timeline">
-                <!-- Current Role -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content" onclick="toggleTimeline(this)">
-                        <div class="company">One Stop Stores Ltd</div>
-                        <span class="duration">July 2025 - Present | Huddersfield, UK</span>
-                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Shift Supervisor</h4>
-                        <p style="color: var(--gray-text);">
-                            Leading operational excellence in retail management, coordinating teams, 
-                            and implementing efficiency improvements in high-paced environments.
-                        </p>
-                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-                                <strong>Key Achievements:</strong><br>
-                                • Team coordination and cross-functional management<br>
-                                • Process optimization and efficiency improvements<br>
-                                • Customer service excellence implementation
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- R&D Role -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content" onclick="toggleTimeline(this)">
-                        <div class="company">Airedale by Modine</div>
-                        <span class="duration">August 2023 - August 2024 | Leeds, UK</span>
-                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Research & Development Engineer</h4>
-                        <p style="color: var(--gray-text);">
-                            Pioneered digital-twin integration and HIL validation for HVAC systems, 
-                            achieving significant performance improvements.
-                        </p>
-                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-                                <strong>Key Achievements:</strong><br>
-                                • <strong>40% reduction</strong> in validation time through HIL testing<br>
-                                • <strong>Digital twin integration</strong> between Siemens Simcenter and PLCs<br>
-                                • <strong>Cross-functional collaboration</strong> with engineering teams<br>
-                                • <strong>Technical reporting</strong> with requirement-to-test traceability
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Previous Role -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content" onclick="toggleTimeline(this)">
-                        <div class="company">Forbes & Company Limited</div>
-                        <span class="duration">December 2020 - August 2022 | Aurangabad, India</span>
-                        <h4 style="color: var(--light-text); margin: 1rem 0 0.5rem;">Junior Engineer → Trainee</h4>
-                        <p style="color: var(--gray-text);">
-                            Developed foundational expertise in industrial automation systems 
-                            and special-purpose machinery through hands-on projects.
-                        </p>
-                        <div class="timeline-details" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease;">
-                            <p style="color: var(--gray-text); margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-                                <strong>Key Achievements:</strong><br>
-                                • Gained <strong>1 year 9 months</strong> industrial experience<br>
-                                • Worked on <strong>special-purpose machinery</strong> projects<br>
-                                • Learned <strong>PLC programming</strong> fundamentals<br>
-                                • Participated in <strong>cross-functional engineering</strong> teams
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -694,48 +579,55 @@
         <!-- PROJECTS SECTION -->
         <section class="section" id="projects">
             <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
-                    Real-world engineering solutions with measurable impact
+                <span class="section-label">Innovation Showcase</span>
+                <h2 class="section-title">Featured Engineering Projects</h2>
+                <p class="section-subtitle">
+                    Real-world applications with measurable impact
                 </p>
             </div>
-            
+
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
                          alt="HVAC Digital Twin" class="project-image">
                     <div class="project-info">
-                        <h3 style="color: var(--light-text); margin-bottom: 1rem;">HVAC Digital Twin System</h3>
-                        <p style="color: var(--gray-text);">
-                            Real-time simulation and predictive maintenance system reducing validation time by 40%.
+                        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">HVAC Digital Twin System</h3>
+                        <p style="color: var(--apple-gray); margin-bottom: 15px;">
+                            Real-time simulation and predictive maintenance system that reduced 
+                            validation time by 40% through Hardware-in-the-Loop testing.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
                                 Siemens Simcenter
                             </span>
-                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
                                 HIL Testing
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
+                                Predictive Analytics
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" 
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
                          alt="Automation Framework" class="project-image">
                     <div class="project-info">
-                        <h3 style="color: var(--light-text); margin-bottom: 1rem;">Industrial Automation Framework</h3>
-                        <p style="color: var(--gray-text);">
-                            End-to-end automation solution reducing manual intervention by 60% in manufacturing processes.
+                        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Industrial Automation Framework</h3>
+                        <p style="color: var(--apple-gray); margin-bottom: 15px;">
+                            Comprehensive automation solution reducing manual intervention by 60% 
+                            in manufacturing processes through PLC control systems.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
                                 PLC Programming
                             </span>
-                            <span style="background: rgba(0, 212, 170, 0.2); color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
                                 Control Systems
+                            </span>
+                            <span style="background: rgba(0, 113, 227, 0.1); color: var(--apple-blue); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;">
+                                Safety Interlocks
                             </span>
                         </div>
                     </div>
@@ -746,21 +638,23 @@
         <!-- CONTACT SECTION -->
         <section class="section" id="contact">
             <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p style="color: var(--gray-text); max-width: 600px; margin: 0 auto;">
-                    Open to opportunities in Industrial Automation & R&D
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Let's Build The Future</h2>
+                <p class="section-subtitle">
+                    Open to opportunities in Industrial Automation, R&D, and Engineering Innovation
                 </p>
             </div>
-            
-            <div class="contact-info">
+
+            <div class="contact-grid">
                 <div class="contact-item">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Email</h3>
-                    <p style="color: var(--gray-text);">j.maosalkar@gmail.com</p>
-                    <button class="secondary-btn" style="margin-top: 1rem;" onclick="window.location.href='mailto:j.maosalkar@gmail.com'">
-                        Send Email
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Email</h3>
+                    <p style="color: var(--apple-gray); margin-bottom: 15px;">j.maosalkar@gmail.com</p>
+                    <button onclick="window.location.href='mailto:j.maosalkar@gmail.com'" 
+                            style="background: var(--apple-blue); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 500;">
+                        Send Message
                     </button>
                 </div>
 
@@ -768,10 +662,11 @@
                     <div class="contact-icon">
                         <i class="fab fa-linkedin"></i>
                     </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">LinkedIn</h3>
-                    <p style="color: var(--gray-text);">linkedin.com/in/jaydevmaosalkar</p>
-                    <button class="secondary-btn" style="margin-top: 1rem;" onclick="window.open('https://linkedin.com/in/jaydevmaosalkar', '_blank')">
-                        Visit Profile
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">LinkedIn</h3>
+                    <p style="color: var(--apple-gray); margin-bottom: 15px;">linkedin.com/in/jaydevmaosalkar</p>
+                    <button onclick="window.open('https://linkedin.com/in/jaydevmaosalkar', '_blank')"
+                            style="background: transparent; color: var(--apple-blue); border: 2px solid var(--apple-blue); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 500;">
+                        View Profile
                     </button>
                 </div>
 
@@ -779,9 +674,9 @@
                     <div class="contact-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3 style="color: var(--light-text); margin-bottom: 1rem;">Location</h3>
-                    <p style="color: var(--gray-text);">Huddersfield, United Kingdom</p>
-                    <p style="color: var(--gray-text); font-size: 0.9rem; margin-top: 0.5rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Location</h3>
+                    <p style="color: var(--apple-gray);">Huddersfield, United Kingdom</p>
+                    <p style="color: var(--apple-gray); font-size: 0.9rem; margin-top: 5px;">
                         Open to remote & on-site opportunities
                     </p>
                 </div>
@@ -789,101 +684,120 @@
         </section>
 
         <!-- FOOTER -->
-        <footer style="text-align: center; padding: 3rem 5%; border-top: 1px solid rgba(255,255,255,0.1); color: var(--gray-text);">
-            <p>© 2024 Jaydev Maosalkar. All rights reserved.</p>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">
-                Mechatronics Engineer | Industrial Automation Specialist
+        <footer class="apple-footer">
+            <div class="footer-logo">Jaydev</div>
+            <p style="color: var(--apple-gray); font-size: 0.9rem; margin-bottom: 10px;">
+                Mechatronics Engineer • Industrial Automation Specialist
+            </p>
+            <p style="color: var(--apple-gray); font-size: 0.8rem;">
+                © 2024 Jaydev Maosalkar. All rights reserved.
             </p>
         </footer>
     </div>
 
     <script>
-        // SEQUENCE: Netflix intro → Vimeo video → Portfolio content
+        // SMOOTH VIDEO TRANSITION MANAGEMENT
+        let videoFaded = false;
+        
         document.addEventListener('DOMContentLoaded', () => {
-            const cinematicIntro = document.getElementById('cinematicIntro');
-            const videoBackground = document.getElementById('videoBackground');
+            const appleIntro = document.getElementById('appleIntro');
+            const video = document.getElementById('vimeoVideo');
             const mainContent = document.getElementById('mainContent');
             
-            // 1. Name animation plays (2.2s + 1.2s glow = 3.4s total)
-            // 2. After name animation, show Vimeo video
+            // 1. Apple-style name intro (2 seconds)
             setTimeout(() => {
-                // Show Vimeo video in background
-                videoBackground.classList.add('active');
+                // 2. Fade in Vimeo video
+                video.classList.add('active');
                 
-                // Fade out intro
-                cinematicIntro.style.opacity = '0';
-                cinematicIntro.style.pointerEvents = 'none';
-                
-                // Show portfolio content
+                // 3. Fade out intro and show content
                 setTimeout(() => {
-                    cinematicIntro.style.display = 'none';
-                    mainContent.classList.add('active');
-                    animateOnScroll();
-                }, 1500);
-                
-            }, 3400); // Wait for name animation to complete
+                    appleIntro.style.opacity = '0';
+                    setTimeout(() => {
+                        appleIntro.style.display = 'none';
+                        mainContent.classList.add('active');
+                        animateOnScroll();
+                        
+                        // Start video fade-out on scroll
+                        setupVideoFade();
+                    }, 1000);
+                }, 1000);
+            }, 2000);
         });
 
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        // Video fade-out on scroll
+        function setupVideoFade() {
+            let lastScrollTop = 0;
             
-            animateOnScroll();
-        });
+            window.addEventListener('scroll', () => {
+                const video = document.getElementById('vimeoVideo');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                const docHeight = document.documentElement.scrollHeight;
+                
+                // Calculate scroll percentage
+                const scrollPercent = (scrollTop / (docHeight - windowHeight)) * 100;
+                
+                if (scrollPercent > 30 && !videoFaded) {
+                    // Start fading video after 30% scroll
+                    video.classList.add('fade-out');
+                    videoFaded = true;
+                }
+                
+                // Completely hide video at bottom
+                if (scrollPercent > 95) {
+                    video.style.opacity = '0';
+                    video.style.pointerEvents = 'none';
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }
 
         // Animate timeline items on scroll
         function animateOnScroll() {
             const timelineItems = document.querySelectorAll('.timeline-item');
             
-            timelineItems.forEach(item => {
-                const rect = item.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    item.classList.add('visible');
-                }
-            });
-        }
-
-        // Toggle skill details
-        function toggleSkill(element) {
-            const allSkills = document.querySelectorAll('.skill-card');
-            allSkills.forEach(skill => {
-                if (skill !== element) {
-                    skill.classList.remove('active');
-                }
-            });
-            element.classList.toggle('active');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            timelineItems.forEach(item => observer.observe(item));
         }
 
         // Toggle timeline details
         function toggleTimeline(element) {
-            const details = element.querySelector('.timeline-details');
-            const isActive = details.style.maxHeight === '500px';
+            const content = element.parentElement.querySelector('.timeline-content');
+            const isExpanded = content.classList.contains('expanded');
             
             // Close all other timeline details
-            document.querySelectorAll('.timeline-details').forEach(detail => {
-                detail.style.maxHeight = '0';
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                item.classList.remove('expanded');
+            });
+            
+            if (!isExpanded) {
+                content.classList.add('expanded');
+            }
+        }
+
+        // Toggle skill details
+        function toggleSkill(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all other skill details
+            document.querySelectorAll('.skill-item').forEach(item => {
+                item.classList.remove('active');
             });
             
             if (!isActive) {
-                details.style.maxHeight = '500px';
+                element.classList.add('active');
             }
         }
 
-        // Scroll to section
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                window.scrollTo({
-                    top: section.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // Initialize
+        // Initialize animations
         setTimeout(animateOnScroll, 100);
     </script>
 </body>
