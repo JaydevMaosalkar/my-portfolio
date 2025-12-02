@@ -40,7 +40,7 @@
             line-height: 1.6;
         }
 
-        /* VIDEO BACKGROUND - FIXED - No borders */
+        /* VIDEO BACKGROUND - FIXED VIMEO */
         .video-container {
             position: fixed;
             top: 0;
@@ -55,16 +55,24 @@
 
         .video-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 100vh;
-            transform: translate(-50%, -50%) scale(1.1); /* Scale up to remove borders */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
+            filter: brightness(0.4) contrast(1.2);
             pointer-events: none;
-            min-width: 100%;
-            min-height: 100%;
+            z-index: -1;
+        }
+
+        .fallback-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            z-index: -2;
         }
 
         /* SMOOTH TRANSITION OVERLAY */
@@ -81,19 +89,19 @@
             transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* IMPACTFUL NAME INTRO - Fixed Y letter */
+        /* IMPACTFUL NAME INTRO */
         .intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(5px);
             transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -147,17 +155,6 @@
             display: inline-block;
         }
 
-        /* Ensure Y doesn't get cut */
-        .intro-name::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: transparent;
-        }
-
         @keyframes nameGlow {
             from {
                 text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
@@ -182,7 +179,7 @@
             transform: translateY(0);
         }
 
-        /* FINAL CONTENT */
+        /* FINAL CONTENT - EARLIER APPEARANCE */
         .final-content {
             min-height: 100vh;
             display: flex;
@@ -190,9 +187,12 @@
             justify-content: center;
             opacity: 0;
             transform: translateY(50px);
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--primary-dark);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.7);
             padding: 120px 5%;
+            margin-top: 100vh; /* Start earlier */
+            position: relative;
+            z-index: 10;
         }
 
         .final-content.active {
@@ -249,7 +249,7 @@
             line-height: 1.6;
         }
 
-        /* MODERN CARDS - Fixed disappearing content */
+        /* MODERN CARDS */
         .modern-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -258,7 +258,7 @@
             border: 1px solid var(--border-color);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: visible; /* Changed from hidden */
+            overflow: visible;
             min-height: 250px;
         }
 
@@ -287,7 +287,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Card content wrapper to prevent disappearing */
         .card-content {
             position: relative;
             z-index: 2;
@@ -372,34 +371,18 @@
             overflow: hidden;
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             margin-top: 0;
-            opacity: 1; /* Fixed */
-            visibility: visible; /* Fixed */
+            opacity: 1;
+            visibility: visible;
         }
 
         .timeline-item.active .timeline-details {
-            max-height: 1000px; /* Increased */
+            max-height: 1000px;
             margin-top: 25px;
             opacity: 1;
             visibility: visible;
         }
 
-        /* LinkedIn Images in Timeline */
-        .linkedin-image {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 12px;
-            margin: 20px 0;
-            display: block;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .linkedin-image:hover {
-            transform: scale(1.02);
-        }
-
-        /* SKILLS GRID - Fixed */
+        /* SKILLS GRID */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -416,7 +399,7 @@
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
-            overflow: visible; /* Changed */
+            overflow: visible;
             min-height: 200px;
         }
 
@@ -435,8 +418,8 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; /* Fixed */
-            visibility: visible; /* Fixed */
+            opacity: 1;
+            visibility: visible;
         }
 
         .skill-card.active .skill-details {
@@ -456,7 +439,7 @@
 
         .project-card {
             border-radius: 20px;
-            overflow: visible; /* Changed */
+            overflow: visible;
             background: var(--surface-dark);
             transition: all 0.5s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -485,12 +468,12 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; /* Fixed */
-            visibility: visible; /* Fixed */
+            opacity: 1;
+            visibility: visible;
         }
 
         .project-card.active .project-details {
-            max-height: 800px; /* Increased */
+            max-height: 800px;
             opacity: 1;
             visibility: visible;
         }
@@ -569,6 +552,111 @@
             background: rgba(0, 0, 0, 0.5);
         }
 
+        /* MUSIC PLAYER */
+        .music-player {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: var(--accent-blue-light);
+            transform: translateY(-2px);
+        }
+
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-blue-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(41, 151, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            color: var(--accent-teal);
+            box-shadow: 0 0 15px rgba(48, 176, 199, 0.3);
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-blue-light);
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-blue-light);
+            cursor: pointer;
+            border: none;
+        }
+
+        .music-info {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* SCROLL FADE FOR VIDEO */
+        .video-fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 40%,
+                rgba(0,0,0,0.3) 60%,
+                rgba(0,0,0,0.6) 75%,
+                rgba(0,0,0,0.9) 90%,
+                var(--primary-dark) 100%
+            );
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+        }
+
         /* RESPONSIVE DESIGN */
         @media (max-width: 1024px) {
             .timeline::before {
@@ -616,8 +704,10 @@
                 padding: 30px;
             }
             
-            .video-background {
-                transform: translate(-50%, -50%) scale(1.15); /* More scale for mobile */
+            .music-player {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
             }
         }
 
@@ -633,6 +723,16 @@
             .timeline-content {
                 width: calc(100% - 60px);
                 margin-left: 60px !important;
+            }
+            
+            .music-player {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            
+            .volume-slider {
+                width: 70px;
             }
         }
 
@@ -711,45 +811,37 @@
             margin-right: 10px;
             font-size: 1.2rem;
         }
-
-        /* SCROLL FADE FOR VIDEO */
-        .video-fade-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent 40%,
-                rgba(0,0,0,0.3) 60%,
-                rgba(0,0,0,0.6) 75%,
-                rgba(0,0,0,0.9) 90%,
-                var(--primary-dark) 100%
-            );
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 2s ease;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
     <!-- TRANSITION OVERLAY -->
     <div class="transition-overlay" id="transitionOverlay"></div>
 
-    <!-- VIDEO BACKGROUND -->
+    <!-- VIDEO BACKGROUND WITH FALLBACK -->
     <div class="video-container" id="videoContainer">
         <div class="video-fade-overlay" id="videoFadeOverlay"></div>
-        <!-- Using YouTube video that fills screen better -->
-        <iframe class="video-background" id="vimeoVideo"
-                src="https://www.youtube.com/embed/3JluqTojuME?autoplay=1&mute=1&loop=1&playlist=3JluqTojuME&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-        </iframe>
+        <div class="fallback-background"></div>
+        <!-- Using direct MP4 video for reliability -->
+        <video class="video-background" id="backgroundVideo" autoplay muted loop playsinline>
+            <source src="https://cdn.pixabay.com/video/2022/03/24/111656-702412278_large.mp4" type="video/mp4">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-robot-working-in-a-production-line-43331-large.mp4" type="video/mp4">
+        </video>
     </div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-info">Background Music</div>
+        <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">
+            <i class="fas fa-play"></i>
+        </button>
+        <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
+    </div>
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- IMPACTFUL NAME INTRO -->
     <div class="intro-overlay" id="introOverlay">
@@ -1358,7 +1450,7 @@
         </section>
     </div>
 
-    <!-- FINAL CONTENT -->
+    <!-- FINAL CONTENT - APPEARS EARLIER -->
     <div class="final-content" id="finalContent">
         <div class="section-header">
             <span class="section-label">Innovation Continues</span>
@@ -1399,9 +1491,17 @@
             const introOverlay = document.getElementById('introOverlay');
             const videoContainer = document.getElementById('videoContainer');
             const mainContent = document.getElementById('mainContent');
+            const video = document.getElementById('backgroundVideo');
             
             // Start with video at 3% opacity
             videoContainer.style.opacity = '0.03';
+            
+            // Try to play video (required for autoplay)
+            if (video) {
+                video.play().catch(e => {
+                    console.log("Video autoplay failed:", e);
+                });
+            }
             
             // After intro animation completes
             setTimeout(() => {
@@ -1427,9 +1527,52 @@
                     // Initialize animations
                     animateOnScroll();
                     setupSmoothVideoTransition();
+                    
+                    // Initialize music
+                    initializeMusic();
                 }, 1400);
             }, 3000);
         });
+
+        // MUSIC FUNCTIONS
+        function initializeMusic() {
+            const music = document.getElementById('backgroundMusic');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            
+            // Set initial volume
+            music.volume = volumeSlider.value;
+            
+            // Try to autoplay music (user interaction required for some browsers)
+            music.play().then(() => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+            }).catch(e => {
+                console.log("Autoplay prevented, waiting for user interaction");
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playPauseBtn.classList.remove('playing');
+            });
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('backgroundMusic');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            
+            if (music.paused) {
+                music.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+            } else {
+                music.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playPauseBtn.classList.remove('playing');
+            }
+        }
+
+        function changeVolume(value) {
+            const music = document.getElementById('backgroundMusic');
+            music.volume = value;
+        }
 
         // SMOOTH VIDEO TRANSITION
         function setupSmoothVideoTransition() {
@@ -1439,25 +1582,23 @@
             const transitionOverlay = document.getElementById('transitionOverlay');
             
             let hasTransitioned = false;
-            const transitionPoint = document.body.scrollHeight - window.innerHeight * 1.5;
+            const transitionPoint = document.body.scrollHeight - window.innerHeight * 2; // Earlier transition
             
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // Gradual fade as user scrolls down
-                if (scrollTop > window.innerHeight * 0.5) {
-                    const fadeProgress = Math.min(1, (scrollTop - window.innerHeight * 0.5) / (window.innerHeight * 1.5));
+                // Gradual fade as user scrolls down - starts earlier
+                if (scrollTop > window.innerHeight * 0.3) {
+                    const fadeProgress = Math.min(1, (scrollTop - window.innerHeight * 0.3) / (window.innerHeight * 1));
                     videoFadeOverlay.style.opacity = fadeProgress.toString();
-                    
-                    // Reduce video brightness gradually
-                    const video = document.querySelector('.video-background');
-                    if (video) {
-                        const brightness = 0.7 - (fadeProgress * 0.5);
-                        video.style.filter = `brightness(${brightness}) contrast(1.1)`;
-                    }
                 }
                 
-                // Apple-style transition at bottom
+                // Make final content appear when scrolling down a bit
+                if (scrollTop > window.innerHeight * 0.5) {
+                    finalContent.classList.add('active');
+                }
+                
+                // Apple-style transition at bottom (earlier)
                 if (scrollTop >= transitionPoint && !hasTransitioned) {
                     hasTransitioned = true;
                     
@@ -1469,9 +1610,6 @@
                         // Hide video container
                         videoContainer.style.opacity = '0';
                         videoContainer.style.pointerEvents = 'none';
-                        
-                        // Show final content
-                        finalContent.classList.add('active');
                         
                         // Hide transition overlay
                         setTimeout(() => {
