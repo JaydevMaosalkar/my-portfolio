@@ -6,9 +6,7 @@
     <title>Jaydev Maosalkar | Mechatronics Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ==============================================
-           ROOT VARIABLES - ORIGINAL COLORS
-           ============================================== */
+        /* MODERN PROFESSIONAL COLOR SCHEME - ORIGINAL */
         :root {
             --primary-dark: #000000;
             --secondary-dark: #0f0f0f;
@@ -42,165 +40,12 @@
             line-height: 1.6;
         }
 
-        /* ==============================================
-           APPLE-STYLE PERMANENT HEADER
-           ============================================== */
-        .permanent-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            padding: 0 40px;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .permanent-header.active {
-            opacity: 0.3;
-            transform: translateY(0);
-        }
-
-        .permanent-header:hover {
-            opacity: 1;
-        }
-
-        .name-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, 
-                var(--text-primary) 0%,
-                var(--accent-blue-light) 70%,
-                var(--text-primary) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            display: inline-block;
-            opacity: 0.7;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-        }
-
-        .permanent-header:hover .name-logo {
-            opacity: 1;
-            transform: scale(1.05);
-            text-shadow: 0 4px 20px rgba(41, 151, 255, 0.2);
-        }
-
-        /* ==============================================
-           INTRO ANIMATION - APPLE STYLE
-           ============================================== */
-        .intro-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            backdrop-filter: blur(5px);
-            animation: overlayExit 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes overlayExit {
-            0% {
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(20px);
-            }
-            70% {
-                background: rgba(0, 0, 0, 0.4);
-                backdrop-filter: blur(5px);
-            }
-            100% {
-                opacity: 0;
-                pointer-events: none;
-                display: none;
-            }
-        }
-
-        .intro-content {
-            text-align: center;
-            animation: introSequence 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes introSequence {
-            0% {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-                filter: blur(10px);
-            }
-            20% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0);
-            }
-            60% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0);
-            }
-            80% {
-                opacity: 1;
-                transform: scale(0.5) translate(-150%, -200%);
-                filter: blur(0);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.4) translate(-185%, -250%);
-            }
-        }
-
-        .intro-name {
-            font-size: 6.5rem;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, 
-                var(--text-primary) 0%,
-                var(--accent-blue-light) 70%,
-                var(--text-primary) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.3;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: nameGlow 2s ease-in-out infinite alternate;
-            margin: 0;
-            padding: 10px 0;
-            position: relative;
-            display: inline-block;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-        }
-
-        @keyframes nameGlow {
-            from {
-                text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
-                             0 0 20px rgba(41, 151, 255, 0.1);
-            }
-            to {
-                text-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
-                             0 0 30px rgba(41, 151, 255, 0.2);
-            }
-        }
-
-        /* ==============================================
-           VIDEO BACKGROUND - NO BORDERS
-           ============================================== */
+        /* VIDEO BACKGROUND - FIXED NO BLUE BORDERS */
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
             z-index: -1;
             overflow: hidden;
@@ -212,10 +57,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
-            object-position: center;
             filter: brightness(0.4) contrast(1.2);
             pointer-events: none;
             z-index: -1;
@@ -231,97 +75,173 @@
             z-index: -2;
         }
 
-        /* ==============================================
-           MUSIC PLAYER - FIXED AUTOPLAY
-           ============================================== */
-        .music-player {
+        /* APPLE-STYLE NAME TRANSFORMATION */
+        .intro-overlay {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .music-player:hover {
-            background: rgba(0, 0, 0, 0.8);
-            border-color: var(--accent-blue-light);
-            transform: translateY(-2px);
-        }
-
-        .music-btn {
-            background: transparent;
-            border: none;
-            color: var(--accent-blue-light);
-            font-size: 1.2rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .music-btn:hover {
-            background: rgba(41, 151, 255, 0.2);
-            transform: scale(1.1);
+        .intro-content {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: introReveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .music-btn.playing {
-            color: var(--accent-teal);
-            box-shadow: 0 0 15px rgba(48, 176, 199, 0.3);
+        /* NEW: Apple-style animation for full name */
+        @keyframes introReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(10px);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
         }
 
-        .volume-slider {
-            width: 100px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
+        .intro-name {
+            font-size: 5.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, 
+                var(--text-primary) 0%,
+                var(--accent-blue-light) 70%,
+                var(--text-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.3;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: nameGlow 2s ease-in-out infinite alternate;
+            margin: 0;
+            padding: 10px 0;
+            position: relative;
+            display: block;
         }
 
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent-blue-light);
+        .intro-first-name {
+            display: block;
+            font-size: 5.5rem;
+            font-weight: 900;
+        }
+
+        .intro-last-name {
+            display: block;
+            font-size: 5.5rem;
+            font-weight: 700;
+            margin-top: -10px;
+        }
+
+        /* NEW: Name transforms into top-left logo - Apple style */
+        .name-logo-container {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .name-logo-container.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .name-logo {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.7) 0%,
+                rgba(41, 151, 255, 0.4) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
             cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0.4;
         }
 
-        .music-info {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
+        .name-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, 
+                var(--text-primary) 0%,
+                var(--accent-blue-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            border-color: rgba(41, 151, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .song-title {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            margin-top: 5px;
-            font-style: italic;
+        .name-first {
+            font-weight: 900;
         }
 
-        /* ==============================================
-           MAIN CONTENT - YOUR ORIGINAL STRUCTURE
-           ============================================== */
+        .name-last {
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .name-logo:hover .name-last {
+            opacity: 1;
+        }
+
+        @keyframes nameGlow {
+            from {
+                text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                             0 0 20px rgba(41, 151, 255, 0.1);
+            }
+            to {
+                text-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
+                             0 0 30px rgba(41, 151, 255, 0.2);
+            }
+        }
+
+        /* MAIN CONTENT */
         .main-content {
             opacity: 0;
             transform: translateY(30px);
             transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-top: 80px; /* Added padding for header */
+            padding-top: 20px;
         }
 
         .main-content.active {
@@ -329,6 +249,28 @@
             transform: translateY(0);
         }
 
+        /* FINAL CONTENT */
+        .final-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 120px 5%;
+            margin-top: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .final-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SECTION STYLES - ORIGINAL */
         .section {
             padding: 120px 5%;
             position: relative;
@@ -377,9 +319,7 @@
             line-height: 1.6;
         }
 
-        /* ==============================================
-           MODERN CARDS WITH LOGOS
-           ============================================== */
+        /* MODERN CARDS - ORIGINAL */
         .modern-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -392,13 +332,40 @@
             min-height: 250px;
         }
 
+        .modern-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.05), 
+                transparent);
+            transition: left 0.7s ease;
+            z-index: 1;
+        }
+
+        .modern-card:hover::before {
+            left: 100%;
+        }
+
         .modern-card:hover {
             transform: translateY(-10px);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* CARD BACKGROUND LOGOS */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* CARD BACKGROUNDS WITH LOGOS FROM LINKEDIN - KEEPING YOUR ORIGINAL */
         .card-bg-overlay {
             position: absolute;
             top: 0;
@@ -409,7 +376,7 @@
             background-position: center;
             background-repeat: no-repeat;
             opacity: 0.07;
-            z-index: 1;
+            z-index: -1;
             border-radius: 20px;
             transition: opacity 0.5s ease;
         }
@@ -418,7 +385,7 @@
             opacity: 0.1;
         }
 
-        /* Logo backgrounds */
+        /* LinkedIn Post Images for Logos - Using your provided LinkedIn links */
         .huddersfield-bg {
             background-image: url('https://media.licdn.com/dms/image/v2/D5622AQF7V8X7Q-9X2A/feedshare-shrink_2048_1536/B4ZRZW8vSd6-/0/1722448081483?e=2147483647&v=beta&t=3W_JVnS-Gs7Lr9rKkjJ7qZOr8c9_gyVdD3g-NaSsJ20');
             background-size: 60% auto;
@@ -443,17 +410,7 @@
             background-position: center 70%;
         }
 
-        .card-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        /* ==============================================
-           TIMELINE - YOUR ORIGINAL STRUCTURE
-           ============================================== */
+        /* TIMELINE - ORIGINAL */
         .timeline {
             max-width: 1000px;
             margin: 0 auto;
@@ -540,9 +497,299 @@
             visibility: visible;
         }
 
-        /* ==============================================
-           RESPONSIVE DESIGN
-           ============================================== */
+        /* SKILLS GRID - ORIGINAL */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            padding: 35px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: visible;
+            min-height: 200px;
+        }
+
+        .skill-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(41, 151, 255, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .skill-card.active {
+            border-color: var(--accent-blue);
+            background: rgba(0, 102, 204, 0.08);
+        }
+
+        .skill-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .skill-card.active .skill-details {
+            max-height: 500px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* PROJECTS GRID - ORIGINAL */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            border-radius: 20px;
+            overflow: visible;
+            background: var(--surface-dark);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-blue);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.08);
+        }
+
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-card.active .project-details {
+            max-height: 800px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-toggle {
+            background: transparent;
+            border: none;
+            color: var(--accent-blue-light);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            z-index: 3;
+            position: relative;
+        }
+
+        .project-toggle:hover {
+            background: rgba(41, 151, 255, 0.1);
+        }
+
+        /* CONTACT SECTION - REMOVED AS PER INSTRUCTION */
+        /* Only keeping footer contact info */
+
+        /* FOOTER - UPDATED WITH CONTACT INFO */
+        .footer {
+            text-align: center;
+            padding: 80px 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 11;
+        }
+
+        .footer-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact-item {
+            text-align: center;
+            padding: 20px;
+            min-width: 200px;
+        }
+
+        .footer-contact-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent-blue-light);
+        }
+
+        .footer-contact-item p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-contact-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--accent-blue-light);
+        }
+
+        /* FIXED MUSIC PLAYER - AUTOPLAY AT 20% - WORKING */
+        .music-player {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: var(--accent-blue-light);
+            transform: translateY(-2px);
+        }
+
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-blue-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(41, 151, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            color: var(--accent-teal);
+            box-shadow: 0 0 15px rgba(48, 176, 199, 0.3);
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-blue-light);
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-blue-light);
+            cursor: pointer;
+            border: none;
+        }
+
+        .music-info {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .song-title {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* SCROLL FADE FOR VIDEO - ORIGINAL */
+        .video-fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 40%,
+                rgba(0,0,0,0.3) 60%,
+                rgba(0,0,0,0.6) 75%,
+                rgba(0,0,0,0.9) 90%,
+                var(--primary-dark) 100%
+            );
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+        }
+
+        /* TRANSITION OVERLAY - ORIGINAL */
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--primary-dark);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* RESPONSIVE DESIGN - ORIGINAL */
         @media (max-width: 1024px) {
             .timeline::before {
                 left: 30px;
@@ -565,11 +812,28 @@
             .timeline-marker {
                 left: 30px;
             }
+            
+            .footer-contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
             .intro-name {
                 font-size: 4.5rem;
+            }
+            
+            .intro-first-name, .intro-last-name {
+                font-size: 4.5rem;
+            }
+            
+            .name-logo {
+                font-size: 1.8rem;
+                padding: 10px 16px;
+                top: 25px;
+                left: 25px;
             }
             
             .section-title {
@@ -580,13 +844,13 @@
                 padding: 90px 5%;
             }
             
-            .permanent-header {
-                padding: 0 20px;
-                height: 50px;
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
             
-            .name-logo {
-                font-size: 1.5rem;
+            .modern-card {
+                padding: 30px;
             }
             
             .music-player {
@@ -594,11 +858,30 @@
                 right: 15px;
                 padding: 10px 15px;
             }
+            
+            .footer-contact-item {
+                min-width: 150px;
+                padding: 15px;
+            }
         }
 
         @media (max-width: 480px) {
             .intro-name {
                 font-size: 3.5rem;
+            }
+            
+            .intro-first-name, .intro-last-name {
+                font-size: 3.5rem;
+            }
+            
+            .name-logo {
+                font-size: 1.5rem;
+                top: 20px;
+                left: 20px;
+                padding: 8px 12px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
             }
             
             .section-title {
@@ -610,15 +893,6 @@
                 margin-left: 60px !important;
             }
             
-            .permanent-header {
-                padding: 0 15px;
-                height: 45px;
-            }
-            
-            .name-logo {
-                font-size: 1.3rem;
-            }
-            
             .music-player {
                 bottom: 10px;
                 right: 10px;
@@ -628,11 +902,18 @@
             .volume-slider {
                 width: 70px;
             }
+            
+            .footer-contact-info {
+                gap: 10px;
+            }
+            
+            .footer-contact-item {
+                padding: 10px;
+                min-width: 100%;
+            }
         }
 
-        /* ==============================================
-           UTILITY CLASSES
-           ============================================== */
+        /* UTILITY CLASSES - ORIGINAL */
         .tag {
             display: inline-block;
             background: rgba(41, 151, 255, 0.1);
@@ -676,6 +957,17 @@
             box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
         }
 
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 102, 204, 0.1);
+            transform: translateY(-3px);
+        }
+
         .highlight {
             color: var(--accent-blue-light);
             font-weight: 600;
@@ -696,49 +988,32 @@
             margin-right: 10px;
             font-size: 1.2rem;
         }
-
-        /* ==============================================
-           SCROLL FADE FOR VIDEO
-           ============================================== */
-        .video-fade-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent 40%,
-                rgba(0,0,0,0.3) 60%,
-                rgba(0,0,0,0.6) 75%,
-                rgba(0,0,0,0.9) 90%,
-                var(--primary-dark) 100%
-            );
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 2s ease;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
-    <!-- PERMANENT HEADER - APPLE STYLE -->
-    <div class="permanent-header" id="permanentHeader">
-        <div class="name-logo" id="nameLogo">Jaydev Maosalkar</div>
-    </div>
+    <!-- TRANSITION OVERLAY -->
+    <div class="transition-overlay" id="transitionOverlay"></div>
 
-    <!-- VIDEO BACKGROUND -->
+    <!-- VIDEO BACKGROUND - NO BLUE BORDERS -->
     <div class="video-container" id="videoContainer">
         <div class="video-fade-overlay" id="videoFadeOverlay"></div>
         <div class="fallback-background"></div>
         <!-- Your graduation video -->
         <video class="video-background" id="backgroundVideo" autoplay muted loop playsinline>
+            <!-- Using a graduation video as placeholder - you can replace with your Vimeo link -->
             <source src="https://assets.mixkit.co/videos/preview/mixkit-graduation-ceremony-43260-large.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- MUSIC PLAYER -->
+    <!-- NEW: Apple-style name logo in top left -->
+    <div class="name-logo-container" id="nameLogoContainer">
+        <div class="name-logo" id="nameLogo">
+            <span class="name-first">Jaydev</span>
+            <span class="name-last">Maosalkar</span>
+        </div>
+    </div>
+
+    <!-- MUSIC PLAYER - AUTOPLAY AT 20% -->
     <div class="music-player" id="musicPlayer">
         <div>
             <div class="music-info">Background Music</div>
@@ -750,19 +1025,23 @@
         <input type="range" min="0" max="1" step="0.1" value="0.2" class="volume-slider" id="volumeSlider">
     </div>
 
-    <!-- AUDIO ELEMENT -->
+    <!-- AUDIO ELEMENT - AUTOPLAY AT 20% -->
     <audio id="backgroundMusic" loop preload="auto">
+        <!-- Michael Jackson Smooth Criminal Instrumental Cover -->
         <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- INTRO OVERLAY WITH NEW ANIMATION -->
+    <!-- IMPACTFUL NAME INTRO - WILL TRANSFORM TO TOP LEFT LOGO -->
     <div class="intro-overlay" id="introOverlay">
         <div class="intro-content">
-            <div class="intro-name">Jaydev</div>
+            <div class="intro-name">
+                <span class="intro-first-name">Jaydev</span>
+                <span class="intro-last-name">Maosalkar</span>
+            </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT - ALL ORIGINAL SECTIONS -->
     <div class="main-content" id="mainContent">
         <!-- HERO SECTION -->
         <section class="section" id="hero">
@@ -777,7 +1056,7 @@
             </div>
         </section>
 
-        <!-- EDUCATION SECTION -->
+        <!-- EDUCATION SECTION WITH LINKEDIN LOGOS -->
         <section class="section" id="education">
             <div class="section-header">
                 <span class="section-label">Academic Foundation</span>
@@ -809,6 +1088,14 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <!-- LinkedIn Image Placeholder -->
+                                    <div style="text-align: center; margin: 20px 0;">
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                            <i class="fas fa-university" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: University Achievement</span>
+                                        </div>
+                                    </div>
+                                    
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
                                         • Specialized in Advanced Control Systems and Industrial Automation<br>
                                         • Thesis: "Integration of Digital Twin Technology in Industrial HVAC Systems"<br>
@@ -850,6 +1137,14 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <!-- LinkedIn Image Placeholder -->
+                                    <div style="text-align: center; margin: 20px 0;">
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                            <i class="fas fa-tools" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: IGTR Training</span>
+                                        </div>
+                                    </div>
+                                    
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
                                         • Core courses: Thermodynamics, Fluid Mechanics, Machine Design, Manufacturing Processes<br>
                                         • Specialized training in precision tool design and manufacturing<br>
@@ -864,6 +1159,14 @@
                                         <span class="tag">Manufacturing Processes</span>
                                         <span class="tag">Engineering Design</span>
                                     </div>
+                                    
+                                    <div class="achievement-badge" style="margin-top: 25px;">
+                                        <i class="fas fa-award"></i>
+                                        <div>
+                                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 5px;">Technical Excellence</p>
+                                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Specialized training in German precision engineering standards at Indo German Tool Room</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -872,7 +1175,7 @@
             </div>
         </section>
 
-        <!-- EXPERIENCE SECTION -->
+        <!-- EXPERIENCE SECTION WITH COMPANY LOGOS -->
         <section class="section" id="experience">
             <div class="section-header">
                 <span class="section-label">Professional Experience</span>
@@ -904,6 +1207,14 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <!-- LinkedIn Image Placeholder -->
+                                    <div style="text-align: center; margin: 20px 0;">
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                            <i class="fas fa-flask" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: R&D Achievement</span>
+                                        </div>
+                                    </div>
+                                    
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
                                         • Engineered a Hardware-in-the-Loop testing framework that reduced validation time by <span class="highlight">40%</span><br>
                                         • Developed digital twin models using Siemens Simcenter Amesim for predictive maintenance<br>
@@ -919,6 +1230,14 @@
                                         <span class="tag">PLC Integration</span>
                                         <span class="tag">Root-Cause Analysis</span>
                                         <span class="tag">Predictive Maintenance</span>
+                                    </div>
+                                    
+                                    <div class="achievement-badge" style="margin-top: 25px;">
+                                        <i class="fas fa-trophy"></i>
+                                        <div>
+                                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 5px;">Key Achievement</p>
+                                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Implemented HIL validation framework reducing testing cycles by 40% while improving accuracy</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -947,6 +1266,14 @@
                             
                             <div class="timeline-details">
                                 <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <!-- LinkedIn Image Placeholder -->
+                                    <div style="text-align: center; margin: 20px 0;">
+                                        <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                            <i class="fas fa-industry" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                            <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Industry Experience</span>
+                                        </div>
+                                    </div>
+                                    
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
                                         • Assisted in PLC programming for automated manufacturing lines<br>
                                         • Participated in installation and commissioning of special-purpose machinery<br>
@@ -969,16 +1296,372 @@
                 </div>
             </div>
         </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <span class="section-label">Technical Expertise</span>
+                <h2 class="section-title">Core Competencies</h2>
+                <p class="section-subtitle">
+                    Specialized skills developed through academic excellence and hands-on engineering experience
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                <i class="fas fa-industry" style="font-size: 1.5rem; color: var(--accent-blue-light);"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Industrial Automation</h3>
+                                <p style="color: var(--text-tertiary); font-size: 1rem;">PLC Systems, HIL Testing, Control Engineering</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Expert in developing and implementing automation solutions for manufacturing and industrial processes with focus on reliability and efficiency.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-details">
+                        <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <!-- Skill Image Placeholder -->
+                            <div style="text-align: center; margin: 20px 0;">
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                    <i class="fas fa-cogs" style="font-size: 2.5rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Automation Projects</span>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Proficiency</p>
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; font-size: 1.1rem;">Expert</p>
+                                </div>
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Experience</p>
+                                    <p style="color: var(--text-secondary); font-weight: 600; font-size: 1.1rem;">4+ Years</p>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px;">
+                                <strong>Key Technologies:</strong> Siemens PLC, Allen-Bradley, Control Systems, HIL Testing<br>
+                                <strong>Applications:</strong> HVAC Automation, Manufacturing Lines, Process Control<br>
+                                <strong>Specialization:</strong> Digital Twin Integration, Predictive Maintenance Systems
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(48, 176, 199, 0.1), rgba(48, 176, 199, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                <i class="fas fa-robot" style="font-size: 1.5rem; color: var(--accent-teal);"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Digital Twin & Simulation</h3>
+                                <p style="color: var(--text-tertiary); font-size: 1rem;">Siemens Simcenter, Predictive Analytics, HIL</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Advanced expertise in creating and implementing digital twin solutions for predictive maintenance and system validation.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-details">
+                        <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <!-- Skill Image Placeholder -->
+                            <div style="text-align: center; margin: 20px 0;">
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                    <i class="fas fa-robot" style="font-size: 2.5rem; color: var(--accent-teal); opacity: 0.5;"></i>
+                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Digital Twin Projects</span>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Proficiency</p>
+                                    <p style="color: var(--accent-teal); font-weight: 600; font-size: 1.1rem;">Advanced</p>
+                                </div>
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Impact</p>
+                                    <p style="color: var(--text-secondary); font-weight: 600; font-size: 1.1rem;">40% Efficiency Gain</p>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px;">
+                                <strong>Key Tools:</strong> Siemens Simcenter Amesim, MATLAB Simulink, 3D Modeling<br>
+                                <strong>Projects:</strong> Real-time HVAC Simulation, Predictive Maintenance Systems<br>
+                                <strong>Achievement:</strong> 40% reduction in validation time through HIL integration
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card" onclick="toggleSkill(this)">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--accent-blue-light);"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Technical Analysis & Software</h3>
+                                <p style="color: var(--text-tertiary); font-size: 1rem;">MATLAB, Python, Data Analysis, CAD</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Proficient in engineering software, data analysis, algorithm development, and technical reporting for systems optimization.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-details">
+                        <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <!-- Skill Image Placeholder -->
+                            <div style="text-align: center; margin: 20px 0;">
+                                <div style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                    <i class="fas fa-code" style="font-size: 2.5rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                    <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Software Projects</span>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Proficiency</p>
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; font-size: 1.1rem;">Advanced</p>
+                                </div>
+                                <div>
+                                    <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 8px;">Tools</p>
+                                    <p style="color: var(--text-secondary); font-weight: 600; font-size: 1.1rem;">10+ Engineering Tools</p>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px;">
+                                <strong>Tools:</strong> MATLAB, Python, SolidWorks, AutoCAD, Data Visualization<br>
+                                <strong>Applications:</strong> System Performance Analysis, CAD Modeling, Optimization<br>
+                                <strong>Certification:</strong> Learning MATLAB by Majlinda Qarri, SolidWorks Associate
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="section" id="projects">
+            <div class="section-header">
+                <span class="section-label">Engineering Impact</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">
+                    Click on any project to explore detailed technical implementations and business impacts
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
+                         alt="HVAC Digital Twin" class="project-image">
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Advanced HVAC Digital Twin System</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Developed a comprehensive digital twin solution integrating Siemens Simcenter Amesim with real-time PLC systems for predictive maintenance and validation optimization.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                            <span class="tag">Siemens Simcenter</span>
+                            <span class="tag">HIL Testing</span>
+                            <span class="tag">Predictive Analytics</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <!-- Project Image Placeholder -->
+                                <div style="text-align: center; margin: 20px 0;">
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                        <i class="fas fa-project-diagram" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: HVAC Project</span>
+                                    </div>
+                                </div>
+                                
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This project involved creating a real-time simulation environment that mirrored physical HVAC systems, allowing for predictive maintenance and reduced downtime. The system integrated Siemens Simcenter Amesim with PLC control systems through a custom Hardware-in-the-Loop interface.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">Real-time Simulation</span>
+                                    <span class="tag">PLC Integration</span>
+                                    <span class="tag">Custom HIL Interface</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • 40% reduction in validation time<br>
+                                        • 25% improvement in predictive maintenance accuracy<br>
+                                        • 30% decrease in system downtime
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
+                         alt="Automation Framework" class="project-image">
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Industrial Automation Framework</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Designed and implemented an automation framework reducing manual intervention in manufacturing processes through advanced PLC control systems and safety protocols.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                            <span class="tag">PLC Programming</span>
+                            <span class="tag">Control Systems</span>
+                            <span class="tag">Safety Interlocks</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <!-- Project Image Placeholder -->
+                                <div style="text-align: center; margin: 20px 0;">
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                        <i class="fas fa-cogs" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: Automation Project</span>
+                                    </div>
+                                </div>
+                                
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This comprehensive automation solution involved programming PLC systems for multiple manufacturing lines, implementing safety interlocks, and creating a centralized monitoring system. The framework was designed to be scalable across different production environments.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">Manufacturing Automation</span>
+                                    <span class="tag">Real-time Monitoring</span>
+                                    <span class="tag">Scalable Architecture</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Business Impact</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • 60% reduction in manual intervention<br>
+                                        • Improved safety compliance by 45%<br>
+                                        • 15% increase in production throughput
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="CAD Design" class="project-image">
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Advanced CAD Design & Analysis</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            Developed complex mechanical designs and conducted structural analysis using CAD software for industrial applications.
+                        </p>
+                        <div style="display: flex; flex-wrap; wrap; gap: 10px; margin-bottom: 20px;">
+                            <span class="tag">SolidWorks</span>
+                            <span class="tag">CAD Design</span>
+                            <span class="tag">Structural Analysis</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <!-- Project Image Placeholder -->
+                                <div style="text-align: center; margin: 20px 0;">
+                                    <div style="width: 100%; height: 200px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                        <i class="fas fa-drafting-compass" style="font-size: 3rem; color: var(--accent-blue-light); opacity: 0.5;"></i>
+                                        <span style="margin-left: 15px; color: var(--text-secondary);">LinkedIn: CAD Project</span>
+                                    </div>
+                                </div>
+                                
+                                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">
+                                    This project involved creating detailed 3D models of mechanical components and assemblies, performing structural analysis, and optimizing designs for manufacturing. Worked on industrial machinery components, HVAC ducting systems, and custom fabrication designs using SolidWorks and AutoCAD.
+                                </p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                                    <span class="tag">3D Modeling</span>
+                                    <span class="tag">FEA Analysis</span>
+                                    <span class="tag">Design Optimization</span>
+                                    <span class="tag">Precision Engineering</span>
+                                </div>
+                                <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(48, 176, 199, 0.1)); padding: 20px; border-radius: 14px; border: 1px solid rgba(41, 151, 255, 0.2);">
+                                    <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">Technical Innovation</p>
+                                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                                        • Reduced component weight by 15% through optimization<br>
+                                        • Improved structural integrity by 25%<br>
+                                        • Streamlined manufacturing processes<br>
+                                        • Enhanced precision tooling designs
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="project-toggle" onclick="toggleProject(this)">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- FINAL CONTENT -->
+    <div class="final-content" id="finalContent">
+        <div class="section-header">
+            <span class="section-label">Innovation Continues</span>
+            <h2 class="section-title">Engineering the Future of Automation</h2>
+            <p class="section-subtitle">
+                With expertise in industrial automation, digital twin technology, and control systems, 
+                I'm passionate about creating innovative solutions that bridge the gap between virtual 
+                simulation and physical implementation.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px;">
+                <!-- Changed to direct email link -->
+                <a href="mailto:j.maosalkar@gmail.com" class="btn btn-primary">Get In Touch</a>
+                <a href="https://linkedin.com/in/jaydevmaosalkar" target="_blank" class="btn btn-outline">View LinkedIn</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER WITH CONTACT INFO (REPLACING THE REMOVED CONNECT SECTION) -->
+    <footer class="footer">
+        <div style="font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 40px; background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue-light) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">
+            Jaydev Maosalkar
+        </div>
+        
+        <div class="footer-contact-info">
+            <div class="footer-contact-item">
+                <h3>Email</h3>
+                <p>Available for opportunities in:</p>
+                <a href="mailto:j.maosalkar@gmail.com">j.maosalkar@gmail.com</a>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-tertiary);">Click to email directly</p>
+            </div>
+            
+            <div class="footer-contact-item">
+                <h3>LinkedIn</h3>
+                <p>Connect professionally:</p>
+                <a href="https://linkedin.com/in/jaydevmaosalkar" target="_blank">linkedin.com/in/jaydevmaosalkar</a>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-tertiary);">View full profile</p>
+            </div>
+            
+            <div class="footer-contact-item">
+                <h3>Location</h3>
+                <p>Based in:</p>
+                <p style="color: var(--text-primary); font-weight: 500;">Leeds, United Kingdom</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-tertiary);">Open to UK & remote positions</p>
+            </div>
+        </div>
+        
+        <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Mechatronics Engineer • Industrial Automation Specialist • Digital Twin Expert
+        </p>
+        
+        <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-top: 40px;">
+            © 2024 Jaydev Maosalkar. All rights reserved.
+        </p>
+    </footer>
 
     <script>
         // ==============================================
-        // APPLE-STYLE NAME ANIMATION
+        // APPLE-STYLE NAME TRANSFORMATION ANIMATION
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
             const introOverlay = document.getElementById('introOverlay');
-            const permanentHeader = document.getElementById('permanentHeader');
-            const nameLogo = document.getElementById('nameLogo');
+            const nameLogoContainer = document.getElementById('nameLogoContainer');
             const videoContainer = document.getElementById('videoContainer');
             const mainContent = document.getElementById('mainContent');
             const video = document.getElementById('backgroundVideo');
@@ -995,13 +1678,13 @@
                 });
             }
             
-            // Apple-style animation sequence
-            // 1. Big name appears in center (handled by CSS animation)
-            // 2. After 3.5 seconds, intro fades out and name moves to header
-            
+            // Apple-style name transformation sequence
             setTimeout(() => {
-                // Show permanent header with fade-in animation
-                permanentHeader.classList.add('active');
+                // Show the name logo in top left (Apple-style)
+                nameLogoContainer.classList.add('active');
+                
+                // Fade out intro overlay gently
+                introOverlay.style.opacity = '0';
                 
                 // Smooth video fade from 3% to 100% opacity
                 let opacity = 0.03;
@@ -1014,23 +1697,23 @@
                     }
                 }, 16);
                 
-                // Show main content
+                // Show main content after intro fade
                 setTimeout(() => {
+                    introOverlay.style.display = 'none';
                     mainContent.classList.add('active');
                     
                     // Initialize animations
                     animateOnScroll();
                     setupSmoothVideoTransition();
                     
-                    // Initialize music
+                    // Initialize music (autoplay at 20%)
                     initializeMusic();
-                }, 500);
-                
-            }, 3500); // Match the CSS animation duration
+                }, 1400);
+            }, 2500);
         });
-        
+
         // ==============================================
-        // MUSIC FUNCTIONS - FIXED AUTOPLAY
+        // MUSIC AUTOPLAY AT 20% - WORKING
         // ==============================================
         function initializeMusic() {
             const music = document.getElementById('backgroundMusic');
@@ -1041,14 +1724,15 @@
             music.volume = 0.2;
             volumeSlider.value = 0.2;
             
-            // Try to autoplay with user interaction fallback
-            function tryPlayMusic() {
+            // Modern browsers require user interaction for audio
+            function initAudio() {
                 music.play().then(() => {
                     console.log('Music playing at 20% volume');
                     playPauseBtn.classList.add('playing');
                     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 }).catch(error => {
-                    console.log('Autoplay blocked, waiting for user interaction');
+                    console.log('Autoplay blocked:', error);
+                    // Show play button instead
                     playPauseBtn.classList.remove('playing');
                     playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                     
@@ -1062,8 +1746,8 @@
                 });
             }
             
-            // Try to play immediately
-            tryPlayMusic();
+            // Try to initialize audio
+            initAudio();
             
             // Volume control
             volumeSlider.addEventListener('input', function() {
@@ -1083,13 +1767,14 @@
                 }
             });
         }
-        
+
         // ==============================================
-        // SMOOTH VIDEO TRANSITION
+        // SMOOTH VIDEO TRANSITION - ORIGINAL
         // ==============================================
         function setupSmoothVideoTransition() {
             const videoContainer = document.getElementById('videoContainer');
             const videoFadeOverlay = document.getElementById('videoFadeOverlay');
+            const finalContent = document.getElementById('finalContent');
             const transitionOverlay = document.getElementById('transitionOverlay');
             
             let hasTransitioned = false;
@@ -1103,14 +1788,40 @@
                     const fadeProgress = Math.min(1, (scrollTop - window.innerHeight * 0.3) / (window.innerHeight * 1));
                     videoFadeOverlay.style.opacity = fadeProgress.toString();
                 }
+                
+                // Make final content appear when scrolling down a bit
+                if (scrollTop > window.innerHeight * 0.5) {
+                    finalContent.classList.add('active');
+                }
+                
+                // Apple-style transition at bottom
+                if (scrollTop >= transitionPoint && !hasTransitioned) {
+                    hasTransitioned = true;
+                    
+                    // Show transition overlay
+                    transitionOverlay.style.opacity = '1';
+                    
+                    // Smooth transition
+                    setTimeout(() => {
+                        // Hide video container
+                        videoContainer.style.opacity = '0';
+                        videoContainer.style.pointerEvents = 'none';
+                        
+                        // Hide transition overlay
+                        setTimeout(() => {
+                            transitionOverlay.style.opacity = '0';
+                        }, 500);
+                    }, 300);
+                }
             });
         }
-        
+
         // ==============================================
-        // ANIMATE ON SCROLL
+        // ANIMATE ON SCROLL - ORIGINAL
         // ==============================================
         function animateOnScroll() {
             const timelineItems = document.querySelectorAll('.timeline-item');
+            const skillCards = document.querySelectorAll('.skill-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1123,10 +1834,11 @@
             }, { threshold: 0.1 });
             
             timelineItems.forEach(item => observer.observe(item));
+            skillCards.forEach(card => observer.observe(card));
         }
-        
+
         // ==============================================
-        // ORIGINAL FUNCTIONS
+        // ORIGINAL FUNCTIONS - PRESERVED
         // ==============================================
         function toggleTimeline(element) {
             const timelineItem = element.closest('.timeline-item');
@@ -1145,7 +1857,58 @@
             }
         }
         
-        // Smooth scrolling
+        function toggleSkill(element) {
+            const isActive = element.classList.contains('active');
+            
+            document.querySelectorAll('.skill-card').forEach(card => {
+                if (card !== element) {
+                    card.classList.remove('active');
+                    const details = card.querySelector('.skill-details');
+                    if (details) {
+                        details.style.maxHeight = '0';
+                    }
+                }
+            });
+            
+            if (!isActive) {
+                element.classList.add('active');
+                const details = element.querySelector('.skill-details');
+                if (details) {
+                    details.style.maxHeight = details.scrollHeight + 'px';
+                }
+            } else {
+                element.classList.remove('active');
+                const details = element.querySelector('.skill-details');
+                if (details) {
+                    details.style.maxHeight = '0';
+                }
+            }
+        }
+        
+        function toggleProject(button) {
+            const projectCard = button.closest('.project-card');
+            const isActive = projectCard.classList.contains('active');
+            
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (card !== projectCard) {
+                    card.classList.remove('active');
+                    const toggleBtn = card.querySelector('.project-toggle');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = 'View Details';
+                    }
+                }
+            });
+            
+            if (!isActive) {
+                projectCard.classList.add('active');
+                button.textContent = 'Show Less';
+            } else {
+                projectCard.classList.remove('active');
+                button.textContent = 'View Details';
+            }
+        }
+        
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1162,7 +1925,7 @@
             });
         });
         
-        // Initialize
+        // Initialize scroll animations
         setTimeout(() => {
             animateOnScroll();
         }, 500);
