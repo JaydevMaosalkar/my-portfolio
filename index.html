@@ -56,19 +56,22 @@
 
         .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 50%;
+            left: 50%;
+            /* Ensure the video fully covers the viewport without leaving
+             * letterboxing on the sides. Using both min-width and
+             * min-height with a 50% transform centres the video and
+             * prevents gaps. */
+            min-width: 100vw;
+            min-height: 100vh;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
             object-fit: cover;
-            /* Make the background video clearer and less dark for better
-             * visual impact. A higher brightness value and mild contrast
-             * adjustment ensure the video remains vibrant without
-             * overpowering the foreground content. */
-            /* Slightly increase brightness so the video is clear and professional
-             * without overpowering the text. The contrast remains mild to
-             * preserve detail. */
-            filter: brightness(0.8) contrast(1.05);
+            /* Increase the brightness slightly so the footage is crisp,
+             * but avoid washing out the content. Contrast is kept mild
+             * to preserve detail in darker scenes. */
+            filter: brightness(0.85) contrast(1.05);
             pointer-events: none;
             z-index: -1;
         }
@@ -1405,8 +1408,8 @@
                          alt="Automation Framework" class="project-image">
                     <div style="padding: 30px;">
                         <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Industrial Automation Framework</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-                            Designed and implemented an automation framework reducing manual intervention in manufacturing processes through advanced PLC control systems and safety protocols.
+                            <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+                            As a Junior Engineer at Forbes &amp; Company, I assembled and commissioned special‑purpose machinery and assisted with PLC programming.  Working closely with senior engineers, I developed an automation framework that reduced manual intervention by integrating advanced PLC control systems and safety interlocks across multiple production lines.
                         </p>
                         <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
                             <span class="tag">PLC Programming</span>
@@ -1762,17 +1765,26 @@
             const heroSection = document.getElementById('hero');
             const nameLogoContainerFade = document.getElementById('nameLogoContainer');
             if (heroSection && nameLogoContainerFade) {
+                /*
+                 * Rather than simply switching the name badge on or off when the
+                 * hero section leaves the viewport, compute a fade based on
+                 * intersection ratio. As the hero scrolls out of view the
+                 * name plate gently fades, reducing its opacity to zero when
+                 * fully obscured. This avoids abrupt transitions and ensures
+                 * the text never competes with underlying content. The
+                 * thresholds array produces granular updates as the user
+                 * scrolls.
+                 */
                 const fadeObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Hero is in view – show name plate fully
-                            nameLogoContainerFade.style.opacity = '1';
-                        } else {
-                            // Hero is out of view – hide the name plate to avoid covering content
-                            nameLogoContainerFade.style.opacity = '0';
-                        }
+                        // intersectionRatio ranges from 0 (not visible) to 1 (fully visible)
+                        const ratio = entry.intersectionRatio;
+                        // Ease the opacity: amplify the fade so that it
+                        // disappears faster near the top but never exceeds 1.
+                        const opacity = Math.max(0, Math.min(1, ratio * 1.5));
+                        nameLogoContainerFade.style.opacity = opacity.toString();
                     });
-                }, { threshold: 0, rootMargin: '-25% 0px -75% 0px' });
+                }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
                 fadeObserver.observe(heroSection);
             }
                     }
