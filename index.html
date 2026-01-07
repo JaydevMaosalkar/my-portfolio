@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaydev Maosalkar | Mechatronics Engineer</title>
-  <link rel="preconnect" href="https://player.vimeo.com">
-<link rel="preconnect" href="https://i.vimeocdn.com">
-<link rel="preconnect" href="https://f.vimeocdn.com">
-<link rel="dns-prefetch" href="https://player.vimeo.com">
-<link rel="dns-prefetch" href="https://i.vimeocdn.com">
-<link rel="dns-prefetch" href="https://f.vimeocdn.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
 /* Prevent end-of-page flicker by adding safe scroll buffer */
 body::after {
@@ -65,7 +59,15 @@ body::after {
     opacity: 1 !important;
     transition: opacity 1.8s ease-in-out !important;
 }
-/* FIX: Remove flicker at bottom — force video to stay fixed and full cover */
+/* FIX: Remove flicker at bottom — force video to stay fixed and full cover
+ *
+ * This duplicate definition of `.video-container` previously included an
+ * `opacity` value marked with `!important`. An `!important` declaration cannot
+ * be overridden by inline styles, which prevented our end‑of‑video fade‑out
+ * script from working correctly. To allow the script to animate the video
+ * container’s opacity, remove the `!important` flag on the `opacity` property.
+ * Retain the other positioning rules so the video remains fixed and full‑screen.
+ */
 .video-container {
     position: fixed !important;
     top: 0;
@@ -74,7 +76,7 @@ body::after {
     height: 100vh;
     overflow: hidden;
     z-index: -3;
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 .video-background {
@@ -182,14 +184,16 @@ body::after {
             height: 100%;
             z-index: -2;
             opacity: 0; /* ultra-soft vignette only (hidden until video ends) */
-            background: radial-gradient(circle at center, rgba(0,0,0,0.18), transparent 60%);
+            /* Use a deep blue gradient once the video ends, matching the site's colour scheme */
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
             pointer-events: none;
             transition: opacity 2.5s ease-in-out;
         }
     
 
         .gradient-background.active {
-            opacity: 0.15;
+            /* When activated at the end of the video, show the full gradient */
+            opacity: 1;
             z-index: -1;
         }
 
@@ -780,7 +784,7 @@ body::after {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.35); /* subtle cinematic overlay */
+            background: rgba(0, 0, 0, 0.30); /* subtle cinematic overlay */
             z-index: -1;
             opacity: 1; /* keep consistent */
             pointer-events: none;
@@ -977,6 +981,94 @@ body::after {
             transform: translateY(-3px);
         }
 
+        /* === HIGHLIGHT STATES FOR SKILL-PROJECT MAPPING === */
+        .skill-card.highlight {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 15px rgba(48, 176, 199, 0.5);
+        }
+        .project-card.highlight {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 20px rgba(48, 176, 199, 0.5);
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        /* PRINT-OPTIMIZED CV MODE */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            /* Hide video, overlays, audio controls, toggles and call-to-action buttons */
+            #videoContainer,
+            .video-container,
+            #gradientBackground,
+            .gradient-background,
+            #videoFadeOverlay,
+            .video-fade-overlay,
+            .audio-button,
+            audio,
+            .project-toggle,
+            .btn,
+            .btn-primary,
+            .btn-outline {
+                display: none !important;
+            }
+            /* Simplify section and card appearance */
+            .section,
+            .timeline-item,
+            .skill-card,
+            .project-card {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #000 !important;
+                box-shadow: none !important;
+            }
+            .tag {
+                border-color: #000 !important;
+            }
+            /* Ensure skill and project details are printed */
+            .project-card .project-details,
+            .skill-card .skill-details {
+                max-height: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        }
+
+        /* =======================================================
+           CV REQUEST MODAL STYLES
+           The modal appears when a recruiter clicks the Request CV
+           button. It darkens the page and centres a form asking
+           for a work email. If the email domain is not from a
+           free provider, the download link is revealed. Otherwise,
+           the user is prompted to enter a company email. These
+           styles ensure the modal remains readable over the site
+           background and is responsive across devices.
+        ======================================================= */
+        .cv-request-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .cv-request-content {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 12px;
+            padding: 25px 30px;
+            max-width: 480px;
+            width: 100%;
+            color: var(--text-secondary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
         .highlight {
             color: var(--accent-blue-light);
             font-weight: 600;
@@ -997,24 +1089,7 @@ body::after {
             margin-right: 10px;
             font-size: 1.2rem;
         }
-    /* === VIDEO LOADING FIX === */
-
-/* Start hidden to avoid Vimeo loading screen */
-.video-container {
-    opacity: 0;
-}
-
-/* Fade in when video is ready */
-.video-container.video-ready {
-    opacity: 1;
-    transition: opacity 0.8s ease-in-out;
-}
-
-/* Show gradient immediately while video loads */
-.gradient-background {
-    opacity: 0.20;
-}
-</style>
+    </style>
 </head>
 <body>
     <!-- TRANSITION OVERLAY -->
@@ -1079,7 +1154,7 @@ body::after {
             </div>
 
             <div class="timeline">
-                <!-- MSc - University of Huddersfield -->
+                <!-- University of Huddersfield – Bachelor of Mechatronics Engineering -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1088,13 +1163,16 @@ body::after {
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>University of Huddersfield</span>
-                                    <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Sep 2022 - Sep 2023</span>
+                                    <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Sep 2022 - Jul 2025</span>
                                 </h3>
                                 <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
-                                    BEng Mechatronics Engineering
+                                    Bachelor of Mechatronics Engineering
                                 </p>
                                 <p style="color: var(--text-secondary); line-height: 1.7;">
-                                    Advanced studies in automation, robotics, control systems, and digital twin technology with practical applications in industrial systems.
+                                    Focused on applied mechatronics and mechanical engineering with emphasis on control systems,
+                                    system modelling, simulation and hardware‑in‑the‑loop validation. Industry‑aligned courses in robotics,
+                                    signal processing and production management provided a rigorous foundation for designing and testing
+                                    real systems.
                                 </p>
                             </div>
                             
@@ -1109,17 +1187,17 @@ body::after {
                                     </div>
                                     
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-                                        • Specialized in Advanced Control Systems and Industrial Automation<br>
-                                        • Thesis: "Integration of Digital Twin Technology in Industrial HVAC Systems"<br>
-                                        • Gained expertise in MATLAB, Simulink, and simulation software<br>
-                                        • Developed projects in robotics, IoT integration, and smart manufacturing
+                                        • Key modules: Advanced Control Systems, Robotics and System Modelling, Embedded Programming<br>
+                                        • Practical labs: PLC &amp; HMI programming, digital twin modelling, hardware‑in‑the‑loop experiments<br>
+                                        • Final year project: Development of a real‑time HVAC simulation with predictive maintenance analysis<br>
+                                        • Tools: MATLAB, Simulink, Python and CAD/CAM for system design and validation
                                     </p>
                                     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;">
-                                        <span class="tag">Advanced Control Systems</span>
+                                        <span class="tag">Control Systems</span>
                                         <span class="tag">Robotics</span>
-                                        <span class="tag">MATLAB/Simulink</span>
-                                        <span class="tag">IoT Integration</span>
-                                        <span class="tag">Smart Manufacturing</span>
+                                        <span class="tag">Embedded Programming</span>
+                                        <span class="tag">Digital Twin</span>
+                                        <span class="tag">Hardware‑in‑the‑Loop</span>
                                         <span class="tag">Digital Twin Technology</span>
                                     </div>
                                 </div>
@@ -1128,7 +1206,7 @@ body::after {
                     </div>
                 </div>
 
-                <!-- BE - Indo German Tool Room -->
+                <!-- Indo German Tool Room – Diploma in Mechatronics, Robotics & Automation Engineering -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1137,13 +1215,15 @@ body::after {
                             <div class="card-content">
                                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>Indo German Tool Room (IGTR), Aurangabad</span>
-                                    <span style="font-size: 0.95rem; color: var(--accent-blue-light);">2016 - 2020</span>
+                                    <span style="font-size: 0.95rem; color: var(--accent-blue-light);">2017 - 2020</span>
                                 </h3>
                                 <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
-                                    Bachelor of Engineering in Mechanical Engineering
+                                    Diploma in Mechatronics, Robotics & Automation Engineering
                                 </p>
                                 <p style="color: var(--text-secondary); line-height: 1.7;">
-                                    Comprehensive foundation in mechanical engineering principles, thermodynamics, fluid mechanics, and precision engineering design with hands-on tool room training.
+                                    Intensive programme covering mechatronics fundamentals, robotics, PLC programming, embedded systems,
+                                    automation and instrumentation. Hands‑on training on industrial robots, CNC machines and
+                                    automated production lines provided practical skills in system integration and control.
                                 </p>
                             </div>
                             
@@ -1158,25 +1238,24 @@ body::after {
                                     </div>
                                     
                                     <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-                                        • Core courses: Thermodynamics, Fluid Mechanics, Machine Design, Manufacturing Processes<br>
-                                        • Specialized training in precision tool design and manufacturing<br>
-                                        • Workshops: CNC machining, CAD/CAM, precision measurement<br>
-                                        • Project: Design and fabrication of specialized tooling systems
+                                        • Core modules: Mechatronics Fundamentals, Robotics and Kinematics, PLC Programming, Automation & Instrumentation<br>
+                                        • Practical workshops: PLC &amp; HMI programming, CAD/CAM integration, Sensor and Actuator interfacing<br>
+                                        • Capstone project: Design and implementation of an automated pick‑and‑place robot for industrial assembly
                                     </p>
                                     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;">
-                                        <span class="tag">Precision Engineering</span>
-                                        <span class="tag">Tool Design</span>
-                                        <span class="tag">CNC Machining</span>
+                                        <span class="tag">Mechatronics</span>
+                                        <span class="tag">Robotics</span>
+                                        <span class="tag">Automation</span>
+                                        <span class="tag">PLC Programming</span>
+                                        <span class="tag">Embedded Systems</span>
                                         <span class="tag">CAD/CAM</span>
-                                        <span class="tag">Manufacturing Processes</span>
-                                        <span class="tag">Engineering Design</span>
                                     </div>
                                     
                                     <div class="achievement-badge" style="margin-top: 25px;">
                                         <i class="fas fa-award"></i>
                                         <div>
-                                            <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 5px;">Technical Excellence</p>
-                                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Specialized training in German precision engineering standards at Indo German Tool Room</p>
+                                        <p style="color: var(--accent-blue-light); font-weight: 600; margin-bottom: 5px;">Technical Excellence</p>
+                                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Top performer in mechatronics, robotics and automation modules with extensive hands‑on training</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1315,7 +1394,7 @@ body::after {
             </div>
 
             <div class="skills-grid">
-                <div class="skill-card" onclick="toggleSkill(this)">
+                 <div class="skill-card" data-projects="p1,p2" onclick="toggleSkill(this)">
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1360,7 +1439,7 @@ body::after {
                     </div>
                 </div>
 
-                <div class="skill-card" onclick="toggleSkill(this)">
+                 <div class="skill-card" data-projects="p1" onclick="toggleSkill(this)">
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(48, 176, 199, 0.1), rgba(48, 176, 199, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1405,7 +1484,7 @@ body::after {
                     </div>
                 </div>
 
-                <div class="skill-card" onclick="toggleSkill(this)">
+                 <div class="skill-card" data-projects="p3" onclick="toggleSkill(this)">
                     <div class="card-content">
                         <div style="display: flex; align-items: center; margin-bottom: 20px;">
                             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
@@ -1463,7 +1542,7 @@ body::after {
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project-id="p1">
                     <!-- Updated: use renamed image file for digital twin control cabinet -->
                     <img src="images/digital-twin-cabinet.jpg"
                          alt="Digital Twin Control Cabinet" class="project-image">
@@ -1510,7 +1589,7 @@ body::after {
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project-id="p2">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200" 
                          alt="Automation Framework" class="project-image">
                     <div style="padding: 30px;">
@@ -1556,7 +1635,7 @@ body::after {
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project-id="p3">
                     <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
                          alt="CAD Design" class="project-image">
                     <div style="padding: 30px;">
@@ -1742,11 +1821,28 @@ body::after {
             <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px;">
                 <a href="#footer" class="btn btn-primary" onclick="scrollToContact()">Get In Touch</a>
                 <a href="https://linkedin.com/in/jaydevmaosalkar" target="_blank" class="btn btn-outline">View LinkedIn</a>
+                <!-- Request CV button opens a modal to validate work email -->
+                <a href="javascript:void(0)" class="btn btn-outline" onclick="openCvRequestModal()">Request CV</a>
             </div>
         </div>
     </div>
 
     <!-- FOOTER WITH CONTACT INFO -->
+    <!-- CV REQUEST MODAL -->
+    <div id="cvRequestModal" class="cv-request-modal" style="display:none;">
+        <div class="cv-request-content">
+            <h3 style="color: var(--text-primary); margin-bottom: 10px;">Request My CV</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 10px; line-height: 1.6;">Please enter your work email to request a copy of my CV.</p>
+            <input type="email" id="cvEmailInput" placeholder="you@company.com" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: var(--text-primary);" />
+            <div style="display:flex; justify-content: flex-end; gap:10px;">
+                <button id="cvCancelBtn" style="background: transparent; color: var(--text-secondary); border:1px solid var(--text-secondary); padding:8px 16px; border-radius:8px; cursor:pointer;">Cancel</button>
+                <button id="cvSubmitBtn" style="background: var(--accent-blue); color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">Submit</button>
+            </div>
+            <p id="cvStatusMsg" style="color: var(--accent-blue-light); margin-top:10px;"></p>
+            <!-- Replace download link with an email link for CV requests -->
+            <a id="cvEmailLink" href="#" target="_blank" style="display:none; margin-top:15px; color: var(--accent-blue); text-decoration: underline; font-weight: 600;">Send CV Request Email</a>
+        </div>
+    </div>
         <!-- ENGINEERING PHILOSOPHY SECTION -->
         <section class="section" id="engineering-philosophy" style="position: relative; z-index: 2; background: rgba(0,0,0,0.7);">
             <div class="section-header">
@@ -1892,18 +1988,37 @@ body::after {
                     // Guard against the Vimeo API not being loaded
                     if (typeof Vimeo !== 'undefined' && backgroundVideoEl) {
                         const player = new Vimeo.Player(backgroundVideoEl);
-                        player.on('ended', function() {
-                            // Fade out the video container
+                        // Helper to fade out the video once it has nearly finished playing.  Defining a
+                        // standalone function allows us to reuse the same logic for both the 'ended'
+                        // event and a timeupdate fallback when the Vimeo player does not reliably
+                        // emit an 'ended' event.  Use a flag to ensure the fade only runs once.
+                        let videoFadeTriggered = false;
+                        function fadeOutVideo() {
+                            if (videoFadeTriggered) return;
+                            videoFadeTriggered = true;
+                            // Fade out the video container over 2.5 seconds
                             videoContainer.style.transition = 'opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
                             videoContainer.style.opacity = '0';
-                            // After a short delay, activate the gradient background
+                            // After a short delay, activate the gradient background to replace the video
                             setTimeout(() => {
                                 gradientBackground.classList.add('active');
                             }, 500);
-                            // Finally remove the video container from the DOM to clean up
+                            // Finally remove the video container from the DOM to clean up resources
                             setTimeout(() => {
                                 videoContainer.remove();
                             }, 3000);
+                        }
+                        // When the Vimeo video reports it has ended, trigger the fade-out.
+                        player.on('ended', function() {
+                            fadeOutVideo();
+                        });
+                        // Fallback: if for some reason the 'ended' event does not fire (known
+                        // limitation with some Vimeo embeds), monitor the playback progress and
+                        // trigger the fade when the video is almost complete (>= 98%).
+                        player.on('timeupdate', function(data) {
+                            if (!videoFadeTriggered && data && typeof data.percent === 'number' && data.percent >= 0.98) {
+                                fadeOutVideo();
+                            }
                         });
 
             // Set up fade behaviour for the name logo when overlapping with content
@@ -2144,6 +2259,121 @@ body::after {
                 });
             }
         }
+
+        /*
+         * Feature: Skills → Evidence Mapping
+         * Attach click handlers to each skill card that specify
+         * associated project IDs via a data-projects attribute. When
+         * a skill is clicked, the card and corresponding projects will
+         * be highlighted. Clicking again on an already highlighted
+         * skill will clear all highlights. This enhances the
+         * portfolio by clearly demonstrating where each skill was
+         * applied.
+         */
+        function setupSkillHighlighting() {
+            const skillCards = document.querySelectorAll('.skill-card[data-projects]');
+            skillCards.forEach(card => {
+                const projectIds = card.dataset.projects
+                    ? card.dataset.projects.split(',').map(id => id.trim())
+                    : [];
+                card.addEventListener('click', () => {
+                    const isHighlighted = card.classList.contains('highlight');
+                    // Remove all existing highlights
+                    document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('highlight'));
+                    document.querySelectorAll('.project-card').forEach(p => p.classList.remove('highlight'));
+                    if (!isHighlighted) {
+                        card.classList.add('highlight');
+                        projectIds.forEach(pid => {
+                            const proj = document.querySelector('.project-card[data-project-id="' + pid + '"]');
+                            if (proj) {
+                                proj.classList.add('highlight');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        /*
+         * Feature: Print CV Mode
+         * Trigger the browser's print dialog and rely on the print CSS
+         * declared in the stylesheet to hide interactive elements and
+         * simplify the layout for paper.
+         */
+        function printCV() {
+            window.print();
+        }
+
+        /*
+         * CV Request Modal logic
+         * openCvRequestModal() shows the modal; closeCvRequestModal() hides it.
+         * handleCvSubmit() validates the email address and reveals the CV download link
+         * only when a non‑generic company domain is entered.
+         */
+        function openCvRequestModal() {
+            const modal = document.getElementById('cvRequestModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                // Reset any previous status message or link visibility
+                const status = document.getElementById('cvStatusMsg');
+                const link = document.getElementById('cvEmailLink');
+                const input = document.getElementById('cvEmailInput');
+                if (status) status.textContent = '';
+                if (link) link.style.display = 'none';
+                if (input) input.value = '';
+            }
+        }
+        function closeCvRequestModal() {
+            const modal = document.getElementById('cvRequestModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        function handleCvSubmit() {
+            const emailInput = document.getElementById('cvEmailInput');
+            const status = document.getElementById('cvStatusMsg');
+            const emailLink = document.getElementById('cvEmailLink');
+            if (!emailInput || !status || !emailLink) return;
+            const email = emailInput.value.trim();
+            // Very basic email syntax check
+            if (!email || !email.includes('@')) {
+                status.textContent = 'Please enter a valid work email.';
+                emailLink.style.display = 'none';
+                return;
+            }
+            const domain = email.split('@')[1].toLowerCase();
+            // List of common free email providers to exclude
+            const forbiddenDomains = ['gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','hotmail.com','outlook.com','mail.com','gmx.com','yandex.com','zoho.com','icloud.com','protonmail.com','aol.com','me.com'];
+            if (forbiddenDomains.includes(domain)) {
+                status.textContent = 'Please use a company or organizational email, not a personal one.';
+                emailLink.style.display = 'none';
+                return;
+            }
+            // If passed checks, show the download link
+            status.textContent = 'Thank you! Click below to send me your CV request email.';
+                // Build mailto link to user's email with prefilled subject and body
+                const targetEmail = 'j.maosalkar@gmail.com';
+                // Keep the subject generic so the recruiter does not need to change it
+                const subject = encodeURIComponent('CV Request');
+                // Prefill the body with a simple message and placeholders for company and role.
+                const body = encodeURIComponent(
+                    'Hello Jaydev,%0A%0A' +
+                    'I would like to request your CV for recruitment purposes.%0A' +
+                    'Company Name: %0A' +
+                    'Role/Position: %0A%0A' +
+                    'My work email is ' + email + '.%0A%0A' +
+                    'Best regards,%0A'
+                );
+                emailLink.href = 'mailto:' + targetEmail + '?subject=' + subject + '&body=' + body;
+            emailLink.style.display = 'inline-block';
+        }
+        // Hook up the modal buttons once the DOM has loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const submitBtn = document.getElementById('cvSubmitBtn');
+            const cancelBtn = document.getElementById('cvCancelBtn');
+            if (submitBtn) submitBtn.onclick = handleCvSubmit;
+            if (cancelBtn) cancelBtn.onclick = closeCvRequestModal;
+        });
         
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2165,6 +2395,7 @@ body::after {
         // Initialize
         setTimeout(() => {
             animateOnScroll();
+            setupSkillHighlighting();
         }, 500);
     </script>
 
@@ -2194,24 +2425,6 @@ body::after {
 window.onscroll = function() {
     /* Disable old fade logic safely */
 };
-</script>
-<script>
-(function () {
-    const iframe = document.getElementById('backgroundVideo');
-    const container = document.getElementById('videoContainer');
-
-    if (!iframe || !container) return;
-
-    // Fade in video once Vimeo iframe finishes loading
-    iframe.addEventListener('load', () => {
-        container.classList.add('video-ready');
-    });
-
-    // Safety fallback in case load event is delayed
-    setTimeout(() => {
-        container.classList.add('video-ready');
-    }, 2500);
-})();
 </script>
 </body>
 </html>
