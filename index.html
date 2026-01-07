@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaydev Maosalkar | Mechatronics Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://player.vimeo.com">
+<link rel="preconnect" href="https://i.vimeocdn.com">
+<link rel="preconnect" href="https://f.vimeocdn.com">
+<link rel="dns-prefetch" href="https://player.vimeo.com">
+<link rel="dns-prefetch" href="https://i.vimeocdn.com">
+<link rel="dns-prefetch" href="https://f.vimeocdn.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
 /* Prevent end-of-page flicker by adding safe scroll buffer */
 body::after {
@@ -774,7 +780,7 @@ body::after {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.30); /* subtle cinematic overlay */
+            background: rgba(0, 0, 0, 0.35); /* subtle cinematic overlay */
             z-index: -1;
             opacity: 1; /* keep consistent */
             pointer-events: none;
@@ -991,7 +997,24 @@ body::after {
             margin-right: 10px;
             font-size: 1.2rem;
         }
-    </style>
+    /* === VIDEO LOADING FIX === */
+
+/* Start hidden to avoid Vimeo loading screen */
+.video-container {
+    opacity: 0;
+}
+
+/* Fade in when video is ready */
+.video-container.video-ready {
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+}
+
+/* Show gradient immediately while video loads */
+.gradient-background {
+    opacity: 0.20;
+}
+</style>
 </head>
 <body>
     <!-- TRANSITION OVERLAY -->
@@ -1068,7 +1091,7 @@ body::after {
                                     <span style="font-size: 0.95rem; color: var(--accent-blue-light);">Sep 2022 - Sep 2023</span>
                                 </h3>
                                 <p style="color: var(--text-tertiary); margin-bottom: 15px; font-weight: 500; font-size: 1.1rem;">
-                                    MSc Mechatronics Engineering
+                                    BEng Mechatronics Engineering
                                 </p>
                                 <p style="color: var(--text-secondary); line-height: 1.7;">
                                     Advanced studies in automation, robotics, control systems, and digital twin technology with practical applications in industrial systems.
@@ -2171,6 +2194,24 @@ body::after {
 window.onscroll = function() {
     /* Disable old fade logic safely */
 };
+</script>
+<script>
+(function () {
+    const iframe = document.getElementById('backgroundVideo');
+    const container = document.getElementById('videoContainer');
+
+    if (!iframe || !container) return;
+
+    // Fade in video once Vimeo iframe finishes loading
+    iframe.addEventListener('load', () => {
+        container.classList.add('video-ready');
+    });
+
+    // Safety fallback in case load event is delayed
+    setTimeout(() => {
+        container.classList.add('video-ready');
+    }, 2500);
+})();
 </script>
 </body>
 </html>
