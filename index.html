@@ -2355,17 +2355,24 @@ body::after {
                 const targetEmail = 'j.maosalkar@gmail.com';
                 // Keep the subject generic so the recruiter does not need to change it
                 const subject = encodeURIComponent('CV Request');
-                // Prefill the body with a simple message and placeholders for company and role.
+                // Prefill the body with a simple message and placeholders for company and role using bullet-style hyphens.
                 const body = encodeURIComponent(
-                    'Hello Jaydev,%0A%0A' +
-                    'I would like to request your CV for recruitment purposes.%0A' +
-                    'Company Name: %0A' +
-                    'Role/Position: %0A%0A' +
-                    'My work email is ' + email + '.%0A%0A' +
-                    'Best regards,%0A'
+                    'Hello Jaydev,\n\n' +
+                    'I would like to request your CV for recruitment purposes.\n\n' +
+                    '- Company Name: \n' +
+                    '- Role/Position: \n' +
+                    '- Work email: ' + email + '\n\n' +
+                    'Best regards,\n'
                 );
-                emailLink.href = 'mailto:' + targetEmail + '?subject=' + subject + '&body=' + body;
-            emailLink.style.display = 'inline-block';
+                // Build the mailto URI
+                const mailtoLink = 'mailto:' + targetEmail + '?subject=' + subject + '&body=' + body;
+                emailLink.href = mailtoLink;
+                emailLink.style.display = 'inline-block';
+                // Ensure clicking the link triggers the email client even if default anchor behaviour is blocked
+                emailLink.onclick = function(event) {
+                    // Some browsers may block default behaviour for mailto links; force navigation
+                    window.location.href = mailtoLink;
+                };
         }
         // Hook up the modal buttons once the DOM has loaded
         document.addEventListener('DOMContentLoaded', () => {
